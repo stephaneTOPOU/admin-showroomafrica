@@ -19,7 +19,7 @@
                                                 <h3 class="card-title">Tous les categories</h3>
                                             </div>
                                             <div class="col-md-2">
-                                                <a href="{{route('category.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
+                                                <a href="{{route('subcategory.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
                                             </div>
                                         </div>
                                     </div>
@@ -35,14 +35,14 @@
                                             </tr>
                                         </thead>
                                             <tbody>
-                                                @foreach ($categories as $categorie)
+                                                @foreach ($sousCategories as $sousCategorie)
                                                     <tr>
-                                                        <td>{{ $categorie->id }}</td>
-                                                        <td>{{ $categorie->libelle }}</td>
-                                                        <td>{{ $categorie->created_at }}</td>
+                                                        <td>{{ $sousCategorie->id }}</td>
+                                                        <td>{{ $sousCategorie->libelle }}</td>
+                                                        <td>{{ $sousCategorie->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('category.add')}}" class="btn btn-default">
+                                                                <a href="{{route('subcategory.update')}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>

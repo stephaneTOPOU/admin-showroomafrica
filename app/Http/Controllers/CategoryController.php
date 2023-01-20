@@ -12,4 +12,14 @@ class CategoryController extends Controller
         $categories = Categories::all();
         return view('categorie.index', compact('categories'));
     }
+
+    public function addCategory()
+    {
+        return view('categorie.add');
+    }
+
+    public function updateCategory()
+    {
+        return view('categorie.update');
+    }
 }

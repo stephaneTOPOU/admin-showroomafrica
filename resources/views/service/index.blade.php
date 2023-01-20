@@ -19,7 +19,7 @@
                                                 <h3 class="card-title">Tous les categories</h3>
                                             </div>
                                             <div class="col-md-2">
-                                                <a href="{{route('category.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
+                                                <a href="{{route('service.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
                                             </div>
                                         </div>
                                     </div>
@@ -29,20 +29,22 @@
                                         <thead>
                                             <tr>
                                             <th>Id</th>
-                                            <th>Nom</th>
+                                            <th>Libelle</th>
+                                            <th>Description</th>
                                             <th>Date</th>
                                             <th>Action</th>
                                             </tr>
                                         </thead>
                                             <tbody>
-                                                @foreach ($categories as $categorie)
+                                                @foreach ($services as $service)
                                                     <tr>
-                                                        <td>{{ $categorie->id }}</td>
-                                                        <td>{{ $categorie->libelle }}</td>
-                                                        <td>{{ $categorie->created_at }}</td>
+                                                        <td>{{ $service->id }}</td>
+                                                        <td>{{ $service->libelle }}</td>
+                                                        <td>{{ $service->description }}</td>
+                                                        <td>{{ $service->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('category.add')}}" class="btn btn-default">
+                                                                <a href="{{route('service.update')}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
@@ -63,7 +65,8 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Nom</th>
+                                                <th>Libelle</th>
+                                                <th>Description</th>
                                                 <th>Date</th>
                                                 <th>Action</th>
                                             </tr>

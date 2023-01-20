@@ -19,7 +19,7 @@
                                                 <h3 class="card-title">Tous les categories</h3>
                                             </div>
                                             <div class="col-md-2">
-                                                <a href="{{route('category.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
+                                                <a href="{{route('entreprise.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
                                             </div>
                                         </div>
                                     </div>
@@ -28,21 +28,27 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                            <th>Id</th>
-                                            <th>Nom</th>
-                                            <th>Date</th>
-                                            <th>Action</th>
+                                                <th>Logo</th>
+                                                <th>Nom</th>
+                                                <th>Adresse</th>
+                                                <th>Telephone</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                             <tbody>
-                                                @foreach ($categories as $categorie)
+                                                @foreach ($entreprises as $entreprise)
                                                     <tr>
-                                                        <td>{{ $categorie->id }}</td>
-                                                        <td>{{ $categorie->libelle }}</td>
-                                                        <td>{{ $categorie->created_at }}</td>
+                                                        @if ($entreprise->logo)
+                                                            <td><img src="{{asset('assets/images')}}/{{$entreprise->logo}}" width="60"></td>
+                                                        @else
+                                                            <td><img src="{{asset('default.png')}} "width="60"></td>
+                                                        @endif
+                                                        <td>{{ $entreprise->nom }}</td>
+                                                        <td>{{ $entreprise->adresse }}</td>
+                                                        <td>{{ $entreprise->telephone1 }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('category.add')}}" class="btn btn-default">
+                                                                <a href="{{route('entreprise.update')}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
@@ -62,9 +68,10 @@
                                             </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Id</th>
+                                                <th>Logo</th>
                                                 <th>Nom</th>
-                                                <th>Date</th>
+                                                <th>Adresse</th>
+                                                <th>Telephone</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
