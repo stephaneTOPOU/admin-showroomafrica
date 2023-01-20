@@ -1,4 +1,11 @@
 @include('header.header')
+@include('header.header2')
+@include('header.header3')
+@include('header.header4')
+@include('header.header5')
+@include('header.header6')
+@include('header.header7')
+@include('header.header8')
 <div class="wrapper">
   @include('navBar.navbar')
   @include('sideBar.sidebar')
@@ -141,6 +148,21 @@
   </div>
   @include('footer.footer')
 </div>
+@include('footer.footer3')
+@include('footer.footer4')
+@include('footer.footer5')
+@include('footer.footer6')
+@include('footer.footer7')
+@include('footer.footer8')
+@include('footer.footer9')
+@include('footer.footer10')
+@include('footer.footer11')
+@include('footer.footer12')
+@include('footer.footer13')
+@include('footer.footer14')
+@include('footer.footer15')
+@include('footer.footer16')
+@include('footer.footer17')
 @include('footer.footer2')
 
 

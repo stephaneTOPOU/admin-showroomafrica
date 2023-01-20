@@ -1,4 +1,6 @@
 @include('header.header')
+@include('header.header5')
+@include('header.header6')
 <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <div class="wrapper">
@@ -70,15 +72,15 @@
             </div>
         @include('footer.footer')
     </div>
-<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
+    @include('footer.footer3')
+    {{-- @include('footer.footer4') --}}
+    @include('footer.footer5')
+    @include('footer.footer10')
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-
 <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
-
 <script>
     $(function () {
         $("#example1").DataTable({
