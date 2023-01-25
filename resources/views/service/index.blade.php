@@ -16,7 +16,7 @@
                                     <div class="card-header">
                                         <div class="row">
                                             <div class="col-md-10">
-                                                <h3 class="card-title">Tous les categories</h3>
+                                                <h3 class="card-title">Tous les services</h3>
                                             </div>
                                             <div class="col-md-2">
                                                 <a href="{{route('service.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
@@ -29,6 +29,7 @@
                                         <thead>
                                             <tr>
                                             <th>Id</th>
+                                            <th>Entreprise</th>
                                             <th>Libelle</th>
                                             <th>Description</th>
                                             <th>Date</th>
@@ -38,7 +39,8 @@
                                             <tbody>
                                                 @foreach ($services as $service)
                                                     <tr>
-                                                        <td>{{ $service->id }}</td>
+                                                        <td>{{ $service->identifiant }}</td>
+                                                        <td>{{ $service->entreprise }}</td>
                                                         <td>{{ $service->libelle }}</td>
                                                         <td>{{ $service->description }}</td>
                                                         <td>{{ $service->created_at }}</td>
@@ -65,6 +67,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Entreprise</th>
                                                 <th>Libelle</th>
                                                 <th>Description</th>
                                                 <th>Date</th>

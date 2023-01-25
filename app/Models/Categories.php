@@ -9,6 +9,8 @@ class Categories extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['libelle'];
+
     public function sousCategorie()
     {
         return $this->belongsTo(SousCategories::class);

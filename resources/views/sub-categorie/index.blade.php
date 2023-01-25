@@ -19,7 +19,7 @@
                                                 <h3 class="card-title">Tous les categories</h3>
                                             </div>
                                             <div class="col-md-2">
-                                                <a href="{{route('subcategory.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
+                                                <a href="{{route('sub-category.create')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
                                             </div>
                                         </div>
                                     </div>
@@ -42,7 +42,7 @@
                                                         <td>{{ $sousCategorie->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('subcategory.update')}}" class="btn btn-default">
+                                                                <a href="{{route('sub-category.edit', $sousCategorie->id)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>

@@ -9,6 +9,14 @@ class Admin extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'prenoms',
+        'email',
+        'password',
+
+    ];
+
     public function minispot()
     {
         return $this->belongsTo(MiniSpot::class);

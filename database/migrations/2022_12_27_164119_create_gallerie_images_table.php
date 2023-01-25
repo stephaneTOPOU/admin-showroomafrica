@@ -16,7 +16,7 @@ class CreateGallerieImagesTable extends Migration
         Schema::create('gallerie_images', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('entreprise_id')->unsigned();
-            $table->integer('galerie_image')->nullable();
+            $table->string('galerie_image')->nullable();
             $table->timestamps();
             $table->foreign('entreprise_id')->references('id')->on('entreprises')->onDelete('cascade');
         });

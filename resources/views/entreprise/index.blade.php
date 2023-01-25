@@ -28,6 +28,7 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
+                                                <th>Id</th>
                                                 <th>Logo</th>
                                                 <th>Nom</th>
                                                 <th>Adresse</th>
@@ -38,6 +39,7 @@
                                             <tbody>
                                                 @foreach ($entreprises as $entreprise)
                                                     <tr>
+                                                        <td>{{ $entreprise->id }}</td>
                                                         @if ($entreprise->logo)
                                                             <td><img src="{{asset('assets/images')}}/{{$entreprise->logo}}" width="60"></td>
                                                         @else
@@ -68,6 +70,7 @@
                                             </tbody>
                                         <tfoot>
                                             <tr>
+                                                <th>Id</th>
                                                 <th>Logo</th>
                                                 <th>Nom</th>
                                                 <th>Adresse</th>

@@ -18,7 +18,7 @@
                         <div class="">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Enrégistrer une catégorie</h3>
+                                    <h3 class="card-title">Modifier un service</h3>
                                 </div>
                                 <form role="form">
                                     <div class="card-body">

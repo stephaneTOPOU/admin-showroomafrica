@@ -24,16 +24,16 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>Nom de la catégorie</label>
-                                            <select class="form-control select2" style="width: 100%;">
+                                            <select class="form-control select2" style="width: 100%;" name="categorie_id">
                                                 <option selected="selected">Catégorie ici</option>
                                                 @foreach ($categories as $categorie)
-                                                    <option value="{{ $categorie->id }}">{{ $categorie->libelle }}</option>
+                                                    <option value="{{ $categorie->id }}" @if(($categorie->id)==($souscategorie->categorie_id)) selected @endif>{{ $categorie->libelle }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Nom</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Entrez le nom">
+                                            <input type="text" class="form-control" id="exampleInputEmail1" value="{{old('libelle')?? $souscategorie->libelle}}" placeholder="Entrez le nom" name="libelle" required>
                                         </div>
                                         <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>

@@ -18,13 +18,18 @@
                         <div class="">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Enrégistrer une catégorie</h3>
+                                    <h3 class="card-title">Modifier une catégorie</h3>
                                 </div>
-                                <form role="form">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                @endif
+                                <form role="form" method="POST" action="{{ route('category.update',$categorie->id) }}">
+                                    @csrf
+                                    @method('PUT')
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Nom de la catégorie</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Entrez le nom">
+                                            <label>Nom de la catégorie</label>
+                                            <input type="text" class="form-control" value="{{old('libelle')?? $categorie->libelle}}" placeholder="Entrez le nom" name="libelle" required>
                                         </div>
                                         <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>

@@ -33,7 +33,7 @@
         </li> 
         <li class="nav-header">POP-UP</li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('popup') }}" class="nav-link">
             <i class="nav-icon fas fa-image"></i>
             <p>
               Pop-up
@@ -42,7 +42,7 @@
         </li>
         <li class="nav-header">ENTREPRISES</li>
         <li class="nav-item">
-          <a href="{{ route('category') }}" class="nav-link">
+          <a href="{{ route('category.index') }}" class="nav-link">
             <i class="nav-icon fas fa-th-large"></i>
             <p>
               Categories
@@ -50,7 +50,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('subcategory') }}" class="nav-link">
+          <a href="{{ route('sub-category.index') }}" class="nav-link">
             <i class="nav-icon fas fa-city"></i>
             <p>
               Sous-Categories
@@ -74,7 +74,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('service-image') }}" class="nav-link">
             <i class="nav-icon fas fa-image"></i>
             <p>
               Images de service
@@ -82,15 +82,15 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('horaire') }}" class="nav-link">
             <i class="nav-icon fas fa-clock"></i>
             <p>
-              Horraire
+              Horaire
             </p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('gallerie') }}" class="nav-link">
             <i class="nav-icon fas fa-images"></i>
             <p>
               Gallerie Image
@@ -99,7 +99,7 @@
         </li>
         <li class="nav-header">LES SLIDERS</li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('slider1') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider 1
@@ -107,7 +107,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('slider2') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider 2
@@ -115,7 +115,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('slider3') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider 3
@@ -123,7 +123,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('sliderhaut') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider Latéral Haut
@@ -131,7 +131,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('sliderbas') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider Latéral Bas
@@ -139,7 +139,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('sliderrecherche') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider Recherche
@@ -147,7 +147,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('sliderlh') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider Recherche Latéral Haut
@@ -155,7 +155,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('sliderlb') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider Recherche Latéral Bas
@@ -164,7 +164,7 @@
         </li>
         <li class="nav-header">LES MEDIAS</li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('minispot') }}" class="nav-link">
             <i class="nav-icon fas fa-video"></i>
             <p>
               Mini-Spot
@@ -172,7 +172,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('reportage') }}" class="nav-link">
             <i class="nav-icon fab fa-youtube"></i>
             <p>
               Reportage
@@ -181,7 +181,7 @@
         </li>
         <li class="nav-header">PAYS & VILLE</li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('pays') }}" class="nav-link">
             <i class="nav-icon far fa-flag"></i>
             <p>
               Pays
@@ -189,7 +189,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('ville') }}" class="nav-link">
             <i class="nav-icon fas fa-city"></i>
             <p>
               Ville
@@ -198,7 +198,7 @@
         </li>
         <li class="nav-header">PARAMETRE</li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('parametre') }}" class="nav-link">
             <i class="nav-icon fas fa-wrench"></i>
             <p>
               Pamètre
@@ -206,7 +206,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{ route('admin.index') }}" class="nav-link">
             <i class="nav-icon fas fa-user-cog"></i>
             <p>
               Admin
