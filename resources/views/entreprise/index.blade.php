@@ -19,12 +19,15 @@
                                                 <h3 class="card-title">Tous les categories</h3>
                                             </div>
                                             <div class="col-md-2">
-                                                <a href="{{route('entreprise.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
+                                                <a href="{{route('entreprise.create')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
+                                        @if(Session::has('success'))
+                                            <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                        @endif
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -50,15 +53,17 @@
                                                         <td>{{ $entreprise->telephone1 }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('entreprise.update')}}" class="btn btn-default">
+                                                                <a href="{{route('entreprise.edit', $entreprise->id)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <div class="btn-group">
-                                                                <a class="btn btn-default">
+                                                            <form method="POST" action="{{ route('entreprise.destroy',$entreprise->id) }}" class="btn-group">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" href="" class="btn btn-default">
                                                                     <i class="fas fa-trash"></i> Supprimer
-                                                                </a>
-                                                            </div>
+                                                                </button>
+                                                            </form>
                                                             {{-- <div class="btn-group">
                                                                 <a class="btn btn-default">
                                                                     <i class="fas fa-eye"></i> Edit

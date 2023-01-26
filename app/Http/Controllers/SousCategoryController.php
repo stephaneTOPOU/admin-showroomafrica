@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use App\Models\SousCategories;
+use Exception;
 use Illuminate\Http\Request;
 
 class SousCategoryController extends Controller
@@ -38,7 +39,17 @@ class SousCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'libelle'=>'required|string',
+            'categorie_id'=>'required|integer',
+        ]);
+
+        try {
+            SousCategories::create($data);
+            return redirect()->back()->with('success','Sous - catégorie Ajouté avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 
     /**
@@ -58,10 +69,11 @@ class SousCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(SousCategories $souscategorie)
+    public function edit($souscategorie)
     {
+        $souscategories = SousCategories::find($souscategorie);
         $categories = Categories::all();
-        return view('sub-categorie.update', compact('categories', 'souscategorie'));
+        return view('sub-categorie.update', compact('categories', 'souscategories'));
     }
 
     /**
@@ -71,9 +83,20 @@ class SousCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $souscategorie)
     {
-        //
+        $souscategories = SousCategories::find($souscategorie);
+        $data = $request->validate([
+            'libelle'=>'required|string',
+            'categorie_id'=>'required|integer',
+        ]);
+
+        try {
+            $souscategories->update($data);
+            return redirect()->back()->with('success','Sous - catégorie mise à jour avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 
     /**
@@ -82,8 +105,14 @@ class SousCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($souscategorie)
     {
-        //
+        $souscategories = SousCategories::find($souscategorie);
+        try {
+            $souscategories->delete();
+            return redirect()->back()->with('success','Sous - catégorie supprimée avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 }

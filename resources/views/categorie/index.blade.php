@@ -25,6 +25,9 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
+                                        @if(Session::has('success'))
+                                            <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                        @endif
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>

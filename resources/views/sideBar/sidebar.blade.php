@@ -58,7 +58,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('entreprise') }}" class="nav-link">
+          <a href="{{ route('entreprise.index') }}" class="nav-link">
             <i class="nav-icon far fa-building"></i>
             <p>
               Entreprise
@@ -66,7 +66,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('service') }}" class="nav-link">
+          <a href="{{ route('service.index') }}" class="nav-link">
             <i class="nav-icon fas fa-tools"></i>
             <p>
               Services
@@ -74,7 +74,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('service-image') }}" class="nav-link">
+          <a href="{{ route('image.index') }}" class="nav-link">
             <i class="nav-icon fas fa-image"></i>
             <p>
               Images de service

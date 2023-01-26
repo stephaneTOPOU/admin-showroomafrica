@@ -19,7 +19,7 @@
                                                 <h3 class="card-title">Tous les services</h3>
                                             </div>
                                             <div class="col-md-2">
-                                                <a href="{{route('service.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
+                                                <a href="{{route('service.create')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
                                             </div>
                                         </div>
                                     </div>
@@ -46,15 +46,17 @@
                                                         <td>{{ $service->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('service.update')}}" class="btn btn-default">
+                                                                <a href="{{route('service.edit',$service->id)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <div class="btn-group">
-                                                                <a class="btn btn-default">
+                                                            <form method="POST" action="{{ route('service.destroy',$service->id) }}" class="btn-group">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" href="" class="btn btn-default">
                                                                     <i class="fas fa-trash"></i> Supprimer
-                                                                </a>
-                                                            </div>
+                                                                </button>
+                                                            </form>
                                                             {{-- <div class="btn-group">
                                                                 <a class="btn btn-default">
                                                                     <i class="fas fa-eye"></i> Edit

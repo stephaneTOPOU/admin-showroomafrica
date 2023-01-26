@@ -20,20 +20,25 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Modifier une sous-catégorie</h3>
                                 </div>
-                                <form role="form">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                @endif
+                                <form role="form" method="POST" action="{{ route('sub-category.update', $souscategories->id) }}">
+                                    @csrf
+                                    @method('PUT')
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>Nom de la catégorie</label>
                                             <select class="form-control select2" style="width: 100%;" name="categorie_id">
                                                 <option selected="selected">Catégorie ici</option>
                                                 @foreach ($categories as $categorie)
-                                                    <option value="{{ $categorie->id }}" @if(($categorie->id)==($souscategorie->categorie_id)) selected @endif>{{ $categorie->libelle }}</option>
+                                                    <option value="{{ $categorie->id }}" @if(($categorie->id)==($souscategories->categorie_id)) selected @endif>{{ $categorie->libelle }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Nom</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" value="{{old('libelle')?? $souscategorie->libelle}}" placeholder="Entrez le nom" name="libelle" required>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" value="{{old('libelle')?? $souscategories->libelle}}" placeholder="Entrez le nom" name="libelle" required>
                                         </div>
                                         <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>

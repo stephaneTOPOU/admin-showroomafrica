@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServiceImageController;
 use App\Http\Controllers\SousCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,23 +25,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', HomeController::class)->name('home');
-
 Route::resource('/category', CategoryController::class);
-
 Route::resource('/sub-category', SousCategoryController::class);
-
-
-Route::get('/entreprise', [\App\Http\Controllers\EntrepriseController::class, 'index'])->name('entreprise');
-Route::get('/entreprise-add', [\App\Http\Controllers\EntrepriseController::class, 'addEntreprise'])->name('entreprise.add');
-Route::get('/entreprise-edit', [\App\Http\Controllers\EntrepriseController::class, 'updateEntreprise'])->name('entreprise.update');
-
-Route::get('/service', [\App\Http\Controllers\ServiceController::class, 'index'])->name('service');
-Route::get('/service-add', [\App\Http\Controllers\ServiceController::class, 'addservice'])->name('service.add');
-Route::get('/service-edit', [\App\Http\Controllers\ServiceController::class, 'updateservice'])->name('service.update');
-
-Route::get('/image', [\App\Http\Controllers\ServiceImageController::class, 'index'])->name('service-image');
-Route::get('/image-add', [\App\Http\Controllers\ServiceImageController::class, 'addServiceImage'])->name('service-image.add');
-Route::get('/image-edit', [\App\Http\Controllers\ServiceImageController::class, 'updateServiceImage'])->name('service-image.update');
+Route::resource('/entreprise', EntrepriseController::class);
+Route::resource('/service', ServiceController::class);
+Route::resource('/image', ServiceImageController::class);
 
 Route::get('/horaire', [\App\Http\Controllers\HoraireController::class, 'index'])->name('horaire');
 Route::get('/horaire-add', [\App\Http\Controllers\HoraireController::class, 'addHoraire'])->name('horaire.add');

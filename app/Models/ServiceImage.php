@@ -9,6 +9,8 @@ class ServiceImage extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['service_id', 'service_image'];
+
     public function service()
     {
         return $this->hasMany(Service::class);

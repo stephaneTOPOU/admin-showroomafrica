@@ -9,6 +9,8 @@ class SousCategories extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['categorie_id','libelle'];
+
     public function Categories()
     {
         return $this->hasMany(Categories::class);

@@ -20,16 +20,21 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Modifier un service</h3>
                                 </div>
-                                <form role="form">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                @endif
+                                <form role="form" method="POST" action="{{ route('service.update',$services->id) }}" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Nom de l'entreprise</label>
-                                                    <select class="form-control select2" style="width: 100%;">
+                                                    <select class="form-control select2" style="width: 100%;" name="entreprise_id">
                                                         <option selected="selected">Entreprise ici</option>
                                                         @foreach ($entreprises as $entreprise)
-                                                            <option value="{{ $entreprise->id }}">{{ $entreprise->nom }}</option>
+                                                            <option value="{{ $entreprise->id }}" {{ $services->entreprise_id == $entreprise->id ? 'selected' : '' }}>{{ $entreprise->nom }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -37,13 +42,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Description 1</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..."></textarea>
+                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="libelle">{{old('libelle')??$services->libelle}}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Description 2</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..."></textarea>
+                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="description">{{old('description')??$services->description}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -54,7 +59,7 @@
                                                     <label for="exampleInputFile">Service image 1</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image1" value="{{old('image1')??$services->image1}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image 1</label>
                                                         </div>
                                                     </div>
@@ -65,7 +70,7 @@
                                                     <label for="exampleInputFile">Service image 2</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image2" value="{{old('image2')??$services->image2}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image 2</label>
                                                         </div>
                                                     </div>
@@ -76,7 +81,7 @@
                                                     <label for="exampleInputFile">Service image 3</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image3" value="{{old('image3')??$services->image3}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image 3</label>
                                                         </div>
                                                     </div>
@@ -87,7 +92,7 @@
                                                     <label for="exampleInputFile">Service image 4</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image4" value="{{old('image4')??$services->image4}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image 4</label>
                                                         </div>
                                                     </div>

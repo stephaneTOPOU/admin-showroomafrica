@@ -20,16 +20,21 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Modifier une entreprise</h3>
                                 </div>
-                                <form role="form">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                @endif
+                                <form role="form" method="POST" action="{{ route('entreprise.update',$entreprises->id) }}" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Nom du sous-catégorie</label>
-                                                    <select class="form-control select2" style="width: 100%;">
+                                                    <select class="form-control select2" style="width: 100%;" name="souscategorie_id">
                                                         <option selected="selected">sous-catégorie ici</option>
                                                         @foreach ($souscategories as $souscategorie)
-                                                            <option value="{{ $souscategorie->id }}">{{ $souscategorie->libelle }}</option>
+                                                            <option value="{{ $souscategorie->id }}" @if(($souscategorie->id)==($entreprises->souscategorie_id)) selected @endif>{{ $souscategorie->libelle }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -37,13 +42,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Nom de l'entreprise</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez le nom">
+                                                    <input type="text" class="form-control" placeholder="Entrez le nom" name="nom" required value="{{old('nom')?? $entreprises->nom}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Email de l'entreprise</label>
-                                                    <input type="email" class="form-control"  id="exampleInputEmail1" placeholder="Entrez le mail">
+                                                    <input type="email" class="form-control"  id="exampleInputEmail1" placeholder="Entrez le mail" name="email" value="{{old('email')?? $entreprises->email}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -53,20 +58,20 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>Adresse de l'entreprise</label>
-                                                        <input type="text" class="form-control"  placeholder="Entrez l'adresse">
+                                                        <input type="text" class="form-control"  placeholder="Entrez l'adresse" name="adresse" required value="{{old('adresse')?? $entreprises->adresse}}">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Statu de l'entreprise</label>
-                                                    <input type="text" class="form-control"  placeholder="Entrez le statu">
+                                                    <input type="text" class="form-control"  placeholder="Entrez le statu" name="statu" value="{{old('statu')?? $entreprises->statu}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Téléphone 1 de l'entreprise</label>
-                                                    <input type="tel" class="form-control"  placeholder="Entrez le numéro">
+                                                    <input type="tel" class="form-control"  placeholder="Entrez le numéro" name="telephone1" required value="{{old('telephone1')?? $entreprises->telephone1}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -76,20 +81,20 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>Téléphone 2 de l'entreprise</label>
-                                                        <input type="tel" class="form-control"  placeholder="Entrez un 2ème numéro">
+                                                        <input type="tel" class="form-control"  placeholder="Entrez un 2ème numéro" name="telephone2" value="{{old('telephone2')?? $entreprises->telephone2}}">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Téléphone 3 de l'entreprise</label>
-                                                    <input type="tel" class="form-control"  placeholder="Entrez un 3ème numéro">
+                                                    <input type="tel" class="form-control"  placeholder="Entrez un 3ème numéro" name="telephone3" value="{{old('telephone3')?? $entreprises->telephone3}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Téléphone 4 de l'entreprise</label>
-                                                    <input type="tel" class="form-control"  placeholder="Entrez un 4ème numéro">
+                                                    <input type="tel" class="form-control"  placeholder="Entrez un 4ème numéro" name="telephone4" value="{{old('telephone4')?? $entreprises->telephone4}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -99,20 +104,20 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>Itinéraire de l'entreprise</label>
-                                                        <input type="text" class="form-control"  placeholder="Entrez l'itinéraire">
+                                                        <input type="text" class="form-control"  placeholder="Entrez l'itinéraire" name="itineraire" value="{{old('itineraire')?? $entreprises->itineraire}}">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Siteweb de l'entreprise</label>
-                                                    <input type="text" class="form-control"  placeholder="Entrez le siteweb">
+                                                    <input type="text" class="form-control"  placeholder="Entrez le siteweb" name="siteweb" value="{{old('siteweb')?? $entreprises->siteweb}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Géoloaclisation de l'entreprise</label>
-                                                    <input type="text" class="form-control"  placeholder="Entrez la géolocalisation">
+                                                    <input type="text" class="form-control"  placeholder="Entrez la géolocalisation" name="geolocalisation" value="{{old('geolocalisation')?? $entreprises->geolocalisation}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -122,14 +127,14 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>Description courte de l'entreprise</label>
-                                                        <textarea class="form-control" rows="4" placeholder="Enter ..."></textarea>
+                                                        <textarea class="form-control" rows="4" placeholder="Enter ..." name="descriptionCourte" >{{old('descriptionCourte')?? $entreprises->descriptionCourte}}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Description longue de l'entreprise</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..."></textarea>
+                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="descriptionLonge" > {{old('descriptionLonge')?? $entreprises->descriptionLonge}}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -137,7 +142,7 @@
                                                     <label for="exampleInputFile">Logo</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="logo" value="{{old('logo')?? $entreprises->logo}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir le logo</label>
                                                         </div>
                                                     </div>
@@ -151,7 +156,7 @@
                                                     <label for="exampleInputFile">Image pharmacie </label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="photo1" value="{{old('photo1')?? $entreprises->photo1}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>
@@ -162,7 +167,7 @@
                                                     <label for="exampleInputFile">Image Couverture(Profil)</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="photo2" value="{{old('photo2')?? $entreprises->photo2}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>
@@ -173,7 +178,7 @@
                                                     <label for="exampleInputFile">Image honneur</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="photo3" value="{{old('photo3')?? $entreprises->photo3}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>
@@ -184,7 +189,7 @@
                                                     <label for="exampleInputFile">Autre image</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="photo4" value="{{old('photo4')?? $entreprises->photo4}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>
@@ -195,37 +200,37 @@
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="est_souscrit" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->est_souscrit == 1) checked  @endif @if($entreprises->est_souscrit == 0) unchecked  @endif>
                                                     <label class="form-check-label" for="exampleCheck1">estSouscrit</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="honneur" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->honneur == 1) checked  @endif @if($entreprises->honneur == 0) unchecked  @endif>
                                                     <label class="form-check-label" for="exampleCheck1">honneur</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="elus" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->elus == 1) checked  @endif @if($entreprises->elus == 0) unchecked  @endif>
                                                     <label class="form-check-label" for="exampleCheck1">elus</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="est_pharmacie" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->est_pharmacie == 1) checked  @endif @if($entreprises->est_pharmacie == 0) unchecked  @endif>
                                                     <label class="form-check-label" for="exampleCheck1">estPharmacie</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="pharmacie_de_garde" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->pharmacie_de_garde == 1) checked  @endif @if($entreprises->pharmacie_de_garde == 0) unchecked  @endif>
                                                     <label class="form-check-label" for="exampleCheck1">estDeGarde</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="a_publireportage" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->a_publireportage == 1) checked  @endif @if($entreprises->a_publireportage == 0) unchecked  @endif>
                                                     <label class="form-check-label" for="exampleCheck1">apublireportage</label>
                                                 </div>
                                             </div>
@@ -237,7 +242,7 @@
                                                     <label for="exampleInputFile">publireportage image 1</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage1" value="{{old('publireportage1')?? $entreprises->publireportage1}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 1</label>
                                                         </div>
                                                     </div>
@@ -248,7 +253,7 @@
                                                     <label for="exampleInputFile">publireportage image 2</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage2" value="{{old('publireportage2')?? $entreprises->publireportage2}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 2</label>
                                                         </div>
                                                     </div>
@@ -259,7 +264,7 @@
                                                     <label for="exampleInputFile">publireportage image 3</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage3" value="{{old('publireportage3')?? $entreprises->publireportage3}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 3</label>
                                                         </div>
                                                     </div>
@@ -270,7 +275,7 @@
                                                     <label for="exampleInputFile">publireportage image 4</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage4" value="{{old('publireportage4')?? $entreprises->publireportage4}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 4</label>
                                                         </div>
                                                     </div>
@@ -281,7 +286,7 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="a_magazine" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->a_magazine == 1) checked  @endif @if($entreprises->a_magazine == 0) unchecked  @endif>
                                                     <label class="form-check-label" for="exampleCheck1">amagazine</label>
                                                 </div>
                                             </div>
@@ -290,7 +295,7 @@
                                                     <label for="exampleInputFile">magazine image 1</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="magazineimage1" value="{{old('magazineimage1')?? $entreprises->magazineimage1}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 1</label>
                                                         </div>
                                                     </div>
@@ -301,7 +306,7 @@
                                                     <label for="exampleInputFile">magazine image 2</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="magazineimage2" value="{{old('magazineimage2')?? $entreprises->magazineimage2}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 2</label>
                                                         </div>
                                                     </div>
@@ -312,7 +317,7 @@
                                                     <label for="exampleInputFile">magazine image 3</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="magazineimage3" value="{{old('magazineimage3')?? $entreprises->magazineimage3}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 3</label>
                                                         </div>
                                                     </div>
@@ -324,10 +329,10 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Ville de l'entreprise</label>
-                                                    <select class="form-control select2" style="width: 100%;">
+                                                    <select class="form-control select2" style="width: 100%;" name="ville">
                                                         <option selected="selected">Ville ici</option>
                                                         @foreach ($villes as $ville)
-                                                            <option value="{{ $ville->libelle }}">{{ $ville->libelle }}</option>
+                                                            <option value="{{ $ville->libelle }}" {{ $entreprises->ville == $ville->libelle ? 'selected' : '' }}>{{ $ville->libelle }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -335,10 +340,10 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Pays de l'entreprise</label>
-                                                    <select class="form-control select2" style="width: 100%;">
+                                                    <select class="form-control select2" style="width: 100%;" name="pays">
                                                         <option selected="selected">Pays ici</option>
                                                         @foreach ($pays as $pay)
-                                                            <option value="{{ $pay->libelle }}">{{ $pay->libelle }}</option>
+                                                            <option value="{{ $pay->libelle }}" {{ $entreprises->pays == $pay->libelle ? 'selected' : '' }}>{{ $pay->libelle }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

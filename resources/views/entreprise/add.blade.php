@@ -20,13 +20,17 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Enrégistrer une entreprise</h3>
                                 </div>
-                                <form role="form">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                @endif
+                                <form role="form" method="POST" action="{{ route('entreprise.store') }}" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Nom du sous-catégorie</label>
-                                                    <select class="form-control select2" style="width: 100%;">
+                                                    <select class="form-control select2" style="width: 100%;" name="souscategorie_id">
                                                         <option selected="selected">sous-catégorie ici</option>
                                                         @foreach ($souscategories as $souscategorie)
                                                             <option value="{{ $souscategorie->id }}">{{ $souscategorie->libelle }}</option>
@@ -37,13 +41,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Nom de l'entreprise</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez le nom">
+                                                    <input type="text" class="form-control" placeholder="Entrez le nom" name="nom" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Email de l'entreprise</label>
-                                                    <input type="email" class="form-control"  id="exampleInputEmail1" placeholder="Entrez le mail">
+                                                    <input type="email" class="form-control"  id="exampleInputEmail1" placeholder="Entrez le mail" name="email">
                                                 </div>
                                             </div>
                                         </div>
@@ -53,20 +57,20 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>Adresse de l'entreprise</label>
-                                                        <input type="text" class="form-control"  placeholder="Entrez l'adresse">
+                                                        <input type="text" class="form-control"  placeholder="Entrez l'adresse" name="adresse" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Statu de l'entreprise</label>
-                                                    <input type="text" class="form-control"  placeholder="Entrez le statu">
+                                                    <input type="text" class="form-control"  placeholder="Entrez le statu" name="statu">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Téléphone 1 de l'entreprise</label>
-                                                    <input type="tel" class="form-control"  placeholder="Entrez le numéro">
+                                                    <input type="tel" class="form-control"  placeholder="Entrez le numéro" name="telephone1" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -76,20 +80,20 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>Téléphone 2 de l'entreprise</label>
-                                                        <input type="tel" class="form-control"  placeholder="Entrez un 2ème numéro">
+                                                        <input type="tel" class="form-control"  placeholder="Entrez un 2ème numéro" name="telephone2" >
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Téléphone 3 de l'entreprise</label>
-                                                    <input type="tel" class="form-control"  placeholder="Entrez un 3ème numéro">
+                                                    <input type="tel" class="form-control"  placeholder="Entrez un 3ème numéro" name="telephone3">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Téléphone 4 de l'entreprise</label>
-                                                    <input type="tel" class="form-control"  placeholder="Entrez un 4ème numéro">
+                                                    <input type="tel" class="form-control"  placeholder="Entrez un 4ème numéro" name="telephone4">
                                                 </div>
                                             </div>
                                         </div>
@@ -99,20 +103,20 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>Itinéraire de l'entreprise</label>
-                                                        <input type="text" class="form-control"  placeholder="Entrez l'itinéraire">
+                                                        <input type="text" class="form-control"  placeholder="Entrez l'itinéraire" name="itineraire">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Siteweb de l'entreprise</label>
-                                                    <input type="text" class="form-control"  placeholder="Entrez le siteweb">
+                                                    <input type="text" class="form-control"  placeholder="Entrez le siteweb" name="siteweb">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Géoloaclisation de l'entreprise</label>
-                                                    <input type="text" class="form-control"  placeholder="Entrez la géolocalisation">
+                                                    <input type="text" class="form-control"  placeholder="Entrez la géolocalisation" name="geolocalisation">
                                                 </div>
                                             </div>
                                         </div>
@@ -122,14 +126,14 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>Description courte de l'entreprise</label>
-                                                        <textarea class="form-control" rows="4" placeholder="Enter ..."></textarea>
+                                                        <textarea class="form-control" rows="4" placeholder="Enter ..." name="descriptionCourte"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Description longue de l'entreprise</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..."></textarea>
+                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="descriptionLonge"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -137,7 +141,7 @@
                                                     <label for="exampleInputFile">Logo</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="logo">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir le logo</label>
                                                         </div>
                                                     </div>
@@ -151,7 +155,7 @@
                                                     <label for="exampleInputFile">Image pharmacie </label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="photo1">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>
@@ -162,7 +166,7 @@
                                                     <label for="exampleInputFile">Image Couverture(Profil)</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="photo2">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>
@@ -173,7 +177,7 @@
                                                     <label for="exampleInputFile">Image honneur</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="photo3">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>
@@ -184,7 +188,7 @@
                                                     <label for="exampleInputFile">Autre image</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="photo4">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>
@@ -195,38 +199,38 @@
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="est_souscrit" value="1">
                                                     <label class="form-check-label" for="exampleCheck1">estSouscrit</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                    <label class="form-check-label" for="exampleCheck1">honneur</label>
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck2" name="honneur" value="1">
+                                                    <label class="form-check-label" for="exampleCheck2">honneur</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                    <label class="form-check-label" for="exampleCheck1">elus</label>
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck3" name="elus" value="1">
+                                                    <label class="form-check-label" for="exampleCheck3">elus</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                    <label class="form-check-label" for="exampleCheck1">estPharmacie</label>
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck4" name="est_pharmacie" value="1">
+                                                    <label class="form-check-label" for="exampleCheck4">estPharmacie</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                    <label class="form-check-label" for="exampleCheck1">estDeGarde</label>
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck5" name="pharmacie_de_garde" value="1">
+                                                    <label class="form-check-label" for="exampleCheck5">estDeGarde</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                    <label class="form-check-label" for="exampleCheck1">apublireportage</label>
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck6" name="a_publireportage" value="1">
+                                                    <label class="form-check-label" for="exampleCheck6">apublireportage</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -237,7 +241,7 @@
                                                     <label for="exampleInputFile">publireportage image 1</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage1">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 1</label>
                                                         </div>
                                                     </div>
@@ -248,7 +252,7 @@
                                                     <label for="exampleInputFile">publireportage image 2</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage2">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 2</label>
                                                         </div>
                                                     </div>
@@ -259,7 +263,7 @@
                                                     <label for="exampleInputFile">publireportage image 3</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage3">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 3</label>
                                                         </div>
                                                     </div>
@@ -270,7 +274,7 @@
                                                     <label for="exampleInputFile">publireportage image 4</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="publireportage4">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 4</label>
                                                         </div>
                                                     </div>
@@ -281,8 +285,8 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                    <label class="form-check-label" for="exampleCheck1">amagazine</label>
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck7" name="a_magazine" value="1">
+                                                    <label class="form-check-label" for="exampleCheck7">amagazine</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -290,7 +294,7 @@
                                                     <label for="exampleInputFile">magazine image 1</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="magazineimage1">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 1</label>
                                                         </div>
                                                     </div>
@@ -301,7 +305,7 @@
                                                     <label for="exampleInputFile">magazine image 2</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="magazineimage2">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 2</label>
                                                         </div>
                                                     </div>
@@ -312,7 +316,7 @@
                                                     <label for="exampleInputFile">magazine image 3</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="magazineimage3">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir image 3</label>
                                                         </div>
                                                     </div>
@@ -324,7 +328,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Ville de l'entreprise</label>
-                                                    <select class="form-control select2" style="width: 100%;">
+                                                    <select class="form-control select2" style="width: 100%;" name="ville">
                                                         <option selected="selected">Ville ici</option>
                                                         @foreach ($villes as $ville)
                                                             <option value="{{ $ville->libelle }}">{{ $ville->libelle }}</option>
@@ -335,7 +339,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Pays de l'entreprise</label>
-                                                    <select class="form-control select2" style="width: 100%;">
+                                                    <select class="form-control select2" style="width: 100%;" name="pays">
                                                         <option selected="selected">Pays ici</option>
                                                         @foreach ($pays as $pay)
                                                             <option value="{{ $pay->libelle }}">{{ $pay->libelle }}</option>

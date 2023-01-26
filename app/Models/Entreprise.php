@@ -10,16 +10,18 @@ class Entreprise extends Model
     use HasFactory;
 
     protected $fillable = [
+        'souscategorie_id',
         'nom',
         'email',
         'adresse',
-        'statut',
+        'statu',
         'telephone1',
         'telephone2',
         'telephone3',
         'telephone4',
         'itineraire',
         'siteweb',
+        'geolocalisation',
         'descriptionCourte',
         'descriptionLongue',
         'logo',
@@ -31,6 +33,7 @@ class Entreprise extends Model
         'pharmacie_de_garde',
         'honneur',
         'est_souscrit',
+        'elus',
         'vue',
         'a_publireportage',
         'publireportage1',
@@ -42,7 +45,9 @@ class Entreprise extends Model
         'a_magazine',
         'magazineimage1',
         'magazineimage2',
-        'magazineimage3'
+        'magazineimage3',
+        'ville',
+        'pays'
     ];
 
     public function sousCategorie()

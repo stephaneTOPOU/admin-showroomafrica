@@ -20,13 +20,17 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Enrégistrer un service</h3>
                                 </div>
-                                <form role="form">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                @endif
+                                <form role="form" method="POST" action="{{ route('service.store') }}" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Nom de l'entreprise</label>
-                                                    <select class="form-control select2" style="width: 100%;">
+                                                    <select class="form-control select2" style="width: 100%;" name="entreprise_id">
                                                         <option selected="selected">Entreprise ici</option>
                                                         @foreach ($entreprises as $entreprise)
                                                             <option value="{{ $entreprise->id }}">{{ $entreprise->nom }}</option>
@@ -37,13 +41,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Description 1</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..."></textarea>
+                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="libelle"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Description 2</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..."></textarea>
+                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="description"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -51,44 +55,44 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">Service image 1</label>
+                                                    <label for="exampleInputFile1">Service image 1</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image 1</label>
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile1" name="image1">
+                                                            <label class="custom-file-label" for="exampleInputFile1">Choisir l'image 1</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">Service image 2</label>
+                                                    <label for="exampleInputFile2">Service image 2</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image 2</label>
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile2" name="image2">
+                                                            <label class="custom-file-label" for="exampleInputFile2">Choisir l'image 2</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">Service image 3</label>
+                                                    <label for="exampleInputFile3">Service image 3</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image 3</label>
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile3" name="image3">
+                                                            <label class="custom-file-label" for="exampleInputFile3">Choisir l'image 3</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">Service image 4</label>
+                                                    <label for="exampleInputFile4">Service image 4</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image 4</label>
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile4" name="image4">
+                                                            <label class="custom-file-label" for="exampleInputFile4">Choisir l'image 4</label>
                                                         </div>
                                                     </div>
                                                 </div>

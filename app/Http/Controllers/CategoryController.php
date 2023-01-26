@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
 use Exception;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -67,10 +67,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categories $categorie)
+    public function edit($categorie)
     {
-        dump($categorie);
-        return view('categorie.update', compact('categorie'));
+        $categories = Categories::find($categorie);
+        return view('categorie.update', compact('categories'));
     }
 
     /**
@@ -80,14 +80,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categories $categorie)
+    public function update(Request $request, $categorie)
     {
+        $categories = Categories::find($categorie);
         $data = $request->validate([
             'libelle'=>'required|string',
         ]);
 
         try {
-            $categorie->update($data);
+            $categories->update($data);
             return redirect()->back()->with('success','Catégorie mise à jour avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
@@ -100,10 +101,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categories $categorie)
+    public function destroy($categorie)
     {
+        $categories = Categories::find($categorie);
         try {
-            $categorie->delete();
+            $categories->delete();
             return redirect()->back()->with('success','Catégorie supprimée avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
