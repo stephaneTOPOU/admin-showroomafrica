@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PopUp;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PopupController extends Controller
 {
@@ -13,7 +17,12 @@ class PopupController extends Controller
      */
     public function index()
     {
-        //
+        $popups = DB::table('admins')
+            ->join('pop_ups', 'admins.id', '=', 'pop_ups.admin_id')
+            ->select('*', 'pop_ups.id as identifiant', 'admins.name as admin')
+            ->get();
+
+        return view('popup.index', compact('popups'));
     }
 
     /**
@@ -54,9 +63,10 @@ class PopupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($popup)
     {
-        //
+        $popups = PopUp::find($popup);
+        return view('popup.update', compact('popups'));
     }
 
     /**
@@ -66,9 +76,28 @@ class PopupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $popup)
     {
-        //
+        $data = $request->validate([
+            'image'=>'required|file'
+        ]);
+
+        try {
+            $data = PopUp::find($popup);
+
+            $data->admin_id =  Auth::user()->id;
+            
+            if ($request->image) {
+                $filename = time() . rand(1, 50) . '.' . $request->image->extension();
+                $image = $request->file('image')->storeAs('Popup', $filename, 'public');
+                $data->image = $image;
+            }
+
+            $data->update();
+            return redirect()->route('popup.index')->with('success', 'Vidéo mise à jour avec succès');
+        } catch (Exception $e) {
+            return redirect()->route('popup.index')->with('success', $e->getMessage());
+        }
     }
 
     /**

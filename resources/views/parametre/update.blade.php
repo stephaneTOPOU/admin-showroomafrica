@@ -23,7 +23,7 @@
                                 @if(Session::has('success'))
                                     <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
                                 @endif
-                                <form role="form" method="POST" action="{{ route('parametre.update',$parametres->id) }}">
+                                <form role="form" method="POST" action="{{ route('parametre.update',$parametres->id) }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="card-body">
@@ -86,6 +86,31 @@
                                                 <div class="form-group">
                                                     <label >Lien Youtube</label>
                                                     <input type="text" class="form-control" placeholder="Entrez le lien Youtube de showroomafrica" name="lienyoutube" value="{{old('lienyoutube')??$parametres->lienyoutube}}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">Logo du header</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="logo_header" value="{{old('logo_header')??$parametres->logo_header}}">
+                                                            <label class="custom-file-label" for="exampleInputFile">Choisir le logo</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">Logo du footer </label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="logo_footer" value="{{old('logo_footer')??$parametres->logo_footer}}">
+                                                            <label class="custom-file-label" for="exampleInputFile">Choisir le logo</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

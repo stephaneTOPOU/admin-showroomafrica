@@ -20,13 +20,17 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Enrégistrer une ville</h3>
                                 </div>
-                                <form role="form">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                @endif
+                                <form role="form" method="POST" action="{{ route('ville.store') }}">
+                                    @csrf
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Nom pays</label>
-                                                    <select class="form-control select2" style="width: 100%;">
+                                                    <select class="form-control select2" style="width: 100%;" name="pays_id">
                                                         <option selected="selected">pays ici</option>
                                                         @foreach ($pays as $pay)
                                                             <option value="{{ $pay->id }}">{{ $pay->libelle }}</option>
@@ -37,13 +41,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Ville</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez le nom de la ville">
+                                                    <input type="text" class="form-control" placeholder="Entrez le nom de la ville" name="libelle" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Région</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez la région">
+                                                    <input type="text" class="form-control" placeholder="Entrez la région" name="region">
                                                 </div>
                                             </div>
                                         </div>

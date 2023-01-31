@@ -20,19 +20,24 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Modifier un pays</h3>
                                 </div>
-                                <form role="form">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                @endif
+                                <form role="form" method="POST" action="{{ route('pays.update',$pays->id) }}" >
+                                    @csrf
+                                    @method('PUT')
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Iso</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez l'iso du pays">
+                                                    <input type="text" class="form-control" placeholder="Entrez l'iso du pays" name="iso" value="{{old('iso')??$pays->iso}}" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Pays</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez le nom du pays">
+                                                    <input type="text" class="form-control" placeholder="Entrez le nom du pays" name="libelle" value="{{old('libelle')??$pays->libelle}}" required>
                                                 </div>
                                             </div>
                                         </div>

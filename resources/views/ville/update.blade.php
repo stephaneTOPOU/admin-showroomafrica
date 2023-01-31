@@ -20,16 +20,21 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Modifier une ville</h3>
                                 </div>
-                                <form role="form">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                @endif
+                                <form role="form" method="POST" action="{{ route('ville.update',$villes->id) }}">
+                                    @csrf
+                                    @method('PUT')
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Nom pays</label>
-                                                    <select class="form-control select2" style="width: 100%;">
+                                                    <select class="form-control select2" style="width: 100%;" name="pays_id">
                                                         <option selected="selected">pays ici</option>
                                                         @foreach ($pays as $pay)
-                                                            <option value="{{ $pay->id }}">{{ $pay->libelle }}</option>
+                                                        <option value="{{ $pay->id }}" {{ $villes->pays_id == $pay->id ? 'selected' : '' }}>{{ $pay->libelle }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -37,13 +42,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Ville</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez le nom de la ville">
+                                                    <input type="text" class="form-control" placeholder="Entrez le nom de la ville" name="libelle" value="{{old('libelle')??$villes->libelle}}" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Région</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez la région">
+                                                    <input type="text" class="form-control" placeholder="Entrez la région" name="region" value="{{old('region')??$villes->region}}">
                                                 </div>
                                             </div>
                                         </div>

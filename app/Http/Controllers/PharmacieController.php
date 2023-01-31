@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
-use App\Models\Entreprise;
-use App\Models\SousCategories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class HomeController extends Controller
+class PharmacieController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,16 +14,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-    }
-
-    public function __invoke()
-    {
-        $nbre_cat = Categories::count();
-        $nbre_sousCat = SousCategories::count();
-        $nbre_entreprise = Entreprise::count();
-        $nbre_phar = Entreprise::where('est_pharmacie', 1)->count();
-        return view('home.home', compact('nbre_cat', 'nbre_sousCat', 'nbre_entreprise', 'nbre_phar'));
+        $entreprises = DB::table('entreprises')->where('est_pharmacie', 1)
+        ->where('pharmacie_de_garde', 1)
+        ->select('*')
+        ->get();
+        return view('entreprise.index', compact('entreprises'));
     }
 
     /**

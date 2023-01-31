@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pays;
+use Exception;
 use Illuminate\Http\Request;
 
 class PaysController extends Controller
@@ -13,7 +15,8 @@ class PaysController extends Controller
      */
     public function index()
     {
-        //
+        $pays = Pays::all();
+        return view('pays.index', compact('pays'));
     }
 
     /**
@@ -23,7 +26,7 @@ class PaysController extends Controller
      */
     public function create()
     {
-        //
+        return view('pays.add');
     }
 
     /**
@@ -34,7 +37,22 @@ class PaysController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'iso'=>'required|string',
+            'libelle'=>'required|string'
+        ]);
+
+        try {
+            $data = new Pays();
+
+            $data->iso = $request->iso;
+            $data->libelle = $request->libelle;
+            
+            $data->save();
+            return redirect()->back()->with('success', 'Pays ajouté avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 
     /**
@@ -54,9 +72,10 @@ class PaysController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($pay)
     {
-        //
+        $pays = Pays::find($pay);
+        return view('pays.update', compact('pays'));
     }
 
     /**
@@ -66,9 +85,24 @@ class PaysController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $pay)
     {
-        //
+        $data = $request->validate([
+            'iso'=>'required|string',
+            'libelle'=>'required|string'
+        ]);
+
+        try {
+            $data = Pays::find($pay);
+
+            $data->iso = $request->iso;
+            $data->libelle = $request->libelle;
+            
+            $data->update();
+            return redirect()->back()->with('success', 'Pays ajouté avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 
     /**
@@ -77,8 +111,14 @@ class PaysController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($pay)
     {
-        //
+        $pays = Pays::find($pay);
+        try {
+            $pays->delete();
+            return redirect()->back()->with('success', 'Pays supprimée avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 }
