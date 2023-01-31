@@ -20,16 +20,21 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Modifier une image</h3>
                                 </div>
-                                <form role="form">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                @endif
+                                <form role="form" method="POST" action="{{ route('gallerie.update', $galleries->id) }}" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Nom de l'entreprise</label>
-                                                    <select class="form-control select2" style="width: 100%;">
+                                                    <select class="form-control select2" style="width: 100%;" name="entreprise_id">
                                                         <option selected="selected">Entreprise ici</option>
                                                         @foreach ($entreprises as $entreprise)
-                                                            <option value="{{ $entreprise->id }}">{{ $entreprise->nom }}</option>
+                                                            <option value="{{ $entreprise->id }}" {{ $galleries->entreprise_id == $entreprise->id ? 'selected' : '' }}>{{ $entreprise->nom }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -39,7 +44,7 @@
                                                     <label for="exampleInputFile">Image</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="galerie_image" value="{{old('galerie_image')??$galleries->galerie_image}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>

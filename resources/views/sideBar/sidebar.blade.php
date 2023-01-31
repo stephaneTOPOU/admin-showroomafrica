@@ -14,7 +14,7 @@
         <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">Alexander Pierce</a>
+        <a href="#" class="d-block">{{ Auth::user()->email }}</a>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
         </li> 
         <li class="nav-header">POP-UP</li>
         <li class="nav-item">
-          <a href="{{ route('popup') }}" class="nav-link">
+          <a href="{{ route('popup.index') }}" class="nav-link">
             <i class="nav-icon fas fa-image"></i>
             <p>
               Pop-up
@@ -82,7 +82,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('horaire') }}" class="nav-link">
+          <a href="{{ route('horaire.index') }}" class="nav-link">
             <i class="nav-icon fas fa-clock"></i>
             <p>
               Horaire
@@ -90,7 +90,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('gallerie') }}" class="nav-link">
+          <a href="{{ route('gallerie.index') }}" class="nav-link">
             <i class="nav-icon fas fa-images"></i>
             <p>
               Gallerie Image
@@ -99,7 +99,7 @@
         </li>
         <li class="nav-header">LES SLIDERS</li>
         <li class="nav-item">
-          <a href="{{ route('slider1') }}" class="nav-link">
+          <a href="{{ route('slider1.index') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider 1
@@ -107,7 +107,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('slider2') }}" class="nav-link">
+          <a href="{{ route('slider2.index') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider 2
@@ -115,7 +115,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('slider3') }}" class="nav-link">
+          <a href="{{ route('slider3.index') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider 3
@@ -123,7 +123,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('sliderhaut') }}" class="nav-link">
+          <a href="{{ route('sliderhaut.index') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider Latéral Haut
@@ -131,7 +131,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('sliderbas') }}" class="nav-link">
+          <a href="{{ route('sliderbas.index') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider Latéral Bas
@@ -139,7 +139,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('sliderrecherche') }}" class="nav-link">
+          <a href="{{ route('sliderrecherche.index') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
               Slider Recherche
@@ -147,24 +147,24 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('sliderlh') }}" class="nav-link">
+          <a href="{{ route('sliderlh.index') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
-              Slider Recherche Latéral Haut
+              Recherche Latéral Haut
             </p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('sliderlb') }}" class="nav-link">
+          <a href="{{ route('sliderlb.index') }}" class="nav-link">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>
-              Slider Recherche Latéral Bas
+              Recherche Latéral Bas
             </p>
           </a>
         </li>
         <li class="nav-header">LES MEDIAS</li>
         <li class="nav-item">
-          <a href="{{ route('minispot') }}" class="nav-link">
+          <a href="{{ route('mini-spot.index') }}" class="nav-link">
             <i class="nav-icon fas fa-video"></i>
             <p>
               Mini-Spot
@@ -172,7 +172,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('reportage') }}" class="nav-link">
+          <a href="{{ route('reportage.index') }}" class="nav-link">
             <i class="nav-icon fab fa-youtube"></i>
             <p>
               Reportage
@@ -181,7 +181,7 @@
         </li>
         <li class="nav-header">PAYS & VILLE</li>
         <li class="nav-item">
-          <a href="{{ route('pays') }}" class="nav-link">
+          <a href="{{ route('pays.index') }}" class="nav-link">
             <i class="nav-icon far fa-flag"></i>
             <p>
               Pays
@@ -189,7 +189,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('ville') }}" class="nav-link">
+          <a href="{{ route('ville.index') }}" class="nav-link">
             <i class="nav-icon fas fa-city"></i>
             <p>
               Ville
@@ -198,7 +198,7 @@
         </li>
         <li class="nav-header">PARAMETRE</li>
         <li class="nav-item">
-          <a href="{{ route('parametre') }}" class="nav-link">
+          <a href="{{ route('parametre.index') }}" class="nav-link">
             <i class="nav-icon fas fa-wrench"></i>
             <p>
               Pamètre

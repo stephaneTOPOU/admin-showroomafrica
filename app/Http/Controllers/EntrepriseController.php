@@ -73,31 +73,31 @@ class EntrepriseController extends Controller
 
             if ($request->logo) {
                 $filename = time() . rand(1, 50) . '.' . $request->logo->extension();
-                $img = $request->file('logo')->storeAs('EntrepriseImages', $filename, 'public');
+                $img = $request->file('logo')->storeAs('logo', $filename, 'public');
                 $data->logo = $img;
             }
 
             if ($request->photo1) {
                 $filename1 = time() . rand(1, 50) . '.' . $request->photo1->extension();
-                $img1 = $request->file('photo1')->storeAs('EntrepriseImages', $filename1, 'public');
+                $img1 = $request->file('photo1')->storeAs('Pharmacie', $filename1, 'public');
                 $data->photo1 = $img1;
             }
 
             if ($request->photo2) {
                 $filename2 = time() . rand(1, 50) . '.' . $request->photo2->extension();
-                $img2 = $request->file('photo2')->storeAs('EntrepriseImages', $filename2, 'public');
+                $img2 = $request->file('photo2')->storeAs('photoDeCouveture', $filename2, 'public');
                 $data->photo2 = $img2;
             }
 
             if ($request->photo3) {
                 $filename3 = time() . rand(1, 50) . '.' . $request->photo3->extension();
-                $img3 = $request->file('photo3')->storeAs('EntrepriseImages', $filename3, 'public');
+                $img3 = $request->file('photo3')->storeAs('photoHonneur', $filename3, 'public');
                 $data->photo3 = $img3;
             }
 
             if ($request->photo4) {
                 $filename4 = time() . rand(1, 50) . '.' . $request->photo4->extension();
-                $img4 = $request->file('photo4')->storeAs('EntrepriseImages', $filename4, 'public');
+                $img4 = $request->file('photo4')->storeAs('autreImage', $filename4, 'public');
                 $data->photo4 = $img4;
             }
 
@@ -140,25 +140,25 @@ class EntrepriseController extends Controller
 
             if ($request->publireportage1) {
                 $filename5 = time() . rand(1, 50) . '.' . $request->publireportage1->extension();
-                $img5 = $request->file('publireportage1')->storeAs('EntrepriseImages', $filename5, 'public');
+                $img5 = $request->file('publireportage1')->storeAs('publireportage', $filename5, 'public');
                 $data->publireportage1 = $img5;
             }
 
             if ($request->publireportage2) {
                 $filename6 = time() . rand(1, 50) . '.' . $request->publireportage2->extension();
-                $img6 = $request->file('publireportage2')->storeAs('EntrepriseImages', $filename6, 'public');
+                $img6 = $request->file('publireportage2')->storeAs('publireportage', $filename6, 'public');
                 $data->publireportage2 = $img6;
             }
 
             if ($request->publireportage3) {
                 $filename7 = time() . rand(1, 50) . '.' . $request->publireportage3->extension();
-                $img7 = $request->file('publireportage3')->storeAs('EntrepriseImages', $filename7, 'public');
+                $img7 = $request->file('publireportage3')->storeAs('publireportage', $filename7, 'public');
                 $data->publireportage3 = $img7;
             }
 
             if ($request->publireportage4) {
                 $filename8 = time() . rand(1, 50) . '.' . $request->publireportage4->extension();
-                $img8 = $request->file('publireportage4')->storeAs('EntrepriseImages', $filename8, 'public');
+                $img8 = $request->file('publireportage4')->storeAs('publireportage', $filename8, 'public');
                 $data->publireportage4 = $img8;
             }
 
@@ -170,19 +170,19 @@ class EntrepriseController extends Controller
 
             if ($request->magazineimage1) {
                 $filename9 = time() . rand(1, 50) . '.' . $request->magazineimage1->extension();
-                $img9 = $request->file('magazineimage1')->storeAs('EntrepriseImages', $filename9, 'public');
+                $img9 = $request->file('magazineimage1')->storeAs('magazine', $filename9, 'public');
                 $data->magazineimage1 = $img9;
             }
 
             if ($request->magazineimage2) {
                 $filename10 = time() . rand(1, 50) . '.' . $request->magazineimage2->extension();
-                $img10 = $request->file('magazineimage2')->storeAs('EntrepriseImages', $filename10, 'public');
+                $img10 = $request->file('magazineimage2')->storeAs('magazine', $filename10, 'public');
                 $data->magazineimage2 = $img10;
             }
 
             if ($request->magazineimage3) {
                 $filename11 = time() . rand(1, 50) . '.' . $request->magazineimage3->extension();
-                $img11 = $request->file('magazineimage3')->storeAs('EntrepriseImages', $filename11, 'public');
+                $img11 = $request->file('magazineimage3')->storeAs('magazine', $filename11, 'public');
                 $data->magazineimage3 = $img11;
             }
 
@@ -259,31 +259,31 @@ class EntrepriseController extends Controller
 
             if ($request->logo) {
                 $filename = time() . rand(1, 50) . '.' . $request->logo->extension();
-                $img = $request->file('logo')->storeAs('EntrepriseImages', $filename, 'public');
+                $img = $request->file('logo')->storeAs('logo', $filename, 'public');
                 $data->logo = $img;
             }
 
             if ($request->photo1) {
                 $filename1 = time() . rand(1, 50) . '.' . $request->photo1->extension();
-                $img1 = $request->file('photo1')->storeAs('EntrepriseImages', $filename1, 'public');
+                $img1 = $request->file('photo1')->storeAs('Pharmacie', $filename1, 'public');
                 $data->photo1 = $img1;
             }
 
             if ($request->photo2) {
                 $filename2 = time() . rand(1, 50) . '.' . $request->photo2->extension();
-                $img2 = $request->file('photo2')->storeAs('EntrepriseImages', $filename2, 'public');
+                $img2 = $request->file('photo2')->storeAs('photoDeCouveture', $filename2, 'public');
                 $data->photo2 = $img2;
             }
 
             if ($request->photo3) {
                 $filename3 = time() . rand(1, 50) . '.' . $request->photo3->extension();
-                $img3 = $request->file('photo3')->storeAs('EntrepriseImages', $filename3, 'public');
+                $img3 = $request->file('photo3')->storeAs('photoHonneur', $filename3, 'public');
                 $data->photo3 = $img3;
             }
 
             if ($request->photo4) {
                 $filename4 = time() . rand(1, 50) . '.' . $request->photo4->extension();
-                $img4 = $request->file('photo4')->storeAs('EntrepriseImages', $filename4, 'public');
+                $img4 = $request->file('photo4')->storeAs('autreImage', $filename4, 'public');
                 $data->photo4 = $img4;
             }
 
@@ -313,25 +313,25 @@ class EntrepriseController extends Controller
 
             if ($request->publireportage1) {
                 $filename5 = time() . rand(1, 50) . '.' . $request->publireportage1->extension();
-                $img5 = $request->file('publireportage1')->storeAs('EntrepriseImages', $filename5, 'public');
+                $img5 = $request->file('publireportage1')->storeAs('publireportage', $filename5, 'public');
                 $data->publireportage1 = $img5;
             }
 
             if ($request->publireportage2) {
                 $filename6 = time() . rand(1, 50) . '.' . $request->publireportage2->extension();
-                $img6 = $request->file('publireportage2')->storeAs('EntrepriseImages', $filename6, 'public');
+                $img6 = $request->file('publireportage2')->storeAs('publireportage', $filename6, 'public');
                 $data->publireportage2 = $img6;
             }
 
             if ($request->publireportage3) {
                 $filename7 = time() . rand(1, 50) . '.' . $request->publireportage3->extension();
-                $img7 = $request->file('publireportage3')->storeAs('EntrepriseImages', $filename7, 'public');
+                $img7 = $request->file('publireportage3')->storeAs('publireportage', $filename7, 'public');
                 $data->publireportage3 = $img7;
             }
 
             if ($request->publireportage4) {
                 $filename8 = time() . rand(1, 50) . '.' . $request->publireportage4->extension();
-                $img8 = $request->file('publireportage4')->storeAs('EntrepriseImages', $filename8, 'public');
+                $img8 = $request->file('publireportage4')->storeAs('publireportage', $filename8, 'public');
                 $data->publireportage4 = $img8;
             }
 
@@ -341,19 +341,19 @@ class EntrepriseController extends Controller
 
             if ($request->magazineimage1) {
                 $filename9 = time() . rand(1, 50) . '.' . $request->magazineimage1->extension();
-                $img9 = $request->file('magazineimage1')->storeAs('EntrepriseImages', $filename9, 'public');
+                $img9 = $request->file('magazineimage1')->storeAs('magazine', $filename9, 'public');
                 $data->magazineimage1 = $img9;
             }
 
             if ($request->magazineimage2) {
                 $filename10 = time() . rand(1, 50) . '.' . $request->magazineimage2->extension();
-                $img10 = $request->file('magazineimage2')->storeAs('EntrepriseImages', $filename10, 'public');
+                $img10 = $request->file('magazineimage2')->storeAs('magazine', $filename10, 'public');
                 $data->magazineimage2 = $img10;
             }
 
             if ($request->magazineimage3) {
                 $filename11 = time() . rand(1, 50) . '.' . $request->magazineimage3->extension();
-                $img11 = $request->file('magazineimage3')->storeAs('EntrepriseImages', $filename11, 'public');
+                $img11 = $request->file('magazineimage3')->storeAs('magazine', $filename11, 'public');
                 $data->magazineimage3 = $img11;
             }
 

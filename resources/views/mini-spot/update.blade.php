@@ -20,16 +20,21 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Modifier un mini - spot </h3>
                                 </div>
-                                <form role="form">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                @endif
+                                <form role="form" method="POST" action="{{ route('mini-spot.update',$minspots->id) }}" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">Image</label>
+                                                    <label for="exampleInputFile">Vidéos</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="video" value="{{old('video')??$minspots->video}}">
+                                                            <label class="custom-file-label" for="exampleInputFile">Choisir la vidéo</label>
                                                         </div>
                                                     </div>
                                                 </div>

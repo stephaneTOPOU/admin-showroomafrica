@@ -57,7 +57,7 @@ class ServiceImageController extends Controller
 
             if ($request->service_image) {
                 $filename = time() . rand(1, 50) . '.' . $request->service_image->extension();
-                $img = $request->file('service_image')->storeAs('EntrepriseImages', $filename, 'public');
+                $img = $request->file('service_image')->storeAs('ServiceImage', $filename, 'public');
                 $data->service_image = $img;
             }
 
@@ -116,7 +116,7 @@ class ServiceImageController extends Controller
 
             if ($request->service_image) {
                 $filename = time() . rand(1, 50) . '.' . $request->service_image->extension();
-                $img = $request->file('service_image')->storeAs('EntrepriseImages', $filename, 'public');
+                $img = $request->file('service_image')->storeAs('ServiceImage', $filename, 'public');
                 $data->service_image = $img;
             }
 

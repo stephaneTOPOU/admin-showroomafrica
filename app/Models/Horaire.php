@@ -9,6 +9,8 @@ class Horaire extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['entreprise_id','jour','h_ouverture','h_fermerture'];
+
     public function entreprise()
     {
         return $this->hasMany(Entreprises::class);

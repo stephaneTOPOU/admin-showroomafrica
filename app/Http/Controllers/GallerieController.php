@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entreprise;
+use App\Models\Gallerie_image;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GallerieController extends Controller
 {
@@ -13,7 +17,11 @@ class GallerieController extends Controller
      */
     public function index()
     {
-        //
+        $galleries = DB::table('entreprises')
+        ->join('gallerie_images', 'entreprises.id', '=', 'gallerie_images.entreprise_id')
+        ->select('*', 'entreprises.nom as entreprise', 'gallerie_images.id as identifiant')
+        ->get();
+        return view('gallerie.index', compact('galleries'));
     }
 
     /**
@@ -23,7 +31,8 @@ class GallerieController extends Controller
      */
     public function create()
     {
-        //
+        $entreprises = Entreprise::all();
+        return view('gallerie.add', compact('entreprises'));
     }
 
     /**
@@ -34,7 +43,25 @@ class GallerieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'entreprise_id' => 'required|integer'
+        ]);
+
+        try {
+            $data = new Gallerie_image();
+            $data->entreprise_id = $request->entreprise_id;
+            
+            if ($request->galerie_image) {
+                $filename = time() . rand(1, 50) . '.' . $request->galerie_image->extension();
+                $img = $request->file('galerie_image')->storeAs('GallerieImage', $filename, 'public');
+                $data->galerie_image = $img;
+            }
+
+            $data->save();
+            return redirect()->back()->with('success', 'Image Ajoutée avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 
     /**
@@ -54,9 +81,11 @@ class GallerieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($gallerie)
     {
-        //
+        $entreprises = Entreprise::all();
+        $galleries = Gallerie_image::find($gallerie);
+        return view('gallerie.update', compact('entreprises','galleries'));
     }
 
     /**
@@ -66,9 +95,27 @@ class GallerieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $gallerie)
     {
-        //
+        $data = $request->validate([
+            'entreprise_id' => 'required|integer'
+        ]);
+
+        try {
+            $data = Gallerie_image::find($gallerie);
+            $data->entreprise_id = $request->entreprise_id;
+            
+            if ($request->galerie_image) {
+                $filename = time() . rand(1, 50) . '.' . $request->galerie_image->extension();
+                $img = $request->file('galerie_image')->storeAs('GallerieImage', $filename, 'public');
+                $data->galerie_image = $img;
+            }
+
+            $data->update();
+            return redirect()->back()->with('success', 'Image mise à jour avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 
     /**
@@ -77,8 +124,14 @@ class GallerieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($gallerie)
     {
-        //
+        $galleries = Gallerie_image::find($gallerie);
+        try {
+            $galleries->delete();
+            return redirect()->back()->with('success', 'Image supprimée avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 }

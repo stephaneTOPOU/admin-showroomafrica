@@ -19,12 +19,15 @@
                                                 <h3 class="card-title">Slider Latéral Haut</h3>
                                             </div>
                                             <div class="col-md-2">
-                                                <a href="{{route('sliderhaut.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
+                                                <a href="{{route('sliderhaut.create')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
+                                        @if(Session::has('success'))
+                                            <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                        @endif
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -44,15 +47,17 @@
                                                         <td>{{ $slider->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('sliderhaut.update')}}" class="btn btn-default">
+                                                                <a href="{{route('sliderhaut.edit',$slider->id)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <div class="btn-group">
-                                                                <a class="btn btn-default">
+                                                            <form method="POST" action="{{ route('sliderhaut.destroy',$slider->id) }}" class="btn-group">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" href="" class="btn btn-default">
                                                                     <i class="fas fa-trash"></i> Supprimer
-                                                                </a>
-                                                            </div>
+                                                                </button>
+                                                            </form>
                                                             {{-- <div class="btn-group">
                                                                 <a class="btn btn-default">
                                                                     <i class="fas fa-eye"></i> Edit

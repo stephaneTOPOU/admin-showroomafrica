@@ -47,15 +47,17 @@
                                                         <td>{{ $reportage->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('reportage.update')}}" class="btn btn-default">
+                                                                <a href="{{route('reportage.edit',$reportage->id)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <div class="btn-group">
-                                                                <a class="btn btn-default">
+                                                            {{-- <form method="POST" action="{{ route('reportage.destroy',$reportage->id) }}" class="btn-group">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" href="" class="btn btn-default">
                                                                     <i class="fas fa-trash"></i> Supprimer
-                                                                </a>
-                                                            </div>
+                                                                </button>
+                                                            </form> --}}
                                                             {{-- <div class="btn-group">
                                                                 <a class="btn btn-default">
                                                                     <i class="fas fa-eye"></i> Edit

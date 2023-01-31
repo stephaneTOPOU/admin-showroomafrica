@@ -20,7 +20,12 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Modifier Slider Recherche Latéral Haut</h3>
                                 </div>
-                                <form role="form">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                @endif
+                                <form role="form" method="POST" action="{{ route('sliderlh.update',$sliders->id) }}" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -28,7 +33,7 @@
                                                     <label for="exampleInputFile">Image</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image" value="{{old('image')??$sliders->image}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>

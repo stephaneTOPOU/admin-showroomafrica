@@ -44,15 +44,15 @@
                                                         <td>{{ $parametre->telephone1 }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('parametre.update')}}" class="btn btn-default">
+                                                                <a href="{{route('parametre.edit',$parametre->id)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <div class="btn-group">
+                                                            {{-- <div class="btn-group">
                                                                 <a class="btn btn-default">
                                                                     <i class="fas fa-trash"></i> Supprimer
                                                                 </a>
-                                                            </div>
+                                                            </div> --}}
                                                             {{-- <div class="btn-group">
                                                                 <a class="btn btn-default">
                                                                     <i class="fas fa-eye"></i> Edit

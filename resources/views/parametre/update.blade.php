@@ -20,25 +20,30 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Modifier les paramètres</h3>
                                 </div>
-                                <form role="form">
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
+                                @endif
+                                <form role="form" method="POST" action="{{ route('parametre.update',$parametres->id) }}">
+                                    @csrf
+                                    @method('PUT')
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Email </label>
-                                                    <input type="email" class="form-control"  id="exampleInputEmail1" placeholder="Entrez l'email de showroomafrica">
+                                                    <input type="email" class="form-control"  id="exampleInputEmail1" placeholder="Entrez l'email de showroomafrica" name="email" value="{{old('email')??$parametres->email}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Adresse</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez l'adresse de showroomafrica">
+                                                    <input type="text" class="form-control" placeholder="Entrez l'adresse de showroomafrica" name="adresse" value="{{old('adresse')??$parametres->adresse}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Géolocalisation</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez la géolocalisation de showroomafrica">
+                                                    <input type="text" class="form-control" placeholder="Entrez la géolocalisation de showroomafrica" name="geolocalisation" value="{{old('geolocalisation')??$parametres->geolocalisation}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -47,19 +52,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Téléphone</label>
-                                                    <input type="tel" class="form-control" placeholder="Entrez le numéro de showroomafrica">
+                                                    <input type="tel" class="form-control" placeholder="Entrez le numéro de showroomafrica" name="telephone1" value="{{old('telephone1')??$parametres->telephone1}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Téléphone 2</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez le numéro 2 de showroomafrica">
+                                                    <input type="text" class="form-control" placeholder="Entrez le numéro 2 de showroomafrica" name="telephone2" value="{{old('telephone2')??$parametres->telephone2}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Lien du Facebook</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez le lien de Facebook showroomafrica">
+                                                    <input type="text" class="form-control" placeholder="Entrez le lien de Facebook showroomafrica" name="lienface" value="{{old('lienface')??$parametres->lienface}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -68,19 +73,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Lien Instagram</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez le lien insta de showroomafrica">
+                                                    <input type="text" class="form-control" placeholder="Entrez le lien insta de showroomafrica" name="lieninsta" value="{{old('lieninsta')??$parametres->lieninsta}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Lien de Twitter</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez le lien Twitter de showroomafrica">
+                                                    <input type="text" class="form-control" placeholder="Entrez le lien Twitter de showroomafrica" name="lientwitter" value="{{old('lientwitter')??$parametres->lientwitter}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Lien Youtube</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez le lien Youtube de showroomafrica">
+                                                    <input type="text" class="form-control" placeholder="Entrez le lien Youtube de showroomafrica" name="lienyoutube" value="{{old('lienyoutube')??$parametres->lienyoutube}}">
                                                 </div>
                                             </div>
                                         </div>

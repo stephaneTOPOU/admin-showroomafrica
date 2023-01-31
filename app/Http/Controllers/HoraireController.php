@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entreprise;
+use App\Models\Horaire;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HoraireController extends Controller
 {
@@ -13,7 +17,11 @@ class HoraireController extends Controller
      */
     public function index()
     {
-        //
+        $horaires = DB::table('entreprises')
+            ->join('horaires', 'entreprises.id', '=', 'horaires.entreprise_id')
+            ->select('*', 'entreprises.nom as entreprise', 'horaires.id as identifiant')
+            ->get();
+        return view('horaire.index', compact('horaires'));
     }
 
     /**
@@ -23,7 +31,9 @@ class HoraireController extends Controller
      */
     public function create()
     {
-        //
+        $entreprises = Entreprise::all();
+
+        return view('horaire.add', compact('entreprises'));
     }
 
     /**
@@ -34,7 +44,25 @@ class HoraireController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'entreprise_id' => 'required|integer',
+            'jour' => 'required|string',
+            'h_ouverture' => 'required|string',
+            'h_fermerture' => 'required|string'
+        ]);
+
+        try {
+            $data = new Horaire();
+            $data->entreprise_id = $request->entreprise_id;
+            $data->jour = $request->jour;
+            $data->h_ouverture = $request->h_ouverture;
+            $data->h_fermerture = $request->h_fermerture;
+
+            $data->save();
+            return redirect()->back()->with('success', 'Horaire Ajoutée avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 
     /**
@@ -54,9 +82,13 @@ class HoraireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($horaire)
     {
-        //
+        $entreprises = Entreprise::all();
+
+        $horaires = Horaire::find($horaire);
+
+        return view('horaire.update', compact('horaires', 'entreprises'));
     }
 
     /**
@@ -66,9 +98,27 @@ class HoraireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $horaire)
     {
-        //
+        $data = $request->validate([
+            'entreprise_id' => 'required|integer',
+            'jour' => 'required|string',
+            'h_ouverture' => 'required|string',
+            'h_fermerture' => 'required|string'
+        ]);
+
+        try {
+            $data = Horaire::find($horaire);
+            $data->entreprise_id = $request->entreprise_id;
+            $data->jour = $request->jour;
+            $data->h_ouverture = $request->h_ouverture;
+            $data->h_fermerture = $request->h_fermerture;
+
+            $data->update();
+            return redirect()->back()->with('success', 'Horaire mis à jour avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 
     /**
@@ -77,8 +127,14 @@ class HoraireController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($horaire)
     {
-        //
+        $horaires = Horaire::find($horaire);
+        try {
+            $horaires->delete();
+            return redirect()->back()->with('success', 'Horaire supprimée avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 }

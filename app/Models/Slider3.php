@@ -9,6 +9,8 @@ class Slider3 extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['admin_id','image'];
+
     public function admin()
     {
         return $this->hasMany(Admin::class);
