@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Admin | Showroom Africa</title>
+  <!-- FAVICON -->
+  <link rel="icon" type="image/x-icon" href="{{ asset('assets/Admin/favicon.ico') }}" />
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
