@@ -27,7 +27,7 @@
                                     @csrf
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Nom de l'entreprise</label>
                                                     <select class="form-control select2" style="width: 100%;" name="entreprise_id">
@@ -38,27 +38,19 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label >Jour</label>
                                                     <input type="text" class="form-control" placeholder="Entrez le jour de la semaine" name="jour">
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label >Heure d'ouverture</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez l'heure d'ouverture de l'entreprise" name="h_ouverture">
+                                                    <label >Horaire</label>
+                                                    <input type="text" class="form-control" placeholder="Entrez l'horaire de l'entreprise" name="h_ouverture">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label >Heure de fermeture</label>
-                                                    <input type="text" class="form-control" placeholder="Entrez l'heure de fermeture de l'entreprise" name="h_fermerture">
-                                                </div>
-                                            </div>
+                                            
                                         </div>
 
                                         <div class="card-footer">

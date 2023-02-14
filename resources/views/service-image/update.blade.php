@@ -28,7 +28,7 @@
                                     @method('PUT')
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Nom de l'entreprise</label>
                                                     <select class="form-control select2" style="width: 100%;" name="service_id">
@@ -39,7 +39,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">Image</label>
                                                     <div class="input-group">
@@ -48,6 +48,12 @@
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label >Lien</label>
+                                                    <input type="text" class="form-control" placeholder="Entrez la description" name="description" value="{{old('description')??$images->description}}">
                                                 </div>
                                             </div>
                                         </div>

@@ -9,7 +9,7 @@ class ServiceImage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['service_id', 'service_image'];
+    protected $fillable = ['service_id', 'service_image', 'description'];
 
     public function service()
     {

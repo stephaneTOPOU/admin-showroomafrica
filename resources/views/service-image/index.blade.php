@@ -34,6 +34,7 @@
                                             <th>Id</th>
                                             <th>Entreprise</th>
                                             <th>Image</th>
+                                            <th>Description</th>
                                             <th>Date</th>
                                             <th>Action</th>
                                             </tr>
@@ -46,6 +47,7 @@
                                                         {{-- @if ($image->galerie_image) --}}
                                                             <td><img src="{{asset('assets/images')}}/{{$image->service_image}}" width="60"></td>
                                                         {{-- @endif --}}
+                                                        <td>{{ $image->description }}</td>
                                                         <td>{{ $image->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
@@ -74,6 +76,7 @@
                                                 <th>Id</th>
                                                 <th>Entreprise</th>
                                                 <th>Image</th>
+                                                <th>Description</th>
                                                 <th>Date</th>
                                                 <th>Action</th>
                                             </tr>

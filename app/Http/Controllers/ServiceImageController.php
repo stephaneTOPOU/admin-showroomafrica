@@ -49,11 +49,13 @@ class ServiceImageController extends Controller
     {
         $data = $request->validate([
             'service_id' => 'required|integer',
+            'description' => 'required|string'
         ]);
 
         try {
             $data = new ServiceImage();
             $data->service_id = $request->service_id;
+            $data->description = $request->description;
 
             if ($request->service_image) {
                 $filename = time() . rand(1, 50) . '.' . $request->service_image->extension();
@@ -108,11 +110,13 @@ class ServiceImageController extends Controller
     {
         $data = $request->validate([
             'service_id' => 'required|integer',
+            'description' => 'required|string'
         ]);
 
         try {
             $data = ServiceImage::find($image);
             $data->service_id = $request->service_id;
+            $data->description = $request->description;
 
             if ($request->service_image) {
                 $filename = time() . rand(1, 50) . '.' . $request->service_image->extension();

@@ -33,9 +33,8 @@
                                             <tr>
                                             <th>Id</th>
                                             <th>Entreprise</th>
-                                            <th>Jour</th>
-                                            <th>Ouverture</th>
-                                            <th>Fermèture</th>
+                                            <th>Jours</th>
+                                            <th>Horaires</th>
                                             <th>Action</th>
                                             </tr>
                                         </thead>
@@ -46,7 +45,6 @@
                                                         <td>{{ $horaire->entreprise }}</td>
                                                         <td>{{ $horaire->jour }}</td>
                                                         <td>{{ $horaire->h_ouverture }}</td>
-                                                        <td>{{ $horaire->h_fermerture }}</td>
                                                         <td>
                                                             <div class="btn-group">
                                                                 <a href="{{route('horaire.edit',$horaire->id)}}" class="btn btn-default">
@@ -73,9 +71,8 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Entreprise</th>
-                                                <th>Jour</th>
-                                                <th>Ouverture</th>
-                                                <th>Fermèture</th>
+                                                <th>Jours</th>
+                                                <th>Horaires</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>

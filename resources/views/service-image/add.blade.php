@@ -27,7 +27,7 @@
                                     @csrf
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Nom de l'entreprise</label>
                                                     <select class="form-control select2" style="width: 100%;" name="service_id">
@@ -38,7 +38,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">Image</label>
                                                     <div class="input-group">
@@ -49,8 +49,14 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label >Lien</label>
+                                                    <input type="text" class="form-control" placeholder="Entrez la description" name="description">
+                                                </div>
+                                            </div>
                                         </div>
-
+                                        
                                         <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>

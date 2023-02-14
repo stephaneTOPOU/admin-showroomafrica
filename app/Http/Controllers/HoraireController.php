@@ -47,8 +47,7 @@ class HoraireController extends Controller
         $data = $request->validate([
             'entreprise_id' => 'required|integer',
             'jour' => 'required|string',
-            'h_ouverture' => 'required|string',
-            'h_fermerture' => 'required|string'
+            'h_ouverture' => 'required|string'
         ]);
 
         try {
@@ -56,8 +55,7 @@ class HoraireController extends Controller
             $data->entreprise_id = $request->entreprise_id;
             $data->jour = $request->jour;
             $data->h_ouverture = $request->h_ouverture;
-            $data->h_fermerture = $request->h_fermerture;
-
+            
             $data->save();
             return redirect()->back()->with('success', 'Horaire Ajoutée avec succès');
         } catch (Exception $e) {
@@ -103,8 +101,7 @@ class HoraireController extends Controller
         $data = $request->validate([
             'entreprise_id' => 'required|integer',
             'jour' => 'required|string',
-            'h_ouverture' => 'required|string',
-            'h_fermerture' => 'required|string'
+            'h_ouverture' => 'required|string'
         ]);
 
         try {
@@ -112,8 +109,7 @@ class HoraireController extends Controller
             $data->entreprise_id = $request->entreprise_id;
             $data->jour = $request->jour;
             $data->h_ouverture = $request->h_ouverture;
-            $data->h_fermerture = $request->h_fermerture;
-
+            
             $data->update();
             return redirect()->back()->with('success', 'Horaire mis à jour avec succès');
         } catch (Exception $e) {
