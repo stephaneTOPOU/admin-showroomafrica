@@ -28,7 +28,7 @@
                                     @method('PUT')
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Nom de l'entreprise</label>
                                                     <select class="form-control select2" style="width: 100%;" name="entreprise_id">
@@ -39,35 +39,41 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label >Description 1</label>
+                                                    <label >Qui sommes-nous</label>
                                                     <textarea class="form-control" rows="4" placeholder="Enter ..." name="libelle">{{old('libelle')??$services->libelle}}</textarea>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label >Description 2</label>
+                                                    <label >Notre mission</label>
                                                     <textarea class="form-control" rows="4" placeholder="Enter ..." name="description">{{old('description')??$services->description}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">Service image 1</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image1" value="{{old('image1')??$services->image1}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image 1</label>
-                                                        </div>
-                                                    </div>
+                                                    <label for="exampleInputFile1">Notre mission (suite)</label>
+                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="image1">{{old('image1')??$services->image1}}</textarea>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">Service image 2</label>
+                                                    <label for="exampleInputFile4">Nos objectifs</label>
+                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="image5">{{old('image5')??$services->image5}}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">image</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="exampleInputFile" name="image2" value="{{old('image2')??$services->image2}}">
@@ -76,24 +82,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="exampleInputFile">Service image 3</label>
+                                                    <label for="exampleInputFile">image</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="exampleInputFile" name="image3" value="{{old('image3')??$services->image3}}">
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image 3</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Service image 4</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image4" value="{{old('image4')??$services->image4}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image 4</label>
                                                         </div>
                                                     </div>
                                                 </div>

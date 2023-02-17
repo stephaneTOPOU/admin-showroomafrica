@@ -46,8 +46,7 @@ class ServiceController extends Controller
     {
         $data = $request->validate([
             'entreprise_id' => 'required|integer',
-            'libelle' => 'required|string',
-            'description' => 'required|string'
+            'libelle' => 'required|string'
         ]);
 
         try {
@@ -55,12 +54,7 @@ class ServiceController extends Controller
             $data->entreprise_id = $request->entreprise_id;
             $data->libelle = $request->libelle;
             $data->description = $request->description;
-
-            if ($request->image1) {
-                $filename = time() . rand(1, 50) . '.' . $request->image1->extension();
-                $img = $request->file('image1')->storeAs('ServiceImage', $filename, 'public');
-                $data->image1 = $img;
-            }
+            $data->image1 = $request->image1;
 
             if ($request->image2) {
                 $filename2 = time() . rand(1, 50) . '.' . $request->image2->extension();
@@ -74,11 +68,7 @@ class ServiceController extends Controller
                 $data->image3 = $img3;
             }
 
-            if ($request->image4) {
-                $filename4 = time() . rand(1, 50) . '.' . $request->image4->extension();
-                $img4 = $request->file('image4')->storeAs('ServiceImage', $filename4, 'public');
-                $data->image4 = $img4;
-            }
+            $data->image5 = $request->image5;
 
             $data->save();
             return redirect()->back()->with('success', 'Service Ajouté avec succès');
@@ -122,8 +112,7 @@ class ServiceController extends Controller
     {
         $data = $request->validate([
             'entreprise_id' => 'required|integer',
-            'libelle' => 'required|string',
-            'description' => 'required|string'
+            'libelle' => 'required|string'
         ]);
 
         try {
@@ -131,12 +120,7 @@ class ServiceController extends Controller
             $data->entreprise_id = $request->entreprise_id;
             $data->libelle = $request->libelle;
             $data->description = $request->description;
-
-            if ($request->image1) {
-                $filename = time() . rand(1, 50) . '.' . $request->image1->extension();
-                $img = $request->file('image1')->storeAs('ServiceImage', $filename, 'public');
-                $data->image1 = $img;
-            }
+            $data->image1 = $request->image1;
 
             if ($request->image2) {
                 $filename2 = time() . rand(1, 50) . '.' . $request->image2->extension();
@@ -150,11 +134,7 @@ class ServiceController extends Controller
                 $data->image3 = $img3;
             }
 
-            if ($request->image4) {
-                $filename4 = time() . rand(1, 50) . '.' . $request->image4->extension();
-                $img4 = $request->file('image4')->storeAs('ServiceImage', $filename4, 'public');
-                $data->image4 = $img4;
-            }
+            $data->image5 = $request->image5;
 
             $data->update();
             return redirect()->back()->with('success', 'Service modifié avec succès');

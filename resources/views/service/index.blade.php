@@ -30,8 +30,11 @@
                                             <tr>
                                             <th>Id</th>
                                             <th>Entreprise</th>
-                                            <th>Libelle</th>
-                                            <th>Description</th>
+                                            <th>Qui sommes-nous</th>
+                                            <th>Notre mission</th>
+                                            <th>Image</th>
+                                            <th>Nos objectifs</th>
+                                            <th>Image</th>
                                             <th>Date</th>
                                             <th>Action</th>
                                             </tr>
@@ -43,6 +46,9 @@
                                                         <td>{{ $service->entreprise }}</td>
                                                         <td>{{ $service->libelle }}</td>
                                                         <td>{{ $service->description }}</td>
+                                                        <td><img src="{{asset('assets/images')}}/{{$service->image2}}" width="60"></td>
+                                                        <td>{{ $service->image5 }}</td>
+                                                        <td><img src="{{asset('assets/images')}}/{{$service->image3}}" width="60"></td>
                                                         <td>{{ $service->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
@@ -70,8 +76,11 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Entreprise</th>
-                                                <th>Libelle</th>
-                                                <th>Description</th>
+                                                <th>Qui sommes-nous</th>
+                                                <th>Notre mission</th>
+                                                <th>Image</th>
+                                                <th>Nos objectifs</th>
+                                                <th>Image</th>
                                                 <th>Date</th>
                                                 <th>Action</th>
                                             </tr>
