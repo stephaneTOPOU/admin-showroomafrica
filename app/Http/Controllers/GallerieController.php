@@ -7,6 +7,7 @@ use App\Models\Gallerie_image;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class GallerieController extends Controller
 {
@@ -44,17 +45,38 @@ class GallerieController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'entreprise_id' => 'required|integer'
+            'entreprise_id' => 'required|integer',
+            'galerie_image' => 'required|file'
         ]);
 
         try {
             $data = new Gallerie_image();
             $data->entreprise_id = $request->entreprise_id;
             
-            if ($request->galerie_image) {
-                $filename = time() . rand(1, 50) . '.' . $request->galerie_image->extension();
-                $img = $request->file('galerie_image')->storeAs('GallerieImage', $filename, 'public');
-                $data->galerie_image = $img;
+            if ($request->hasFile('galerie_image') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('galerie_image')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('galerie_image')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+        
+                
+
+                //$filename = time() . rand(1, 50) . '.' . $request->galerie_image->extension();
+                //$img = $request->file('galerie_image')->storeAs('GallerieImage', $filename, 'public');
+
+                //Upload File to external server
+                Storage::disk('ftp')->put($filenametostore, fopen($request->file('galerie_image'), 'r+'));
+
+                //Upload name to database
+                $data->galerie_image = $filenametostore;
             }
 
             $data->save();
