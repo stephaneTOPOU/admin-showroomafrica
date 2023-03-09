@@ -33,7 +33,8 @@
                                             <tr>
                                             <th>Id</th>
                                             <th>Admin</th>
-                                            <th>Vidéo</th>
+                                            <th>Vidéos</th>
+                                            <th>Images</th>
                                             <th>Date</th>
                                             <th>Action</th>
                                             </tr>
@@ -44,6 +45,7 @@
                                                         <td>{{ $minispot->identifiant }}</td>
                                                         <td>{{ $minispot->admin }}</td>
                                                         <td><video src="{{asset('assets/test')}}/{{$minispot->video}}" width="200" height="100" autoplay muted type="video/mp4"> </video></td>
+                                                        <td><img src="{{asset('assets/images')}}/{{$minispot->image}}" width="60"></td>
                                                         <td>{{ $minispot->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
@@ -71,7 +73,8 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Admin</th>
-                                                <th>Vidéo</th>
+                                                <th>Vidéos</th>
+                                                <th>Images</th>
                                                 <th>Date</th>
                                                 <th>Action</th>
                                             </tr>

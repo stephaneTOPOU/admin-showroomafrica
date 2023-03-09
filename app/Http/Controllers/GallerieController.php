@@ -66,11 +66,6 @@ class GallerieController extends Controller
         
                 //filename to store
                 $filenametostore = $filename.'_'.uniqid().'.'.$extension;
-        
-                
-
-                //$filename = time() . rand(1, 50) . '.' . $request->galerie_image->extension();
-                //$img = $request->file('galerie_image')->storeAs('GallerieImage', $filename, 'public');
 
                 //Upload File to external server
                 Storage::disk('ftp')->put($filenametostore, fopen($request->file('galerie_image'), 'r+'));

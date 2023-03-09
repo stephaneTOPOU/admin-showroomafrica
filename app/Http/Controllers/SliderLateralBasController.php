@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class SliderLateralBasController extends Controller
 {
@@ -52,10 +53,31 @@ class SliderLateralBasController extends Controller
 
             $data->admin_id =  Auth::user()->id;
             
-            if ($request->image) {
-                $filename = time() . rand(1, 50) . '.' . $request->image->extension();
-                $img = $request->file('image')->storeAs('sliders', $filename, 'public');
-                $data->image = $img;
+            // if ($request->image) {
+            //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
+            //     $img = $request->file('image')->storeAs('sliders', $filename, 'public');
+            //     $data->image = $img;
+            // }
+
+            if ($request->hasFile('image') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('image')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('image')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp17')->put($filenametostore, fopen($request->file('image'), 'r+'));
+
+                //Upload name to database
+                $data->image = $filenametostore;
             }
 
             $data->save();
@@ -107,10 +129,31 @@ class SliderLateralBasController extends Controller
 
             $data->admin_id =  Auth::user()->id;
             
-            if ($request->image) {
-                $filename = time() . rand(1, 50) . '.' . $request->image->extension();
-                $img = $request->file('image')->storeAs('sliders', $filename, 'public');
-                $data->image = $img;
+            // if ($request->image) {
+            //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
+            //     $img = $request->file('image')->storeAs('sliders', $filename, 'public');
+            //     $data->image = $img;
+            // }
+
+            if ($request->hasFile('image') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('image')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('image')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp17')->put($filenametostore, fopen($request->file('image'), 'r+'));
+
+                //Upload name to database
+                $data->image = $filenametostore;
             }
 
             $data->update();

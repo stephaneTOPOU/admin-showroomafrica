@@ -62,6 +62,185 @@ return [
             'root' => env('FTP_ROOT'),
         ],
 
+        'ftp1' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT1'),
+        ],
+
+        'ftp2' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT2'),
+        ],
+
+        'ftp3' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT3'),
+        ],
+
+        'ftp4' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT4'),
+        ],
+
+        'ftp5' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT5'),
+        ],
+
+        'ftp6' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT6'),
+        ],
+
+        'ftp7' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT7'),
+        ],
+
+        'ftp8' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT8'),
+        ],
+
+        'ftp9' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT9'),
+        ],
+
+        'ftp10' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT10'),
+        ],
+
+        'ftp11' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT11'),
+        ],
+
+        'ftp12' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT12'),
+        ],
+
+        'ftp13' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT13'),
+        ],
+
+        'ftp14' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT14'),
+        ],
+
+        'ftp15' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT15'),
+        ],
+
+        'ftp16' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT16'),
+        ],
+
+        'ftp17' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT17'),
+        ],
+
+        'ftp18' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT18'),
+        ],
+
+        'ftp19' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT19'),
+        ],
+
+        'ftp20' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT20'),
+        ],
     ],
 
     /*

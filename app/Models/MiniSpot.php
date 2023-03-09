@@ -9,7 +9,7 @@ class MiniSpot extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['admin_id', 'video'];
+    protected $fillable = ['admin_id', 'video', 'image'];
 
     public function admin()
     {

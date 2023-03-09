@@ -39,6 +39,17 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">Image</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image" value="{{old('image')??$minspots->image}}">
+                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="card-footer">

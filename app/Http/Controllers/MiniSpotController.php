@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class MiniSpotController extends Controller
 {
@@ -86,10 +87,52 @@ class MiniSpotController extends Controller
 
             $data->admin_id =  Auth::user()->id;
             
-            if ($request->video) {
-                $filename = time() . rand(1, 50) . '.' . $request->video->extension();
-                $video = $request->file('video')->storeAs('MiniSpot', $filename, 'public');
-                $data->video = $video;
+            // if ($request->video) {
+            //     $filename = time() . rand(1, 50) . '.' . $request->video->extension();
+            //     $video = $request->file('video')->storeAs('MiniSpot', $filename, 'public');
+            //     $data->video = $video;
+            // }
+
+            if ($request->hasFile('video') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('video')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('video')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp19')->put($filenametostore, fopen($request->file('video'), 'r+'));
+
+                //Upload name to database
+                $data->video = $filenametostore;
+            }
+
+            if ($request->hasFile('image') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('image')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('image')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp20')->put($filenametostore, fopen($request->file('image'), 'r+'));
+
+                //Upload name to database
+                $data->image = $filenametostore;
             }
 
             $data->update();

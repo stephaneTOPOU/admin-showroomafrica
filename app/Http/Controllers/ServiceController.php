@@ -7,6 +7,7 @@ use App\Models\Service;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
@@ -56,16 +57,58 @@ class ServiceController extends Controller
             $data->description = $request->description;
             $data->image1 = $request->image1;
 
-            if ($request->image2) {
-                $filename2 = time() . rand(1, 50) . '.' . $request->image2->extension();
-                $img2 = $request->file('image2')->storeAs('ServiceImage', $filename2, 'public');
-                $data->image2 = $img2;
+            // if ($request->image2) {
+            //     $filename2 = time() . rand(1, 50) . '.' . $request->image2->extension();
+            //     $img2 = $request->file('image2')->storeAs('ServiceImage', $filename2, 'public');
+            //     $data->image2 = $img2;
+            // }
+
+            if ($request->hasFile('image2') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('image2')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('image2')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image2'), 'r+'));
+
+                //Upload name to database
+                $data->image2 = $filenametostore;
             }
 
-            if ($request->image3) {
-                $filename3 = time() . rand(1, 50) . '.' . $request->image3->extension();
-                $img3 = $request->file('image3')->storeAs('ServiceImage', $filename3, 'public');
-                $data->image3 = $img3;
+            // if ($request->image3) {
+            //     $filename3 = time() . rand(1, 50) . '.' . $request->image3->extension();
+            //     $img3 = $request->file('image3')->storeAs('ServiceImage', $filename3, 'public');
+            //     $data->image3 = $img3;
+            // }
+
+            if ($request->hasFile('image3') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('image3')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('image3')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image3'), 'r+'));
+
+                //Upload name to database
+                $data->image3 = $filenametostore;
             }
 
             $data->image5 = $request->image5;
@@ -122,16 +165,58 @@ class ServiceController extends Controller
             $data->description = $request->description;
             $data->image1 = $request->image1;
 
-            if ($request->image2) {
-                $filename2 = time() . rand(1, 50) . '.' . $request->image2->extension();
-                $img2 = $request->file('image2')->storeAs('ServiceImage', $filename2, 'public');
-                $data->image2 = $img2;
+            // if ($request->image2) {
+            //     $filename2 = time() . rand(1, 50) . '.' . $request->image2->extension();
+            //     $img2 = $request->file('image2')->storeAs('ServiceImage', $filename2, 'public');
+            //     $data->image2 = $img2;
+            // }
+
+            if ($request->hasFile('image2') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('image2')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('image2')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image2'), 'r+'));
+
+                //Upload name to database
+                $data->image2 = $filenametostore;
             }
 
-            if ($request->image3) {
-                $filename3 = time() . rand(1, 50) . '.' . $request->image3->extension();
-                $img3 = $request->file('image3')->storeAs('ServiceImage', $filename3, 'public');
-                $data->image3 = $img3;
+            // if ($request->image3) {
+            //     $filename3 = time() . rand(1, 50) . '.' . $request->image3->extension();
+            //     $img3 = $request->file('image3')->storeAs('ServiceImage', $filename3, 'public');
+            //     $data->image3 = $img3;
+            // }
+
+            if ($request->hasFile('image3') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('image3')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('image3')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp14')->put($filenametostore, fopen($request->file('image3'), 'r+'));
+
+                //Upload name to database
+                $data->image3 = $filenametostore;
             }
 
             $data->image5 = $request->image5;

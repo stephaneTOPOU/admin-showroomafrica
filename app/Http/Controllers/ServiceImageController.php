@@ -6,6 +6,7 @@ use App\Models\ServiceImage;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceImageController extends Controller
 {
@@ -57,10 +58,31 @@ class ServiceImageController extends Controller
             $data->service_id = $request->service_id;
             $data->description = $request->description;
 
-            if ($request->service_image) {
-                $filename = time() . rand(1, 50) . '.' . $request->service_image->extension();
-                $img = $request->file('service_image')->storeAs('ServiceImage', $filename, 'public');
-                $data->service_image = $img;
+            // if ($request->service_image) {
+            //     $filename = time() . rand(1, 50) . '.' . $request->service_image->extension();
+            //     $img = $request->file('service_image')->storeAs('ServiceImage', $filename, 'public');
+            //     $data->service_image = $img;
+            // }
+
+            if ($request->hasFile('service_image') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('service_image')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('service_image')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp14')->put($filenametostore, fopen($request->file('service_image'), 'r+'));
+
+                //Upload name to database
+                $data->service_image = $filenametostore;
             }
 
             $data->save();
@@ -118,10 +140,25 @@ class ServiceImageController extends Controller
             $data->service_id = $request->service_id;
             $data->description = $request->description;
 
-            if ($request->service_image) {
-                $filename = time() . rand(1, 50) . '.' . $request->service_image->extension();
-                $img = $request->file('service_image')->storeAs('ServiceImage', $filename, 'public');
-                $data->service_image = $img;
+            if ($request->hasFile('service_image') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('service_image')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('service_image')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp14')->put($filenametostore, fopen($request->file('service_image'), 'r+'));
+
+                //Upload name to database
+                $data->service_image = $filenametostore;
             }
 
             $data->update();
