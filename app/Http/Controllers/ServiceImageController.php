@@ -49,8 +49,7 @@ class ServiceImageController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'service_id' => 'required|integer',
-            'description' => 'required|string'
+            'service_id' => 'required|integer'
         ]);
 
         try {
@@ -79,7 +78,7 @@ class ServiceImageController extends Controller
                 $filenametostore = $filename.'_'.uniqid().'.'.$extension;
 
                 //Upload File to external server
-                Storage::disk('ftp14')->put($filenametostore, fopen($request->file('service_image'), 'r+'));
+                Storage::disk('ftp15')->put($filenametostore, fopen($request->file('service_image'), 'r+'));
 
                 //Upload name to database
                 $data->service_image = $filenametostore;
@@ -131,8 +130,7 @@ class ServiceImageController extends Controller
     public function update(Request $request, $image)
     {
         $data = $request->validate([
-            'service_id' => 'required|integer',
-            'description' => 'required|string'
+            'service_id' => 'required|integer'
         ]);
 
         try {
@@ -155,7 +153,7 @@ class ServiceImageController extends Controller
                 $filenametostore = $filename.'_'.uniqid().'.'.$extension;
 
                 //Upload File to external server
-                Storage::disk('ftp14')->put($filenametostore, fopen($request->file('service_image'), 'r+'));
+                Storage::disk('ftp15')->put($filenametostore, fopen($request->file('service_image'), 'r+'));
 
                 //Upload name to database
                 $data->service_image = $filenametostore;

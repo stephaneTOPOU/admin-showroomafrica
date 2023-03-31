@@ -46,8 +46,7 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'entreprise_id' => 'required|integer',
-            'libelle' => 'required|string'
+            'entreprise_id' => 'required|integer'
         ]);
 
         try {
@@ -154,8 +153,7 @@ class ServiceController extends Controller
     public function update(Request $request, $service)
     {
         $data = $request->validate([
-            'entreprise_id' => 'required|integer',
-            'libelle' => 'required|string'
+            'entreprise_id' => 'required|integer'
         ]);
 
         try {
