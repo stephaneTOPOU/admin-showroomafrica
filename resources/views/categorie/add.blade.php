@@ -27,6 +27,15 @@
                                     @csrf
                                     <div class="card-body">
                                         <div class="form-group">
+                                            <label>Trouver pays</label>
+                                            <select class="form-control select2" style="width: 100%;" name="pays_id">
+                                                <option selected="selected">Trouver pays</option>
+                                                @foreach ($pays as $pay)
+                                                    <option value="{{ $pay->id }}">{{ $pay->libelle }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label >Nom de la catégorie</label>
                                             <input type="text" class="form-control" placeholder="Entrez le nom" name="libelle" required>
                                         </div>

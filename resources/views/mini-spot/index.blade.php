@@ -35,6 +35,7 @@
                                             <th>Admin</th>
                                             <th>Vidéos</th>
                                             <th>Images</th>
+                                            <th>Pays</th>
                                             <th>Date</th>
                                             <th>Action</th>
                                             </tr>
@@ -75,6 +76,7 @@
                                                 <th>Admin</th>
                                                 <th>Vidéos</th>
                                                 <th>Images</th>
+                                                <th>Pays</th>
                                                 <th>Date</th>
                                                 <th>Action</th>
                                             </tr>

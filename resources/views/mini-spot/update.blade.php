@@ -27,6 +27,15 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="card-body">
+                                        <div class="form-group">
+                                            <label>Trouver pays</label>
+                                            <select class="form-control select2" style="width: 100%;" name="pays_id">
+                                                <option selected="selected">Pays</option>
+                                                @foreach ($pays as $pay)
+                                                    <option value="{{ $pay->id }}" @if(($pay->id)==($minspots->pays_id)) selected @endif>{{ $pay->libelle }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">

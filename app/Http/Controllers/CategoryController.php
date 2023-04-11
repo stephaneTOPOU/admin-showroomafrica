@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Categories;
+use App\Models\Pays;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -15,7 +17,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Categories::all();
+        $categories = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->select('*', 'pays.libelle as pays', 'categories.libelle as categorie')
+            ->get();
         return view('categorie.index', compact('categories'));
     }
 
@@ -26,7 +31,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categorie.add');
+        $pays = Pays::all();
+        return view('categorie.add', compact('pays'));
     }
 
     /**
@@ -39,7 +45,7 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'libelle'=>'required|string',
-            
+            'pays_id'=>'required|integer'
         ]);
 
         try {
@@ -70,7 +76,8 @@ class CategoryController extends Controller
     public function edit($categorie)
     {
         $categories = Categories::find($categorie);
-        return view('categorie.update', compact('categories'));
+        $pays = Pays::all();
+        return view('categorie.update', compact('categories', 'pays'));
     }
 
     /**
@@ -85,6 +92,7 @@ class CategoryController extends Controller
         $categories = Categories::find($categorie);
         $data = $request->validate([
             'libelle'=>'required|string',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
