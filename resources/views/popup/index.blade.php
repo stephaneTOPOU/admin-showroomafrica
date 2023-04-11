@@ -18,9 +18,9 @@
                                             <div class="col-md-10">
                                                 <h3 class="card-title">Pop - Up</h3>
                                             </div>
-                                            {{-- <div class="col-md-2">
-                                                <a href="{{route('sliderbas.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
-                                            </div> --}}
+                                            <div class="col-md-2">
+                                                <a href="{{route('popup.create')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- /.card-header -->
@@ -32,6 +32,7 @@
                                         <thead>
                                             <tr>
                                             <th>Id</th>
+                                            <th>Pays</th>
                                             <th>Admin</th>
                                             <th>Image</th>
                                             <th>Date</th>
@@ -42,25 +43,23 @@
                                                 @foreach ($popups as $popup)
                                                     <tr>
                                                         <td>{{ $popup->identifiant }}</td>
+                                                        <td>{{ $popup->libelle }}</td>
                                                         <td>{{ $popup->admin }}</td>
                                                         <td><img src="{{asset('assets/test')}}/{{$popup->image}}" width="100" height="300"></td>
                                                         <td>{{ $popup->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('popup.edit',$popup->id)}}" class="btn btn-default">
+                                                                <a href="{{route('popup.edit',$popup->identifiant)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            {{--<div class="btn-group">
-                                                                <a class="btn btn-default">
+                                                            <form action="{{ route('popup.destroy',$popup->identifiant ) }}" method="POST" class="btn-group">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" href="" class="btn btn-default">
                                                                     <i class="fas fa-trash"></i> Supprimer
-                                                                </a>
-                                                            </div>
-                                                            <div class="btn-group">
-                                                                <a class="btn btn-default">
-                                                                    <i class="fas fa-eye"></i> Edit
-                                                                </a>
-                                                            </div> --}}
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -68,6 +67,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Pays</th>
                                                 <th>Admin</th>
                                                 <th>Image</th>
                                                 <th>Date</th>

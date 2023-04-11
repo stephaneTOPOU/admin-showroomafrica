@@ -18,14 +18,14 @@
                         <div class="">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Modifier le pop - up </h3>
+                                    <h3 class="card-title">Ajouter un pop - up </h3>
                                 </div>
                                 @if(Session::has('success'))
                                     <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
                                 @endif
-                                <form role="form" method="POST" action="{{ route('popup.update',$popups->id) }}" enctype="multipart/form-data">
+                                <form role="form" method="POST" action="{{ route('popup.store') }}" enctype="multipart/form-data">
                                     @csrf
-                                    @method('PUT')
+                                    
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -34,7 +34,7 @@
                                                     <select class="form-control select2" style="width: 100%;" name="pays_id">
                                                         <option selected="selected">Pays</option>
                                                         @foreach ($pays as $pay)
-                                                            <option value="{{ $pay->id }}" @if(($pay->id)==($popups->pays_id)) selected @endif>{{ $pay->libelle }}</option>
+                                                            <option value="{{ $pay->id }}">{{ $pay->libelle }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -44,7 +44,7 @@
                                                     <label for="exampleInputFile">Image</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image" value="{{old('image')??$popups->image}}">
+                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image" >
                                                             <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
                                                         </div>
                                                     </div>
@@ -53,7 +53,7 @@
                                         </div>
 
                                         <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Modifier</button>
+                                        <button type="submit" class="btn btn-primary">Ajouter</button>
                                         </div>
                                     </div>
                                 </form>

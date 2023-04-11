@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Pays;
 
 class PopupController extends Controller
 {
@@ -18,8 +19,9 @@ class PopupController extends Controller
      */
     public function index()
     {
-        $popups = DB::table('admins')
-            ->join('pop_ups', 'admins.id', '=', 'pop_ups.admin_id')
+        $popups = DB::table('pays')
+            ->join('pop_ups', 'pays.id', '=', 'pop_ups.pays_id')
+            ->join('admins', 'admins.id', '=', 'pop_ups.admin_id')
             ->select('*', 'pop_ups.id as identifiant', 'admins.name as admin')
             ->get();
 
@@ -33,7 +35,8 @@ class PopupController extends Controller
      */
     public function create()
     {
-        //
+        $pays = Pays::all();
+        return view('popup.add', compact('pays'));
     }
 
     /**
@@ -44,7 +47,49 @@ class PopupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'pays_id'=>'required|integer',
+            'image'=>'required|file'
+        ]);
+
+        try {
+            $data = new PopUp();
+
+            $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
+            
+            // if ($request->image) {
+            //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
+            //     $image = $request->file('image')->storeAs('Popup', $filename, 'public');
+            //     $data->image = $image;
+            // }
+
+            if ($request->hasFile('image') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('image')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('image')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+        
+                //Upload File to external server
+                Storage::disk('ftp2')->put($filenametostore, fopen($request->file('image'), 'r+'));
+
+                //Upload name to database
+                $data->image = $filenametostore;
+            }
+
+            $data->save();
+            return redirect()->route('popup.index')->with('success', 'Popup ajouté avec succès');
+        } catch (Exception $e) {
+            return redirect()->route('popup.index')->with('success', $e->getMessage());
+        }
     }
 
     /**
@@ -66,8 +111,10 @@ class PopupController extends Controller
      */
     public function edit($popup)
     {
+        
         $popups = PopUp::find($popup);
-        return view('popup.update', compact('popups'));
+        $pays = Pays::all();
+        return view('popup.update', compact('popups', 'pays'));
     }
 
     /**
@@ -80,6 +127,7 @@ class PopupController extends Controller
     public function update(Request $request, $popup)
     {
         $data = $request->validate([
+            'pays_id'=>'required|integer',
             'image'=>'required|file'
         ]);
 
@@ -87,6 +135,7 @@ class PopupController extends Controller
             $data = PopUp::find($popup);
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
@@ -116,7 +165,7 @@ class PopupController extends Controller
             }
 
             $data->update();
-            return redirect()->route('popup.index')->with('success', 'Vidéo mise à jour avec succès');
+            return redirect()->route('popup.index')->with('success', 'Popup mis à jour avec succès');
         } catch (Exception $e) {
             return redirect()->route('popup.index')->with('success', $e->getMessage());
         }
@@ -128,8 +177,14 @@ class PopupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($popup)
     {
-        //
+        try {
+            $data = PopUp::find($popup);
+            $data -> delete();
+            return redirect()->back()->with('success', 'Popup supprimé avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 }
