@@ -49,7 +49,7 @@
                                                         <td>{{ $reportage->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('reportage.edit',$reportage->id)}}" class="btn btn-default">
+                                                                <a href="{{route('reportage.edit',$reportage->identifiant)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>

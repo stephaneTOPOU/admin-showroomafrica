@@ -47,11 +47,11 @@
                                                         <td>{{ $horaire->h_ouverture }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('horaire.edit',$horaire->id)}}" class="btn btn-default">
+                                                                <a href="{{route('horaire.edit',$horaire->identifiant)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <form method="POST" action="{{ route('horaire.destroy',$horaire->id) }}" class="btn-group">
+                                                            <form method="POST" action="{{ route('horaire.destroy',$horaire->identifiant) }}" class="btn-group">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" href="" class="btn btn-default">

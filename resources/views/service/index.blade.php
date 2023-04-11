@@ -52,11 +52,11 @@
                                                         <td>{{ $service->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('service.edit',$service->id)}}" class="btn btn-default">
+                                                                <a href="{{route('service.edit',$service->identifiant)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <form method="POST" action="{{ route('service.destroy',$service->id) }}" class="btn-group">
+                                                            <form method="POST" action="{{ route('service.destroy',$service->identifiant) }}" class="btn-group">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" href="" class="btn btn-default">

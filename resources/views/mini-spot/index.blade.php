@@ -51,7 +51,7 @@
                                                         <td>{{ $minispot->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('mini-spot.edit',$minispot->id)}}" class="btn btn-default">
+                                                                <a href="{{route('mini-spot.edit',$minispot->identifiant)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>

@@ -51,11 +51,11 @@
                                                         <td>{{ $image->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('image.edit',$image->id)}}" class="btn btn-default">
+                                                                <a href="{{route('image.edit',$image->identifiant)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <form method="POST" action="{{ route('image.destroy',$image->id) }}" class="btn-group">
+                                                            <form method="POST" action="{{ route('image.destroy',$image->identifiant) }}" class="btn-group">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" href="" class="btn btn-default">

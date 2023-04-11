@@ -19,8 +19,9 @@ class Slider2Controller extends Controller
      */
     public function index()
     {
-        $slider2s = DB::table('admins')
-        ->join('slider2s', 'admins.id', '=', 'slider2s.admin_id')
+        $slider2s = DB::table('pays')
+        ->join('slider2s', 'pays.id', '=', 'slider2s.pays_id')
+        ->join('admins', 'admins.id', '=', 'slider2s.admin_id')
         ->select('*', 'admins.name as admin', 'slider2s.id as identifiant')
         ->get();
         return view('slider2.index', compact('slider2s'));

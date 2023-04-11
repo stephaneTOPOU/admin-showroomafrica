@@ -41,17 +41,17 @@
                                             <tbody>
                                                 @foreach ($categories as $categorie)
                                                     <tr>
-                                                        <td>{{ $categorie->id }}</td>
+                                                        <td>{{ $categorie->identifiant }}</td>
                                                         <td>{{ $categorie->categorie }}</td>
                                                         <td>{{ $categorie->pays }}</td>
                                                         <td>{{ $categorie->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('category.edit',$categorie->id)}}" class="btn btn-default">
+                                                                <a href="{{route('category.edit',$categorie->identifiant)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <form method="POST" action="{{ route('category.destroy',$categorie->id) }}" class="btn-group">
+                                                            <form method="POST" action="{{ route('category.destroy',$categorie->identifiant) }}" class="btn-group">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" href="" class="btn btn-default">

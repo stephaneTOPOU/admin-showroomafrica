@@ -47,11 +47,11 @@
                                                         <td>{{ $gallerie->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('gallerie.edit',$gallerie->id)}}" class="btn btn-default">
+                                                                <a href="{{route('gallerie.edit',$gallerie->identifiant)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <form method="POST" action="{{ route('gallerie.destroy',$gallerie->id) }}" class="btn-group">
+                                                            <form method="POST" action="{{ route('gallerie.destroy',$gallerie->identifiant) }}" class="btn-group">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" href="" class="btn btn-default">

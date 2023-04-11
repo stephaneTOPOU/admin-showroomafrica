@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Pays;
 use App\Models\Slider1;
 use Exception;
 use Illuminate\Http\Request;
@@ -19,8 +20,9 @@ class Slider1Controller extends Controller
      */
     public function index()
     {
-        $slider1s = DB::table('admins')
-        ->join('slider1s', 'admins.id', '=', 'slider1s.admin_id')
+        $slider1s = DB::table('pays')
+        ->join('slider1s', 'pays.id', '=', 'slider1s.pays_id')
+        ->join('admins', 'admins.id', '=', 'slider1s.admin_id')
         ->select('*', 'admins.name as admin', 'slider1s.id as identifiant')
         ->get();
         return view('slider1.index', compact('slider1s'));
@@ -33,7 +35,8 @@ class Slider1Controller extends Controller
      */
     public function create()
     {
-        return view('slider1.add');
+        $pays = Pays::all();
+        return view('slider1.add', compact('pays'));
     }
 
     /**
@@ -45,13 +48,15 @@ class Slider1Controller extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = new Slider1();
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
@@ -107,8 +112,8 @@ class Slider1Controller extends Controller
     public function edit($slider1)
     {
         $slider1s = Slider1::find($slider1);
-        
-        return view('slider1.update', compact('slider1s'));
+        $pays = Pays::all();
+        return view('slider1.update', compact('slider1s', 'pays'));
     }
 
     /**
@@ -121,12 +126,14 @@ class Slider1Controller extends Controller
     public function update(Request $request, $slider1)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = Slider1::find($slider1);
-
+            
+            $data->pays_id = $request->pays_id;
             $data->admin_id =  Auth::user()->id;
             
             // if ($request->image) {

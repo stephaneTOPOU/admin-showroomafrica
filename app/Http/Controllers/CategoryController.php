@@ -19,7 +19,7 @@ class CategoryController extends Controller
     {
         $categories = DB::table('pays')
             ->join('categories', 'pays.id', '=', 'categories.pays_id')
-            ->select('*', 'pays.libelle as pays', 'categories.libelle as categorie')
+            ->select('*', 'pays.libelle as pays', 'categories.libelle as categorie', 'categories.id as identifiant')
             ->get();
         return view('categorie.index', compact('categories'));
     }

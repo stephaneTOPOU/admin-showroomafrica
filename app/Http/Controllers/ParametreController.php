@@ -20,7 +20,7 @@ class ParametreController extends Controller
     {
         $parametres = DB::table('pays')
         ->join('parametres', 'pays.id', '=', 'parametres.pays_id')
-        ->select('*')
+        ->select('*', 'parametres.id as identifiant')
         ->get();
         return view('parametre.index', compact('parametres'));
     }

@@ -39,14 +39,14 @@
                                             <tbody>
                                                 @foreach ($parametres as $parametre)
                                                     <tr>
-                                                        <td>{{ $parametre->id }}</td>
+                                                        <td>{{ $parametre->identifiant }}</td>
                                                         <td>{{ $parametre->email }}</td>
                                                         <td>{{ $parametre->libelle }}</td>
                                                         <td>{{ $parametre->adresse }}</td>
                                                         <td>{{ $parametre->telephone1 }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('parametre.edit',$parametre->id)}}" class="btn btn-default">
+                                                                <a href="{{route('parametre.edit',$parametre->identifiant)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
