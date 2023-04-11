@@ -33,6 +33,7 @@
                                             <tr>
                                             <th>Id</th>
                                             <th>Nom</th>
+                                            <th>Pays</th>
                                             <th>Date</th>
                                             <th>Action</th>
                                             </tr>
@@ -41,7 +42,8 @@
                                                 @foreach ($categories as $categorie)
                                                     <tr>
                                                         <td>{{ $categorie->id }}</td>
-                                                        <td>{{ $categorie->libelle }}</td>
+                                                        <td>{{ $categorie->categorie }}</td>
+                                                        <td>{{ $categorie->pays }}</td>
                                                         <td>{{ $categorie->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
@@ -69,6 +71,7 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Nom</th>
+                                                <th>Pays</th>
                                                 <th>Date</th>
                                                 <th>Action</th>
                                             </tr>

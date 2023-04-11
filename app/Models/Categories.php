@@ -9,7 +9,7 @@ class Categories extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['libelle'];
+    protected $fillable = ['libelle', 'pays_id'];
 
     public function sousCategorie()
     {

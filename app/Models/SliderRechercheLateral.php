@@ -9,7 +9,7 @@ class SliderRechercheLateral extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['admin_id','image'];
+    protected $fillable = ['admin_id','image', 'pays_id'];
 
     public function admin()
     {

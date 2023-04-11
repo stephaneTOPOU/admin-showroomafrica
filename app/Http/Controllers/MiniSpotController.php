@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MiniSpot;
+use App\Models\Pays;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,10 +19,11 @@ class MiniSpotController extends Controller
      */
     public function index()
     {
-        $minspots = DB::table('admins')
-        ->join('mini_spots', 'admins.id', '=', 'mini_spots.admin_id')
-        ->select('*', 'admins.name as admin', 'mini_spots.id as identifiant')
-        ->get();
+        $minspots = DB::table('Pays')
+            ->join('mini_spots', 'pays.id', '=', 'mini_spots.pays_id')
+            ->join('admins', 'admins.id', '=', 'mini_spots.admin_id')
+            ->select('*', 'admins.name as admin', 'mini_spots.id as identifiant')
+            ->get();
         return view('mini-spot.index', compact('minspots'));
     }
 
@@ -66,7 +68,8 @@ class MiniSpotController extends Controller
     public function edit($minspot)
     {
         $minspots = MiniSpot::find($minspot);
-        return view('mini-spot.update', compact('minspots'));
+        $pays = Pays::all();
+        return view('mini-spot.update', compact('minspots', 'pays'));
     }
 
     /**
@@ -79,13 +82,15 @@ class MiniSpotController extends Controller
     public function update(Request $request, $minspot)
     {
         $data = $request->validate([
-            'video'=>'required|file'
+            'video'=>'required|file',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = MiniSpot::find($minspot);
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->video) {
             //     $filename = time() . rand(1, 50) . '.' . $request->video->extension();
