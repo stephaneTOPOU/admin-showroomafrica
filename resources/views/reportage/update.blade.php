@@ -30,14 +30,25 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label >Lien</label>
+                                                    <label>Trouver pays</label>
+                                                    <select class="form-control select2" style="width: 100%;" name="pays_id">
+                                                        <option selected="selected">Pays</option>
+                                                        @foreach ($pays as $pay)
+                                                            <option value="{{ $pay->id }}" @if(($pay->id)==($reportages->pays_id)) selected @endif>{{ $pay->libelle }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label >Lien Youtube</label>
                                                     <input type="text" class="form-control" placeholder="Entrez le lien youtube" name="video" value="{{old('video')??$reportages->video}}">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary">Modifier</button>
                                         </div>
                                     </div>
                                 </form>

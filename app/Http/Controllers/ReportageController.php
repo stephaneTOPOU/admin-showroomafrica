@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Pays;
 
 class ReportageController extends Controller
 {
@@ -17,9 +18,10 @@ class ReportageController extends Controller
      */
     public function index()
     {
-        $reportages = DB::table('admins')
-        ->join('reportages', 'admins.id', '=', 'reportages.admin_id')
-        ->select('*', 'admins.name as admin', 'reportages.id as identifiant')
+        $reportages = DB::table('pays')
+        ->join('reportages', 'pays.id', '=', 'reportages.pays_id')
+        ->join('admins', 'admins.id', '=', 'reportages.admin_id')
+        ->select('*', 'admins.name as admin', 'reportages.id as identifiant','pays.libelle as pays')
         ->get();
         return view('reportage.index', compact('reportages'));
     }
@@ -65,7 +67,8 @@ class ReportageController extends Controller
     public function edit($reportage)
     {
         $reportages = Reportage::find($reportage);
-        return view('reportage.update',compact('reportages'));
+        $pays = Pays::all();
+        return view('reportage.update',compact('reportages', 'pays'));
     }
 
     /**
@@ -78,13 +81,15 @@ class ReportageController extends Controller
     public function update(Request $request, $reportage)
     {
         $data = $request->validate([
-            'video'=>'required|string'
+            'video'=>'required|string',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = Reportage::find($reportage);
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             $data->video = $request->video;
 
             $data->update();

@@ -29,6 +29,7 @@
                                         <thead>
                                             <tr>
                                             <th>Id</th>
+                                            <th>Pays</th>
                                             <th>Admin</th>
                                             <th>Vidéo</th>
                                             <th>Date</th>
@@ -39,6 +40,7 @@
                                                 @foreach ($reportages as $reportage)
                                                     <tr>
                                                         <td>{{ $reportage->identifiant }}</td>
+                                                        <td>{{ $reportage->pays }}</td>
                                                         <td>{{ $reportage->admin }}</td>
                                                         <td><iframe width="90%" height="100px" src="{{ $reportage->video }}" title="YouTube video player"
                                                             frameborder="0"
@@ -70,6 +72,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Pays</th>
                                                 <th>Admin</th>
                                                 <th>Vidéo</th>
                                                 <th>Date</th>
