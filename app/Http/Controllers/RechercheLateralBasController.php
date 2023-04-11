@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pays;
 use App\Models\SliderLateralBas;
 use App\Models\SliderRechercheLateralBas;
 use Exception;
@@ -19,8 +20,9 @@ class RechercheLateralBasController extends Controller
      */
     public function index()
     {
-        $sliders = DB::table('admins')
-        ->join('slider_recherche_lateral_bas', 'admins.id', '=', 'slider_recherche_lateral_bas.admin_id')
+        $sliders = DB::table('pays')
+        ->join('slider_recherche_lateral_bas', 'pays.id', '=', 'slider_recherche_lateral_bas.pays_id')
+        ->join('admins', 'admins.id', '=', 'slider_recherche_lateral_bas.admin_id')
         ->select('*', 'admins.name as admin', 'slider_recherche_lateral_bas.id as identifiant')
         ->get();
         return view('slider-recherche-lateral-bas.index', compact('sliders'));
@@ -33,7 +35,8 @@ class RechercheLateralBasController extends Controller
      */
     public function create()
     {
-        return view('slider-recherche-lateral-bas.add');
+        $pays = Pays::all();
+        return view('slider-recherche-lateral-bas.add', compact('pays'));
     }
 
     /**
@@ -45,13 +48,15 @@ class RechercheLateralBasController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = new SliderRechercheLateralBas();
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
@@ -107,7 +112,8 @@ class RechercheLateralBasController extends Controller
     public function edit($slider)
     {
         $sliders = SliderRechercheLateralBas::find($slider);
-        return view('slider-recherche-lateral-bas.update', compact('sliders'));
+        $pays = Pays::all();
+        return view('slider-recherche-lateral-bas.update', compact('sliders', 'pays'));
     }
 
     /**
@@ -120,13 +126,15 @@ class RechercheLateralBasController extends Controller
     public function update(Request $request, $slider)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = SliderRechercheLateralBas::find($slider);
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();

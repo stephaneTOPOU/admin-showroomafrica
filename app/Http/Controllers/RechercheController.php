@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pays;
 use App\Models\SliderRecherche;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,8 +19,9 @@ class RechercheController extends Controller
      */
     public function index()
     {
-        $sliders = DB::table('admins')
-        ->join('slider_recherches', 'admins.id', '=', 'slider_recherches.admin_id')
+        $sliders = DB::table('pays')
+        ->join('slider_recherches', 'pays.id', '=', 'slider_recherches.pays_id')
+        ->join('admins', 'admins.id', '=', 'slider_recherches.admin_id')
         ->select('*', 'admins.name as admin', 'slider_recherches.id as identifiant')
         ->get();
         return view('slider-recherche.index', compact('sliders'));
@@ -32,7 +34,8 @@ class RechercheController extends Controller
      */
     public function create()
     {
-        return view('slider-recherche.add');
+        $pays = Pays::all();
+        return view('slider-recherche.add', compact('pays'));
     }
 
     /**
@@ -44,13 +47,15 @@ class RechercheController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = new SliderRecherche();
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
@@ -106,7 +111,8 @@ class RechercheController extends Controller
     public function edit($slider)
     {
         $sliders = SliderRecherche::find($slider);
-        return view('slider-recherche.update', compact('sliders'));
+        $pays = Pays::all();
+        return view('slider-recherche.update', compact('sliders', 'pays'));
     }
 
     /**
@@ -119,13 +125,15 @@ class RechercheController extends Controller
     public function update(Request $request, $slider)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = SliderRecherche::find($slider);
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();

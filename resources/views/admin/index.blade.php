@@ -54,7 +54,7 @@
                                                             <form method="POST" action="{{ route('admin.destroy',$admin->id) }}" class="btn-group">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" href="" class="btn btn-default">
+                                                                <button type="submit" href="" class="btn btn-default" onclick="confirm('Etes-vous sûr de vouloir supprimer ce produit ??? ') || event.stopImmediatePropagation()">
                                                                     <i class="fas fa-trash"></i> Supprimer
                                                                 </button>
                                                             </form>

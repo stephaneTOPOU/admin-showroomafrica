@@ -32,6 +32,7 @@
                                         <thead>
                                             <tr>
                                             <th>Id</th>
+                                            <th>Pays</th>
                                             <th>Admin</th>
                                             <th>Image</th>
                                             <th>Date</th>
@@ -42,16 +43,17 @@
                                                 @foreach ($sliders as $slider)
                                                     <tr>
                                                         <td>{{ $slider->identifiant }}</td>
+                                                        <td>{{ $slider->libelle }}</td>
                                                         <td>{{ $slider->admin }}</td>
                                                         <td><img src="{{asset('assets/images')}}/{{$slider->image}}" width="100"></td>
                                                         <td>{{ $slider->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('sliderrecherche.edit',$slider->id)}}" class="btn btn-default">
+                                                                <a href="{{route('sliderrecherche.edit',$slider->identifiant)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <form method="POST" action="{{ route('sliderrecherche.destroy',$slider->id) }}" class="btn-group">
+                                                            <form method="POST" action="{{ route('sliderrecherche.destroy',$slider->identifiant) }}" class="btn-group">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" href="" class="btn btn-default">
@@ -70,6 +72,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Pays</th>
                                                 <th>Admin</th>
                                                 <th>Image</th>
                                                 <th>Date</th>

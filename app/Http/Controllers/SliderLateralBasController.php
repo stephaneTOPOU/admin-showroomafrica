@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pays;
 use App\Models\SliderLateralBas;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,8 +19,9 @@ class SliderLateralBasController extends Controller
      */
     public function index()
     {
-        $sliders = DB::table('admins')
-        ->join('slider_lateral_bas', 'admins.id', '=', 'slider_lateral_bas.admin_id')
+        $sliders = DB::table('pays')
+        ->join('slider_lateral_bas', 'pays.id', '=', 'slider_lateral_bas.pays_id')
+        ->join('admins', 'admins.id', '=', 'slider_lateral_bas.admin_id')
         ->select('*', 'admins.name as admin', 'slider_lateral_bas.id as identifiant')
         ->get();
         
@@ -33,7 +35,8 @@ class SliderLateralBasController extends Controller
      */
     public function create()
     {
-        return view('slider-lateral-bas.add');
+        $pays = Pays::all();
+        return view('slider-lateral-bas.add', compact('pays'));
     }
 
     /**
@@ -45,13 +48,15 @@ class SliderLateralBasController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = new SliderLateralBas();
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
@@ -107,7 +112,8 @@ class SliderLateralBasController extends Controller
     public function edit($slider)
     {
         $sliders = SliderLateralBas::find($slider);
-        return view('slider-lateral-bas.update', compact('sliders'));
+        $pays = Pays::all();
+        return view('slider-lateral-bas.update', compact('sliders', 'pays'));
     }
 
     /**
@@ -121,13 +127,15 @@ class SliderLateralBasController extends Controller
     {
         //dd($request);
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = SliderLateralBas::find($slider);
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();

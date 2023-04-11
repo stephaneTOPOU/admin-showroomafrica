@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Pays;
 use App\Models\Slider2;
 use Exception;
 use Illuminate\Http\Request;
@@ -34,7 +35,8 @@ class Slider2Controller extends Controller
      */
     public function create()
     {
-        return view('slider2.add');
+        $pays = Pays::all();
+        return view('slider2.add', compact('pays'));
     }
 
     /**
@@ -46,13 +48,15 @@ class Slider2Controller extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = new Slider2();
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
@@ -108,7 +112,8 @@ class Slider2Controller extends Controller
     public function edit($slider2)
     {
         $slider2s = Slider2::find($slider2);
-        return view('slider2.update', compact('slider2s'));
+        $pays = Pays::all();
+        return view('slider2.update', compact('slider2s','pays'));
     }
 
     /**
@@ -121,13 +126,15 @@ class Slider2Controller extends Controller
     public function update(Request $request, $slider2)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = Slider2::find($slider2);
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
