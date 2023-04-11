@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Parametre;
 use Exception;
 use Illuminate\Http\Request;
+use App\Models\Pays;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ParametreController extends Controller
 {
@@ -16,7 +18,10 @@ class ParametreController extends Controller
      */
     public function index()
     {
-        $parametres = Parametre::all();
+        $parametres = DB::table('pays')
+        ->join('parametres', 'pays.id', '=', 'parametres.pays_id')
+        ->select('*')
+        ->get();
         return view('parametre.index', compact('parametres'));
     }
 
@@ -61,7 +66,8 @@ class ParametreController extends Controller
     public function edit($parametre)
     {
         $parametres = Parametre::find($parametre);
-        return view('parametre.update',compact('parametres'));
+        $pays = Pays::all();
+        return view('parametre.update',compact('parametres', 'pays'));
     }
 
     /**
@@ -73,9 +79,9 @@ class ParametreController extends Controller
      */
     public function update(Request $request, $parametre)
     {
-        // $data = $request->validate([
-        //     'video'=>'required|string'
-        // ]);
+        $data = $request->validate([
+            'pays_id'=>'required|integer'
+        ]);
 
         try {
             $data = Parametre::find($parametre);
@@ -90,6 +96,7 @@ class ParametreController extends Controller
             $data->lientwitter = $request->lientwitter;
             $data->lieninsta = $request->lieninsta;
             $data->lienyoutube = $request->lienyoutube;
+            $data->pays_id = $request->pays_id;
             
             if ($request->logo_header) {
                 $filename = time() . rand(1, 50) . '.' . $request->logo_header->extension();
