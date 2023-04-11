@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Pays;
 
 class Slider3Controller extends Controller
 {
@@ -19,8 +20,9 @@ class Slider3Controller extends Controller
      */
     public function index()
     {
-        $slider3s = DB::table('admins')
-        ->join('slider3s', 'admins.id', '=', 'slider3s.admin_id')
+        $slider3s = DB::table('pays')
+        ->join('slider3s', 'pays.id', '=', 'slider3s.pays_id')
+        ->join('admins', 'admins.id', '=', 'slider3s.admin_id')
         ->select('*', 'admins.name as admin', 'slider3s.id as identifiant')
         ->get();
         return view('slider3.index', compact('slider3s'));
@@ -33,7 +35,8 @@ class Slider3Controller extends Controller
      */
     public function create()
     {
-        return view('slider3.add');
+        $pays = Pays::all();
+        return view('slider3.add', compact('pays'));
     }
 
     /**
@@ -45,13 +48,15 @@ class Slider3Controller extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = new Slider3();
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
@@ -107,7 +112,8 @@ class Slider3Controller extends Controller
     public function edit($slider3)
     {
         $slider3s = Slider3::find($slider3);
-        return view('slider3.update',compact('slider3s'));
+        $pays = Pays::all();
+        return view('slider3.update',compact('slider3s', 'pays'));
     }
 
     /**
@@ -120,13 +126,15 @@ class Slider3Controller extends Controller
     public function update(Request $request, $slider3)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = Slider3::find($slider3);
-
+            
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();

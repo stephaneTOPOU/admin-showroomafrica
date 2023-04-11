@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Pays;
 
 class SliderLateralHautController extends Controller
 {
@@ -18,8 +19,9 @@ class SliderLateralHautController extends Controller
      */
     public function index()
     {
-        $sliders = DB::table('admins')
-        ->join('slider_laterals', 'admins.id', '=', 'slider_laterals.admin_id')
+        $sliders = DB::table('pays')
+        ->join('slider_laterals', 'pays.id', '=', 'slider_laterals.pays_id')
+        ->join('admins', 'admins.id', '=', 'slider_laterals.admin_id')
         ->select('*', 'admins.name as admin', 'slider_laterals.id as identifiant')
         ->get();
 
@@ -33,7 +35,8 @@ class SliderLateralHautController extends Controller
      */
     public function create()
     {
-        return view('slider-lateral-haut.add');
+        $pays = Pays::all();
+        return view('slider-lateral-haut.add', compact('pays'));
     }
 
     /**
@@ -45,13 +48,15 @@ class SliderLateralHautController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = new SliderLateral();
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
@@ -106,8 +111,9 @@ class SliderLateralHautController extends Controller
      */
     public function edit($slider)
     {
+        $pays = Pays::all();
         $sliders = SliderLateral::find($slider);
-        return view('slider-lateral-haut.update', compact('sliders'));
+        return view('slider-lateral-haut.update', compact('sliders', 'pays'));
     }
 
     /**
@@ -120,13 +126,15 @@ class SliderLateralHautController extends Controller
     public function update(Request $request, $slider)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024'
+            'image'=>'required|file|max:1024',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
             $data = SliderLateral::find($slider);
 
             $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
             
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();

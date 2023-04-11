@@ -15,7 +15,8 @@ class Admin extends Authenticatable
         'prenoms',
         'email',
         'password',
-        'fonction'
+        'fonction',
+        'pays_id'
 
     ];
 
