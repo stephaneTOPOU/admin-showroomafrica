@@ -30,6 +30,7 @@
                                             <tr>
                                             <th>Id</th>
                                             <th>Email</th>
+                                            <th>Pays</th>
                                             <th>Adresse</th>
                                             <th>Téléphone</th>
                                             <th>Action</th>
@@ -40,6 +41,7 @@
                                                     <tr>
                                                         <td>{{ $parametre->id }}</td>
                                                         <td>{{ $parametre->email }}</td>
+                                                        <td>{{ $parametre->libelle }}</td>
                                                         <td>{{ $parametre->adresse }}</td>
                                                         <td>{{ $parametre->telephone1 }}</td>
                                                         <td>
@@ -66,6 +68,7 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Email</th>
+                                                <th>Pays</th>
                                                 <th>Adresse</th>
                                                 <th>Géolocalisation</th>
                                                 <th>Action</th>
