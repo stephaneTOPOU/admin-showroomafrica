@@ -41,7 +41,7 @@
                                             <input type="text" class="form-control" id="exampleInputEmail1" value="{{old('libelle')?? $souscategories->libelle}}" placeholder="Entrez le nom" name="libelle" required>
                                         </div>
                                         <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary">Modifier</button>
                                         </div>
                                     </div>
                                 </form>

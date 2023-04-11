@@ -52,7 +52,7 @@
                                         </div>
 
                                         <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Modifier</button>
+                                        <button type="submit" class="btn btn-primary">Ajouter</button>
                                         </div>
                                     </div>
                                 </form>
