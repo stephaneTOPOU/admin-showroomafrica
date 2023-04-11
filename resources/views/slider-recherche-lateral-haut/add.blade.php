@@ -29,6 +29,17 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
+                                                    <label>Trouver pays</label>
+                                                    <select class="form-control select2" style="width: 100%;" name="pays_id">
+                                                        <option selected="selected">Pays</option>
+                                                        @foreach ($pays as $pay)
+                                                            <option value="{{ $pay->id }}">{{ $pay->libelle }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
                                                     <label for="exampleInputFile">Image</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
@@ -41,7 +52,7 @@
                                         </div>
 
                                         <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary">Ajouter</button>
                                         </div>
                                     </div>
                                 </form>
