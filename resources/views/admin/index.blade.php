@@ -32,6 +32,7 @@
                                         <thead>
                                             <tr>
                                             <th>Id</th>
+                                            <th>Pays</th>
                                             <th>Nom</th>
                                             <th>Prénom</th>
                                             <th>Date</th>
@@ -41,17 +42,18 @@
                                             <tbody>
                                                 @foreach ($admins as $admin)
                                                     <tr>
-                                                        <td>{{ $admin->id }}</td>
+                                                        <td>{{ $admin->identifiant }}</td>
+                                                        <td>{{ $admin->libelle }}</td>
                                                         <td>{{ $admin->name }}</td>
                                                         <td>{{ $admin->prenoms }}</td>
                                                         <td>{{ $admin->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('admin.edit',$admin->id)}}" class="btn btn-default">
+                                                                <a href="{{route('admin.edit',$admin->identifiant)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <form method="POST" action="{{ route('admin.destroy',$admin->id) }}" class="btn-group">
+                                                            <form method="POST" action="{{ route('admin.destroy',$admin->identifiant) }}" class="btn-group">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" href="" class="btn btn-default" onclick="confirm('Etes-vous sûr de vouloir supprimer ce produit ??? ') || event.stopImmediatePropagation()">
@@ -70,6 +72,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Pays</th>
                                                 <th>Nom</th>
                                                 <th>Prénom</th>
                                                 <th>Date</th>

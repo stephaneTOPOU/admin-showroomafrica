@@ -26,6 +26,15 @@
                                 <form role="form" method="POST" action="{{ route('admin.store') }}">
                                     @csrf
                                     <div class="card-body">
+                                        <div class="form-group">
+                                            <label>Trouver pays</label>
+                                            <select class="form-control select2" style="width: 100%;" name="pays_id">
+                                                <option selected="selected">Trouver pays</option>
+                                                @foreach ($pays as $pay)
+                                                    <option value="{{ $pay->id }}">{{ $pay->libelle }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">

@@ -6,6 +6,8 @@ use App\Models\Admin;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Pays;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -16,7 +18,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = Admin::all();
+        $admins = DB::table('pays')
+        ->join('admins', 'pays.id', '=', 'admins.pays_id')
+        ->select('*', 'admins.id as identifiant')
+        ->get();
         return view('admin.index', compact('admins'));
     }
 
@@ -27,7 +32,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.add');
+        $pays = Pays::all();
+        return view('admin.add', compact('pays'));
     }
 
     /**
@@ -42,7 +48,8 @@ class AdminController extends Controller
             'name'=>'required|string',
             'prenoms'=>'required|string',
             'email'=>'required|email|string',
-            'password'=>'required|string'
+            'password'=>'required|string',
+            'pays_id'=>'required|integer'
         ]);
 
         try {
@@ -74,7 +81,8 @@ class AdminController extends Controller
     public function edit(Admin $admin)
     {
         //dd($admin);
-        return view('admin.update', compact('admin'));
+        $pays = Pays::all();
+        return view('admin.update', compact('admin', 'pays'));
     }
 
     /**
@@ -90,7 +98,8 @@ class AdminController extends Controller
             'name'=>'required|string',
             'prenoms'=>'required|string',
             'email'=>'required|email|string',
-            'password'=>'required|string'
+            'password'=>'required|string',
+            'pays_id'=>'required|integer'
         ]);
 
         try {

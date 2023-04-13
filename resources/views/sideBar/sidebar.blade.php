@@ -101,7 +101,7 @@
               <a href="{{ route('service.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-tools"></i>
                 <p>
-                  Services
+                  Présentation de l'entreprise
                 </p>
               </a>
             </li>

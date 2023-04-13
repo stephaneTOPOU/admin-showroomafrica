@@ -18,7 +18,7 @@
                         <div class="">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Enrégistrer un service</h3>
+                                    <h3 class="card-title">Présentation de l'entreprise</h3>
                                 </div>
                                 @if(Session::has('success'))
                                     <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
