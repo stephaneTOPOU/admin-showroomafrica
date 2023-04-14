@@ -75,9 +75,6 @@
                                                             function deleteData(identifiant) {
 
                                                                 let table = $('#example1');
-                                                                event.preventDefault();
-                                                                var id = $(this).data("id");
-                                                                console.log('id : ',id);
 
                                                                 Swal.fire({
                                                                 title: 'Etes-vous sûr?',
@@ -109,7 +106,8 @@
                                                                             'La présentation a été supprimée.',
                                                                             'success'
                                                                         )
-                                                                        table.show();
+                                                                        //table.DataTable().splice();
+                                                                        window.location.reload();
                                                                     },
 
                                                                         error: function(){
