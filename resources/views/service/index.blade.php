@@ -56,9 +56,11 @@
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <button class="btn btn-default" onclick="deleteData({{ $service->identifiant }})">
+
+                                                            <button class="btn btn-default" onclick="deleteData({{ $service->identifiant }})" data-id="{{ $service->identifiant }}" data-target="#default{{ $service->identifiant }}">
                                                                 <i class="fas fa-trash"></i> Supprimer
                                                             </button>
+
                                                             {{-- <form method="POST" action="{{ route('service.destroy',$service->identifiant) }}" class="btn-group">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -66,14 +68,17 @@
                                                                     <i class="fas fa-trash"></i> Supprimer
                                                                 </button>
                                                             </form> --}}
-                                                            {{-- <div class="btn-group">
-                                                                <a class="btn btn-default">
-                                                                    <i class="fas fa-eye"></i> Edit
-                                                                </a>
-                                                            </div> --}}
+        
                                                             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                                                             <script>
+
                                                             function deleteData(identifiant) {
+
+                                                                let table = $('#example1');
+                                                                event.preventDefault();
+                                                                var id = $(this).data("id");
+                                                                console.log('id : ',id);
+
                                                                 Swal.fire({
                                                                 title: 'Etes-vous sûr?',
                                                                 text: "Vous ne pourrez pas revenir en arrière!",
@@ -85,30 +90,35 @@
                                                                 }).then((result) => {
                                                                 if (result.isConfirmed) {
 
-                                                                var url = '{{ route("service.destroy", ":service") }}'
-                                                                url.replace(':service', identifiant.service)
+                                                                    //let url = "{{ route('service.destroy',['service' => $service->identifiant]) }}"
+                                                                    let url = "{{url('service')}}/" + identifiant
 
-                                                                $.ajax({
-                                                                    type: 'POST',
-                                                                    url: url,
-                                                                    data: {
-                                                                    '_method': 'DELETE',
-                                                                    '_token': '{{ csrf_token() }}'
+                                                                    console.log(url);
+                                                                    $.ajax({
+                                                                        type: 'POST',
+                                                                        url: url,
+                                                                        data: {
+                                                                        _method: 'DELETE',
+                                                                        _token: "{{ csrf_token() }}",
+                                                                        service: identifiant                                                                  
+                                                                        },
+                                                                        
+                                                                        success: function () {
+                                                                        Swal.fire(
+                                                                            'Supprimé!',
+                                                                            'La présentation a été supprimée.',
+                                                                            'success'
+                                                                        )
+                                                                        table.show();
                                                                     },
 
-                                                                    success: function () {
-                                                                    Swal.fire(
-                                                                        'Supprimé!',
-                                                                        'Votre fichier a été supprimé.',
-                                                                        'success'
-                                                                    )
-                                                                    }
-
-                                                                })
-
+                                                                        error: function(){
+                                                                            alert('error');
+                                                                        },
+                                                                    })
                                                                 }
 
-                                                            })
+                                                            });
 
                                                             }
                                                             
