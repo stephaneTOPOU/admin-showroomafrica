@@ -18,9 +18,9 @@
                                             <div class="col-md-10">
                                                 <h3 class="card-title">Paramètres</h3>
                                             </div>
-                                            {{-- <div class="col-md-2">
-                                                <a href="{{route('parametre.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
-                                            </div> --}}
+                                            <div class="col-md-2">
+                                                <a href="{{route('parametre.create')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- /.card-header -->

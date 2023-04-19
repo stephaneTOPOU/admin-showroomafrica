@@ -45,8 +45,8 @@
                                                     <tr>
                                                         <td>{{ $minispot->identifiant }}</td>
                                                         <td>{{ $minispot->admin }}</td>
-                                                        <td><video src="{{asset('assets/test')}}/{{$minispot->video}}" width="200" height="100" autoplay muted type="video/mp4"> </video></td>
-                                                        <td><img src="{{asset('assets/images')}}/{{$minispot->image}}" width="60"></td>
+                                                        <td><video src="https://www.showroomafrica.com/assets/videos/{{$minispot->video}}" width="200" height="100" autoplay muted type="video/mp4"> </video></td>
+                                                        <td><img src="https://www.showroomafrica.com/assets/videos/posters/{{$minispot->image}}" width="60"></td>
                                                         <td>{{ $minispot->libelle }}</td>
                                                         <td>{{ $minispot->created_at }}</td>
                                                         <td>

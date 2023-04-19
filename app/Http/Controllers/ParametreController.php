@@ -32,7 +32,9 @@ class ParametreController extends Controller
      */
     public function create()
     {
-        //
+        $pays = Pays::all();
+        $parametres = Parametre::all();
+        return view('parametre.add', compact('pays', 'parametres'));
     }
 
     /**
@@ -43,7 +45,42 @@ class ParametreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'pays_id'=>'required|integer'
+        ]);
+
+        try {
+            $data = new Parametre();
+
+            
+            $data->email = $request->email;
+            $data->adresse = $request->adresse;
+            $data->geolocalisation = $request->geolocalisation;
+            $data->telephone1 = $request->telephone1;
+            $data->telephone2 = $request->telephone2;
+            $data->lienface = $request->lienface;
+            $data->lientwitter = $request->lientwitter;
+            $data->lieninsta = $request->lieninsta;
+            $data->lienyoutube = $request->lienyoutube;
+            $data->pays_id = $request->pays_id;
+            
+            if ($request->logo_header) {
+                $filename = time() . rand(1, 50) . '.' . $request->logo_header->extension();
+                $logo_header = $request->file('logo_header')->storeAs('MiniSpot', $filename, 'public');
+                $data->logo_header = $logo_header;
+            }
+
+            if ($request->logo_footer) {
+                $filename2 = time() . rand(1, 50) . '.' . $request->logo_footer->extension();
+                $logo_footer = $request->file('logo_footer')->storeAs('MiniSpot', $filename2, 'public');
+                $data->logo_footer = $logo_footer;
+            }
+
+            $data->save();
+            return redirect()->back()->with('success', 'Paramètre a été ajouté avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 
     /**

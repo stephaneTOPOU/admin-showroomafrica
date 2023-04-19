@@ -45,7 +45,7 @@
                                                         <td>{{ $slider1->identifiant }}</td>
                                                         <td>{{ $slider1->libelle }}</td>
                                                         <td>{{ $slider1->admin }}</td>
-                                                        <td><img src="{{asset('assets')}}/{{$slider1->image}}" width="100"></td>
+                                                        <td><img src="https://www.showroomafrica.com/assets/images/sliders/main/{{$slider1->image}}" width="100"></td>
                                                         <td>{{ $slider1->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
@@ -53,18 +53,69 @@
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            <form method="POST" action="{{ route('slider1.destroy',$slider1->identifiant) }}" class="btn-group">
+                                                            {{-- <form method="POST" action="{{ route('slider1.destroy',$slider1->identifiant) }}" class="btn-group">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" href="" class="btn btn-default">
                                                                     <i class="fas fa-trash"></i> Supprimer
                                                                 </button>
-                                                            </form>
-                                                            {{-- <div class="btn-group">
-                                                                <a class="btn btn-default">
-                                                                    <i class="fas fa-eye"></i> Edit
-                                                                </a>
-                                                            </div> --}}
+                                                            </form> --}}
+                                                            
+                                                            <button class="btn btn-default" onclick="deleteData({{ $slider1->identifiant }})" data-id="{{ $slider1->identifiant }}" data-target="#default{{ $slider1->identifiant }}">
+                                                                <i class="fas fa-trash"></i> Supprimer
+                                                            </button>
+
+                                                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                                            <script>
+
+                                                            function deleteData(identifiant) {
+
+                                                                let table = $('#example1');
+
+                                                                Swal.fire({
+                                                                title: 'Etes-vous sûr?',
+                                                                text: "Vous ne pourrez pas revenir en arrière!",
+                                                                icon: 'warning',
+                                                                showCancelButton: true,
+                                                                confirmButtonColor: '#3085d6',
+                                                                cancelButtonColor: '#d33',
+                                                                confirmButtonText: 'Oui, supprimez!'
+                                                                }).then((result) => {
+                                                                if (result.isConfirmed) {
+
+                                                                    let url = "{{url('slider1')}}/" + identifiant
+                                                                    window.location.reload();
+
+                                                                    //console.log(url);
+                                                                    $.ajax({
+                                                                        type: 'POST',
+                                                                        url: url,
+                                                                        data: {
+                                                                        _method: 'DELETE',
+                                                                        _token: "{{ csrf_token() }}",
+                                                                        service: identifiant                                                                  
+                                                                        },
+                                                                        
+                                                                        success: function () {
+                                                                        Swal.fire(
+                                                                            'Supprimé!',
+                                                                            'La présentation a été supprimée.',
+                                                                            'success'
+                                                                        )
+                                                                        table.dataTable({ ajax: "data.json"}).ajax.reload();
+                                                                    },
+
+                                                                        error: function(){
+                                                                            alert('error');
+                                                                        },
+                                                                    })
+                                                                }
+
+                                                            });
+
+                                                            }
+                                                            
+                                                            </script>
                                                         </td>
                                                     </tr>
                                                 @endforeach

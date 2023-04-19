@@ -46,9 +46,9 @@
                                                         <td>{{ $service->entreprise }}</td>
                                                         <td>{{ $service->libelle }}</td>
                                                         <td>{{ $service->description }}</td>
-                                                        <td><img src="{{asset('assets/images')}}/{{$service->image2}}" width="60"></td>
+                                                        <td><img src="https://www.showroomafrica.com/assets/images/advertorial/{{$service->image2}}" width="60"></td>
                                                         <td>{{ $service->image5 }}</td>
-                                                        <td><img src="{{asset('assets/images')}}/{{$service->image3}}" width="60"></td>
+                                                        <td><img src="https://www.showroomafrica.com/assets/images/advertorial/{{$service->image3}}" width="60"></td>
                                                         <td>{{ $service->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
@@ -86,6 +86,7 @@
                                                                 confirmButtonText: 'Oui, supprimez!'
                                                                 }).then((result) => {
                                                                 if (result.isConfirmed) {
+                                                                    window.location.reload();
 
                                                                     //let url = "{{ route('service.destroy',['service' => $service->identifiant]) }}"
                                                                     let url = "{{url('service')}}/" + identifiant
@@ -106,8 +107,8 @@
                                                                             'La présentation a été supprimée.',
                                                                             'success'
                                                                         )
-                                                                        //table.DataTable().splice();
-                                                                        window.location.reload();
+                                                                        table.dataTable({ ajax: "data.json"}).ajax.reload();
+                                                                        
                                                                     },
 
                                                                         error: function(){

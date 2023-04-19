@@ -8,6 +8,7 @@ use App\Models\SousCategories;
 use App\Models\User;
 use App\Models\Ville;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
