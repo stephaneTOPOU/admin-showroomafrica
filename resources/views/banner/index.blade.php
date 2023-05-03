@@ -78,10 +78,10 @@
                                                                 confirmButtonText: 'Oui, supprimez!'
                                                                 }).then((result) => {
                                                                 if (result.isConfirmed) {
-                                                                    window.location.reload();
 
                                                                     //let url = "{{ route('banner.destroy',['banner' => $banner->id]) }}"
                                                                     let url = "{{url('banner')}}/" + identifiant
+                                                                    window.location.reload();
 
                                                                     console.log(url);
                                                                     $.ajax({

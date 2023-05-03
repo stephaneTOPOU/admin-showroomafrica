@@ -86,10 +86,10 @@
                                                                 confirmButtonText: 'Oui, supprimez!'
                                                                 }).then((result) => {
                                                                 if (result.isConfirmed) {
-                                                                    window.location.reload();
-
+                                                                
                                                                     //let url = "{{ route('service.destroy',['service' => $service->identifiant]) }}"
                                                                     let url = "{{url('service')}}/" + identifiant
+                                                                    window.location.reload();
 
                                                                     console.log(url);
                                                                     $.ajax({

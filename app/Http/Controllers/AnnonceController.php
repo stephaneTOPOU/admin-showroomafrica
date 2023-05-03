@@ -239,11 +239,11 @@ class AnnonceController extends Controller
      * @param  \App\Models\Annonce  $annonce
      * @return \Illuminate\Http\Response
      */
-    public function destroy($annonce)
+    public function destroy(Annonce $annonce)
     {
-        $annonces = Annonce::find($annonce);
+        //$annonces = Annonce::find($annonce);
         try {
-            $annonces->delete();
+            $annonce->delete();
             return redirect()->back()->with('success','Annonce supprimée avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
