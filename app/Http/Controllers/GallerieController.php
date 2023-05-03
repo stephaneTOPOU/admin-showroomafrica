@@ -122,10 +122,25 @@ class GallerieController extends Controller
             $data = Gallerie_image::find($gallerie);
             $data->entreprise_id = $request->entreprise_id;
             
-            if ($request->galerie_image) {
-                $filename = time() . rand(1, 50) . '.' . $request->galerie_image->extension();
-                $img = $request->file('galerie_image')->storeAs('GallerieImage', $filename, 'public');
-                $data->galerie_image = $img;
+            if ($request->hasFile('galerie_image') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('galerie_image')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('galerie_image')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp')->put($filenametostore, fopen($request->file('galerie_image'), 'r+'));
+
+                //Upload name to database
+                $data->galerie_image = $filenametostore;
             }
 
             $data->update();

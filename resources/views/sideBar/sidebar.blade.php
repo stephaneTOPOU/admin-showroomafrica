@@ -40,6 +40,15 @@
             </p>
           </a>
         </li>
+        <li class="nav-header">BANNIERE</li>
+        <li class="nav-item">
+          <a href="{{ route('banner.index') }}" class="nav-link">
+            <i class="nav-icon fas fa-image"></i>
+            <p>
+              Banniere
+            </p>
+          </a>
+        </li>
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="nav-icon far fa-building"></i>
@@ -70,6 +79,14 @@
                 <i class="nav-icon far fa-building"></i>
                 <p>
                   Entreprise
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('annonce.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-newspaper"></i>
+                <p>
+                  Les annonces
                 </p>
               </a>
             </li>

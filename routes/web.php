@@ -26,6 +26,8 @@ use App\Http\Controllers\SliderLateralBasController;
 use App\Http\Controllers\SliderLateralHautController;
 use App\Http\Controllers\SousCategoryController;
 use App\Http\Controllers\VilleController;
+use App\Http\Controllers\AnnonceController;
+use App\Http\Controllers\BannerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +73,8 @@ Route::resource('/pays', PaysController::class);
 Route::resource('/ville', VilleController::class);
 Route::resource('/parametre', ParametreController::class);
 Route::resource('/popup', PopupController::class);
+Route::resource('/annonce', AnnonceController::class);
+Route::resource('/banner', BannerController::class);
 });
 
 Route::get('login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
