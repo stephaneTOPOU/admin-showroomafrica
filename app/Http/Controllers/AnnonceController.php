@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Annonce;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 

@@ -53,8 +53,15 @@ class AdminController extends Controller
         ]);
 
         try {
-            $data['password'] = bcrypt($request->password);
-            Admin::create($data);
+            //$data['password'] = bcrypt($request->password);
+            // Admin::create($data);
+            $data = new Admin();
+            $data->name = $request->name;
+            $data->prenoms = $request->prenoms;
+            $data->email = $request->email;
+            $data->password = bcrypt($request->password);
+            $data->pays_id = $request->pays_id;
+            $data->save();
             return redirect()->back()->with('success','Admin Ajouté avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
@@ -92,7 +99,7 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request, $admin)
     {
         $data = $request->validate([
             'name'=>'required|string',
@@ -103,9 +110,16 @@ class AdminController extends Controller
         ]);
 
         try {
-            if (Hash::check(request('password'), $admin->password)) {
-                $data['password'] = bcrypt($request->new_password);
-                $admin->update($data);
+            $data = Admin::find($admin);
+            if (Hash::check(request('password'), $data->password)) {
+                //$data['password'] = bcrypt($request->new_password);
+                //$admin->update($data);
+                $data->name = $request->name;
+                $data->prenoms = $request->prenoms;
+                $data->email = $request->email;
+                $data->password = bcrypt($request->password);;
+                $data->pays_id = $request->pays_id;
+                $data->update();
                 return redirect()->back()->with('success','Admin mise à jour avec succès');
             } else {
                 return redirect()->back()->with('success','Mot de pass ne correspondent pas!!!');
