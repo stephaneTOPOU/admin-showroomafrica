@@ -150,6 +150,21 @@
                                         </div>
 
                                         <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck100" name="premium" value="1">
+                                                    <label class="form-check-label" for="exampleCheck100">estPremium</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck101" name="basic" value="1">
+                                                    <label class="form-check-label" for="exampleCheck101">estBasic</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile">Image pharmacie </label>

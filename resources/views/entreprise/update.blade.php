@@ -149,6 +149,20 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck100" name="premium" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->premium == 1) checked  @endif @if($entreprises->premium == 0) unchecked  @endif>
+                                                    <label class="form-check-label" for="exampleCheck100">estPremium</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="exampleCheck101" name="basic" data-key="{{$entreprises->id}}"  value="1" @if($entreprises->basic == 1) checked  @endif @if($entreprises->basic == 0) unchecked  @endif>
+                                                    <label class="form-check-label" for="exampleCheck101">estBasic</label>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="row">
                                             <div class="col-md-3">

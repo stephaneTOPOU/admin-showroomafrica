@@ -100,6 +100,18 @@ class EntrepriseController extends Controller
                 $data->logo = $filenametostore;
             }
 
+            if ($request->premium) {
+                $data->premium = $request->premium;
+            } else {
+                $data->premium = 0;
+            }
+
+            if ($request->basic) {
+                $data->basic = $request->basic;
+            } else {
+                $data->basic = 0;
+            }
+
             // if ($request->photo1) {
             //     $filename1 = time() . rand(1, 50) . '.' . $request->photo1->extension();
             //     $img1 = $request->file('photo1')->storeAs('Pharmacie', $filename1, 'public');
@@ -536,6 +548,18 @@ class EntrepriseController extends Controller
 
                 //Upload name to database
                 $data->logo = $filenametostore;
+            }
+
+            if ($request->premium) {
+                $data->premium = $request->premium;
+            } else {
+                $data->premium = 0;
+            }
+
+            if ($request->basic) {
+                $data->basic = $request->basic;
+            } else {
+                $data->basic = 0;
             }
 
             // if ($request->photo1) {

@@ -47,7 +47,9 @@ class Entreprise extends Model
         'magazineimage2',
         'magazineimage3',
         'ville',
-        'pays'
+        'pays',
+        'premium',
+        'basic'
     ];
 
     public function sousCategorie()
