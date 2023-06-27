@@ -21,7 +21,13 @@ class EntrepriseController extends Controller
      */
     public function index()
     {
-        $entreprises = Entreprise::all();
+        $entreprises = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
+            ->select('*','pays.libelle as pays', 'entreprises.id as identifiant', 'entreprises.nom as ent')
+            ->orderBy('entreprises.id', 'desc')
+            ->get();
         return view('entreprise.index', compact('entreprises'));
     }
 
@@ -32,7 +38,11 @@ class EntrepriseController extends Controller
      */
     public function create()
     {
-        $souscategories = SousCategories::all();
+        $souscategories = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->select('*','pays.libelle as nom')
+            ->get();
         $villes = Ville::all();
         $pays = Pays::all();
 
@@ -481,7 +491,11 @@ class EntrepriseController extends Controller
     public function edit($entreprise)
     {
         $entreprises = Entreprise::find($entreprise);
-        $souscategories = SousCategories::all();
+        $souscategories = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->select('*','pays.libelle as nom')
+            ->get();
         $villes = Ville::all();
         $pays = Pays::all();
 

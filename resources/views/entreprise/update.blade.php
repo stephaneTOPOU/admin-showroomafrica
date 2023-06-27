@@ -34,7 +34,7 @@
                                                     <select class="form-control select2" style="width: 100%;" name="souscategorie_id">
                                                         <option selected="selected">sous-catégorie ici</option>
                                                         @foreach ($souscategories as $souscategorie)
-                                                            <option value="{{ $souscategorie->id }}" @if(($souscategorie->id)==($entreprises->souscategorie_id)) selected @endif>{{ $souscategorie->libelle }}</option>
+                                                            <option value="{{ $souscategorie->id }}" @if(($souscategorie->id)==($entreprises->souscategorie_id)) selected @endif>{{ $souscategorie->libelle }} - {{ $souscategorie->nom }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -339,7 +339,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="row">
+                                        {{-- <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Ville de l'entreprise</label>
@@ -362,7 +362,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Modifier</button>

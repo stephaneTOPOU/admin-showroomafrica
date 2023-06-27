@@ -32,7 +32,7 @@
                                             <select class="form-control select2" style="width: 100%;" name="categorie_id">
                                                 <option selected="selected">Catégorie ici</option>
                                                 @foreach ($categories as $categorie)
-                                                    <option value="{{ $categorie->id }}" @if(($categorie->id)==($souscategories->categorie_id)) selected @endif>{{ $categorie->libelle }}</option>
+                                                    <option value="{{ $categorie->id }}" @if(($categorie->id)==($souscategories->categorie_id)) selected @endif>{{ $categorie->libelle }} - {{ ($categorie->nom) }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

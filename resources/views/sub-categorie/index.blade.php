@@ -33,6 +33,7 @@
                                             <tr>
                                             <th>Id</th>
                                             <th>Nom</th>
+                                            <th>Pays</th>
                                             <th>Date</th>
                                             <th>Action</th>
                                             </tr>
@@ -40,12 +41,13 @@
                                             <tbody>
                                                 @foreach ($sousCategories as $sousCategorie)
                                                     <tr>
-                                                        <td>{{ $sousCategorie->id }}</td>
+                                                        <td>{{ $sousCategorie->identifiant }}</td>
                                                         <td>{{ $sousCategorie->libelle }}</td>
+                                                        <td>{{ $sousCategorie->nom }}</td>
                                                         <td>{{ $sousCategorie->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('sub-category.edit', $sousCategorie->id)}}" class="btn btn-default">
+                                                                <a href="{{route('sub-category.edit', $sousCategorie->identifiant)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
@@ -120,6 +122,7 @@
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Nom</th>
+                                                <th>Pays</th>
                                                 <th>Date</th>
                                                 <th>Action</th>
                                             </tr>

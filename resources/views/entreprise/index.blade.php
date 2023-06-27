@@ -35,14 +35,15 @@
                                                 <th>Logo</th>
                                                 <th>Nom</th>
                                                 <th>Adresse</th>
-                                                <th>Telephone</th>
+                                                <th>Adresse</th>
+                                                {{-- <th>Telephone</th> --}}
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                             <tbody>
                                                 @foreach ($entreprises as $entreprise)
                                                     <tr>
-                                                        <td>{{ $entreprise->id }}</td>
+                                                        <td>{{ $entreprise->identifiant }}</td>
                                                         @if ($entreprise->logo)
                                                         <td><img src="https://www.showroomafrica.com/assets/images/companies/logos/{{$entreprise->logo}}" width="60"></td>
                                                         @else
@@ -50,14 +51,14 @@
                                                         @endif
                                                         <td>{{ $entreprise->nom }}</td>
                                                         <td>{{ $entreprise->adresse }}</td>
-                                                        <td>{{ $entreprise->telephone1 }}</td>
+                                                        <td>{{ $entreprise->nom }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('entreprise.edit', $entreprise->id)}}" class="btn btn-default">
+                                                                <a href="{{route('entreprise.edit', $entreprise->identifiant)}}" class="btn btn-default">
                                                                     <i class="fas fa-edit"></i> Modifier
                                                                 </a>
                                                             </div>
-                                                            {{-- <form method="POST" action="{{ route('entreprise.destroy',$entreprise->id) }}" class="btn-group">
+                                                            {{-- <form method="POST" action="{{ route('entreprise.destroy',$entreprise->identifiant) }}" class="btn-group">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" href="" class="btn btn-default">
@@ -65,14 +66,14 @@
                                                                 </button>
                                                             </form> --}}
 
-                                                            <button class="btn btn-default" onclick="deleteData({{ $entreprise->id }})" data-id="{{ $entreprise->id }}" data-target="#default{{ $entreprise->id }}">
+                                                            <button class="btn btn-default" onclick="deleteData({{ $entreprise->identifiant }})" data-id="{{ $entreprise->identifiant }}" data-target="#default{{ $entreprise->identifiant }}">
                                                                 <i class="fas fa-trash"></i> Supprimer
                                                             </button>
 
                                                             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                                                             <script>
 
-                                                            function deleteData(id) {
+                                                            function deleteData(identifiant) {
 
                                                                 let table = $('#example1');
 
@@ -87,7 +88,7 @@
                                                                 }).then((result) => {
                                                                 if (result.isConfirmed) {
 
-                                                                    let url = "{{url('entreprise')}}/" + id
+                                                                    let url = "{{url('entreprise')}}/" + identifiant
                                                                     window.location.reload();
 
                                                                     //console.log(url);
@@ -97,7 +98,7 @@
                                                                         data: {
                                                                         _method: 'DELETE',
                                                                         _token: "{{ csrf_token() }}",
-                                                                        service: id                                                                  
+                                                                        service: identifiant                                                                  
                                                                         },
                                                                         
                                                                         success: function () {
@@ -131,7 +132,8 @@
                                                 <th>Logo</th>
                                                 <th>Nom</th>
                                                 <th>Adresse</th>
-                                                <th>Telephone</th>
+                                                <th>Adresse</th>
+                                                {{-- <th>Telephone</th> --}}
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>

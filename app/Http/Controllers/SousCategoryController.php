@@ -6,6 +6,7 @@ use App\Models\Categories;
 use App\Models\SousCategories;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SousCategoryController extends Controller
 {
@@ -16,7 +17,11 @@ class SousCategoryController extends Controller
      */
     public function index()
     {
-        $sousCategories = SousCategories::all();
+        $sousCategories = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->select('*','pays.libelle as nom', 'sous_categories.id as identifiant')
+            ->get();
         return view('sub-categorie.index', compact('sousCategories'));
     }
 
@@ -27,7 +32,10 @@ class SousCategoryController extends Controller
      */
     public function create()
     {
-        $categories = Categories::all();
+        $categories = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->select('*','pays.libelle as nom')
+            ->get();
         return view('sub-categorie.add', compact('categories'));
     }
 
@@ -72,7 +80,10 @@ class SousCategoryController extends Controller
     public function edit($souscategorie)
     {
         $souscategories = SousCategories::find($souscategorie);
-        $categories = Categories::all();
+        $categories = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->select('*','pays.libelle as nom')
+            ->get();
         return view('sub-categorie.update', compact('categories', 'souscategories'));
     }
 
