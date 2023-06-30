@@ -32,6 +32,7 @@
                                         <thead>
                                             <tr>
                                             <th>Id</th>
+                                            <th>Catégories</th>
                                             <th>Nom</th>
                                             <th>Pays</th>
                                             <th>Date</th>
@@ -42,6 +43,7 @@
                                                 @foreach ($sousCategories as $sousCategorie)
                                                     <tr>
                                                         <td>{{ $sousCategorie->identifiant }}</td>
+                                                        <td>{{ $sousCategorie->categorie }}</td>
                                                         <td>{{ $sousCategorie->libelle }}</td>
                                                         <td>{{ $sousCategorie->nom }}</td>
                                                         <td>{{ $sousCategorie->created_at }}</td>
@@ -121,6 +123,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Catégories</th>
                                                 <th>Nom</th>
                                                 <th>Pays</th>
                                                 <th>Date</th>
