@@ -131,6 +131,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{ route('partenaire.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-handshake"></i>
+                <p>
+                  Partenaires des entreprises
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ route('horaire.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-clock"></i>
                 <p>
