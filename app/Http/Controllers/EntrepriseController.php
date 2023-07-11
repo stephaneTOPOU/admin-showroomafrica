@@ -122,6 +122,12 @@ class EntrepriseController extends Controller
                 $data->basic = 0;
             }
 
+            if ($request->partenaire) {
+                $data->partenaire = $request->partenaire;
+            } else {
+                $data->partenaire = 0;
+            }
+
             // if ($request->photo1) {
             //     $filename1 = time() . rand(1, 50) . '.' . $request->photo1->extension();
             //     $img1 = $request->file('photo1')->storeAs('Pharmacie', $filename1, 'public');
@@ -574,6 +580,12 @@ class EntrepriseController extends Controller
                 $data->basic = $request->basic;
             } else {
                 $data->basic = 0;
+            }
+
+            if ($request->partenaire) {
+                $data->partenaire = $request->partenaire;
+            } else {
+                $data->partenaire = 0;
             }
 
             // if ($request->photo1) {
