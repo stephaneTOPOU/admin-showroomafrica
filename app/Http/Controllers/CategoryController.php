@@ -49,7 +49,10 @@ class CategoryController extends Controller
         ]);
 
         try {
-            Categories::create($data);
+            $data = new Categories();
+            $data->pays_id = $request->pays_id;
+            $data->libelle = $request->libelle;
+            $data->save();
             return redirect()->back()->with('success','Catégorie Ajouté avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
@@ -89,14 +92,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $categorie)
     {
-        $categories = Categories::find($categorie);
+        
         $data = $request->validate([
             'libelle'=>'required|string',
             'pays_id'=>'required|integer'
         ]);
 
         try {
-            $categories->update($data);
+            $data = Categories::find($categorie);
+            $data->pays_id = $request->pays_id;
+            $data->libelle = $request->libelle;
+            $data->update();
             return redirect()->back()->with('success','Catégorie mise à jour avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
