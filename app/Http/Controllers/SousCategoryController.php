@@ -21,6 +21,7 @@ class SousCategoryController extends Controller
             ->join('categories', 'pays.id', '=', 'categories.pays_id')
             ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
             ->select('*','pays.libelle as nom', 'sous_categories.id as identifiant', 'categories.libelle as categorie')
+            ->orderBy('sous_categories.id', 'desc')
             ->get();
         return view('sub-categorie.index', compact('sousCategories'));
     }

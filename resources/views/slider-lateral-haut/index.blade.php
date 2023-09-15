@@ -45,7 +45,7 @@
                                                         <td>{{ $slider->identifiant }}</td>
                                                         <td>{{ $slider->libelle }}</td>
                                                         <td>{{ $slider->admin }}</td>
-                                                        <td><img src="https://www.showroomafrica.com/assets/images/sliders/side/{{$slider->image}}" width="100"></td>
+                                                        <td><img src="https://www.showroomafrica.com/assets/images/sliders/search-side/{{$slider->image}}" width="100"></td>
                                                         <td>{{ $slider->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">

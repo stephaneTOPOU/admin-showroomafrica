@@ -16,10 +16,7 @@
                                     <div class="card-header">
                                         <div class="row">
                                             <div class="col-md-10">
-                                                <h3 class="card-title">Slider De Recherche latéral Bas</h3>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <a href="{{route('sliderlb.create')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
+                                                <h3 class="card-title">Tous les devis</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -31,38 +28,31 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                            <th>Id</th>
-                                            <th>Pays</th>
-                                            <th>Admin</th>
-                                            <th>Image</th>
-                                            <th>Date</th>
+                                            <th>Secteur d'activité</th>
+                                            <th>Type de demande</th>
+                                            <th>Nom . Prénoms</th>
+                                            <th>Email</th>
+                                            <th>Ville</th>
                                             <th>Action</th>
                                             </tr>
                                         </thead>
                                             <tbody>
-                                                @foreach ($sliders as $slider)
+                                                @foreach ($devis as $devi)
                                                     <tr>
-                                                        <td>{{ $slider->identifiant }}</td>
-                                                        <td>{{ $slider->libelle }}</td>
-                                                        <td>{{ $slider->admin }}</td>
-                                                        <td><img src="https://www.showroomafrica.com/assets/images/sliders/search-side/{{$slider->image}}" width="100"></td>
-                                                        <td>{{ $slider->created_at }}</td>
+                                                        <td>{{ $devi->libelle }}</td>
+                                                        <td>{{ $devi->type_demande }}</td>
+                                                        <td>{{ $devi->nom }} . {{ $devi->prenom }}</td>
+                                                        <td>{{ $devi->email }}</td>
+                                                        <td>{{ $devi->ville }}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a href="{{route('sliderlb.edit',$slider->identifiant)}}" class="btn btn-default">
-                                                                    <i class="fas fa-edit"></i> Modifier
+                                                                <a href="{{route('devis.show',$devi->identifiant)}}" class="btn btn-default">
+                                                                    <i class="fas fa-eye"></i> voir
                                                                 </a>
                                                             </div>
-                                                            {{-- <form method="POST" action="{{ route('sliderlb.destroy',$slider->identifiant) }}" class="btn-group">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" href="" class="btn btn-default">
-                                                                    <i class="fas fa-trash"></i> Supprimer
-                                                                </button>
-                                                            </form> --}}
                                                             
-                                                            <button class="btn btn-default" onclick="deleteData({{ $slider->identifiant }})" data-id="{{ $slider->identifiant }}" data-target="#default{{ $slider->identifiant }}">
-                                                                <i class="fas fa-trash"></i> Supprimer
+                                                            <button class="btn btn-default" onclick="deleteData({{ $devi->identifiant }})" data-id="{{ $devi->identifiant }}" data-target="#default{{ $devi->identifiant }}">
+                                                                <i class="fas fa-file-import"></i> Envoyer
                                                             </button>
 
                                                             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -83,7 +73,7 @@
                                                                 }).then((result) => {
                                                                 if (result.isConfirmed) {
 
-                                                                    let url = "{{url('sliderlb')}}/" + identifiant
+                                                                    let url = "{{url('category')}}/" + identifiant
                                                                     window.location.reload();
 
                                                                     //console.log(url);
@@ -122,11 +112,11 @@
                                             </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Id</th>
-                                                <th>Pays</th>
-                                                <th>Admin</th>
-                                                <th>Image</th>
-                                                <th>Date</th>
+                                                <th>Secteur d'activité</th>
+                                                <th>Type de demande</th>
+                                                <th>Nom . Prénoms</th>
+                                                <th>
+                                                <th>Ville</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>

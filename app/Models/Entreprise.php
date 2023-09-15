@@ -49,7 +49,9 @@ class Entreprise extends Model
         'ville',
         'pays',
         'premium',
-        'basic'
+        'basic',
+        'partenaire',
+        'video'
     ];
 
     public function sousCategorie()

@@ -154,6 +154,14 @@
                 </p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ route('devis.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-file"></i>
+                <p>
+                  Devis
+                </p>
+              </a>
+            </li>
           </ul>
         </li>
         

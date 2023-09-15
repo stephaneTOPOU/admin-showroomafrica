@@ -8,63 +8,38 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
 @include('header.header5')
-<div class="wrapper">
-    @include('navBar.navbar')
-        @include('sideBar.sidebar')
-        <div class="content-wrapper">
-            @include('content-header.content-header')
-                <section class="content">
-                    <div class="container-fluid">
-                        <div class="">
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Modifier un partenaire</h3>
-                                </div>
-                                @if(Session::has('success'))
-                                    <div class="alert alert-success" role="alert">{{Session::get('success') }}</div>
-                                @endif
-                                <form role="form" method="POST" action="{{ route('partenaire.update', $partenaires->id) }}" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Nom de l'entreprise</label>
-                                                    <select class="form-control select2" style="width: 100%;" name="entreprise_id">
-                                                        <option selected="selected">Entreprise ici</option>
-                                                        @foreach ($entreprises as $entreprise)
-                                                            <option value="{{ $entreprise->id }}" {{ $partenaires->entreprise_id == $entreprise->id ? 'selected' : '' }}>{{ $entreprise->nom }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="exampleInputFile">Image</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="exampleInputFile" name="image" value="{{old('image')??$partenaires->image}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Modfier</button>
-                                        </div>
+<body>
+    <div class="wrapper">
+        @include('navBar.navbar')
+            @include('sideBar.sidebar')
+            <div class="content-wrapper">
+                @include('content-header.content-header')
+                    <section class="content">
+                        <div class="container-fluid">
+                            <div class="">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Devis</h3>
                                     </div>
-                                </form>
+                                    <p style="margin: 0 15px;"><strong>Secteur</strong> :  {{ $devis->libelle }}</p>
+                                    <p style="margin: 0 15px;"><strong>Type de demande</strong> :  {{ $devis->type_demande }}</p>
+                                    <p style="margin: 0 15px;"><strong>La ville</strong> :  {{ $devis->ville }}</p>
+                                    <p style="margin: 0 15px;"><strong>Email</strong> :  {{ $devis->email }}</p>
+                                    <p style="margin: 0 15px;"><strong>Nom</strong> :  {{ $devis->nom }}</p>
+                                    <p style="margin: 0 15px;"><strong>Prenom</strong> :  {{ $devis->prenom }}</p>
+                                    <p style="margin: 0 15px;"><strong>Téléphone</strong> :  {{ $devis->telephone }}</p>
+                                    <p style="margin: 0 15px;"><strong>Demande</strong> :  {{ $devis->demande }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </section>
-        </div>
-        @include('footer.footer')
-</div>
-@include('footer.footer3')
+                    </section>
+            </div>
+            @include('footer.footer')
+    </div>
+
+
+    @include('footer.footer3')
 @include('footer.footer6')
 <script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
@@ -156,4 +131,5 @@
     
         })
     </script>
-@include('footer.footer2')
+</body>
+</html>

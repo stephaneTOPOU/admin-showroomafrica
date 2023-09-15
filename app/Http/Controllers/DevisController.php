@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Devis;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class MagazineController extends Controller
+class DevisController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,15 +16,11 @@ class MagazineController extends Controller
      */
     public function index()
     {
-        $entreprises = DB::table('pays')
-            ->join('categories', 'pays.id', '=', 'categories.pays_id')
-            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
-            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
-            ->select('*','pays.libelle as pays', 'entreprises.id as identifiant', 'entreprises.nom as ent', 'sous_categories.libelle as subcat')
-            ->where('a_magazine', 1)
-            ->orderBy('entreprises.id', 'desc')
+        $devis = DB::table('sous_categories')
+            ->join('devis', 'sous_categories.id', '=', 'devis.souscategorie_id')
+            ->select('*', 'devis.id as identifiant')
             ->get();
-        return view('entreprise.index', compact('entreprises'));
+        return view('devis.index', compact('devis'));
     }
 
     /**
@@ -49,21 +47,22 @@ class MagazineController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Devis  $devis
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($devis)
     {
-        //
+        $devis = Devis::find($devis);
+        return view('devis.front', compact('devis'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Devis  $devis
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Devis $devis)
     {
         //
     }
@@ -72,10 +71,10 @@ class MagazineController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Devis  $devis
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Devis $devis)
     {
         //
     }
@@ -83,11 +82,17 @@ class MagazineController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Devis  $devis
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($devis)
     {
-        //
+        $devis = Devis::find($devis);
+        try {
+            $devis->delete();
+            return redirect()->back()->with('success','Devis supprimé avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 }

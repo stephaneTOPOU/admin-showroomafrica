@@ -102,7 +102,7 @@ class PartenaireController extends Controller
     {
         $entreprises = Entreprise::all();
         $partenaires = Partenaire::find($partenaire);
-        return view('gallerie.update', compact('entreprises','p$partenaires'));
+        return view('partenaire.update', compact('entreprises','partenaires'));
     }
 
     /**
