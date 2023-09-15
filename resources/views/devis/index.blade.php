@@ -51,7 +51,7 @@
                                                                 </a>
                                                             </div>
                                                             
-                                                            <button class="btn btn-default" onclick="deleteData({{ $devi->identifiant }})" data-id="{{ $devi->identifiant }}" data-target="#default{{ $devi->identifiant }}">
+                                                            <button class="btn btn-default">
                                                                 <i class="fas fa-file-import"></i> Envoyer
                                                             </button>
 
