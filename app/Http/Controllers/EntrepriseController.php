@@ -61,8 +61,7 @@ class EntrepriseController extends Controller
             'souscategorie_id' => 'required|integer',
             'nom' => 'required|string',
             'adresse' => 'nullable|string',
-            'telephone1' => 'nullable|string',
-            'logo' => 'nullable|file|max:1024'
+            'telephone1' => 'nullable|string'
         ]);
 
         try {
@@ -468,6 +467,27 @@ class EntrepriseController extends Controller
                 $data->magazineimage3 = $filenametostore;
             }
 
+            if ($request->hasFile('video') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('video')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('video')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp19')->put($filenametostore, fopen($request->file('video'), 'r+'));
+
+                //Upload name to database
+                $data->video = $filenametostore;
+            }
+
             $data->ville = $request->ville;
             $data->pays = $request->pays;
             $data->save();
@@ -521,8 +541,7 @@ class EntrepriseController extends Controller
             'souscategorie_id' => 'required|integer',
             'nom' => 'required|string',
             'adresse' => 'nullable|string',
-            'telephone1' => 'nullable|string',
-            'logo' => 'nullable|file|max:1024'
+            'telephone1' => 'nullable|string'
         ]);
 
         try {
@@ -926,6 +945,27 @@ class EntrepriseController extends Controller
 
                 //Upload name to database
                 $data->magazineimage3 = $filenametostore;
+            }
+
+            if ($request->hasFile('video') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('video')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('video')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp19')->put($filenametostore, fopen($request->file('video'), 'r+'));
+
+                //Upload name to database
+                $data->video = $filenametostore;
             }
 
             $data->ville = $request->ville;

@@ -79,7 +79,7 @@ class RechercheLateralBasController extends Controller
                 $filenametostore = $filename.'_'.uniqid().'.'.$extension;
 
                 //Upload File to external server
-                Storage::disk('ftp18')->put($filenametostore, fopen($request->file('image'), 'r+'));
+                Storage::disk('ftp25')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
                 //Upload name to database
                 $data->image = $filenametostore;
@@ -157,7 +157,7 @@ class RechercheLateralBasController extends Controller
                 $filenametostore = $filename.'_'.uniqid().'.'.$extension;
 
                 //Upload File to external server
-                Storage::disk('ftp18')->put($filenametostore, fopen($request->file('image'), 'r+'));
+                Storage::disk('ftp25')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
                 //Upload name to database
                 $data->image = $filenametostore;
