@@ -162,6 +162,14 @@
                 </p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ route('blog.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-blog"></i>
+                <p>
+                  Blog
+                </p>
+              </a>
+            </li>
           </ul>
         </li>
         

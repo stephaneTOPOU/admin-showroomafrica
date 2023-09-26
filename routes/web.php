@@ -28,6 +28,7 @@ use App\Http\Controllers\SousCategoryController;
 use App\Http\Controllers\VilleController;
 use App\Http\Controllers\AnnonceController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\DevisController;
 use Illuminate\Support\Facades\Route;
@@ -79,6 +80,7 @@ Route::resource('/annonce', AnnonceController::class);
 Route::resource('/banner', BannerController::class);
 Route::resource('/partenaire', PartenaireController::class);
 Route::resource('/devis', DevisController::class);
+Route::resource('/blog', BlogController::class);
 });
 
 Route::get('login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
