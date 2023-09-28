@@ -40,7 +40,7 @@
                                                     <tr>
                                                         <td>{{ $banner->identifiant }}</td>
                                                         <td>{{ $banner->libelle }}</td>
-                                                        <td><img src="https://www.showroomafrica.com/assets/images/{{$banner->image}}" width="200"></td>
+                                                        <td><img src="https://www.showroomafrica.com/assets/images/banner/{{$banner->image}}" width="200"></td>
                                                         <td>{{ $banner->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">

@@ -45,7 +45,7 @@
                                                         <td>{{ $popup->identifiant }}</td>
                                                         <td>{{ $popup->libelle }}</td>
                                                         <td>{{ $popup->admin }}</td>
-                                                        <td><img src="https://www.showroomafrica.com/assets/images/{{$popup->image}}" width="200" height="300"></td>
+                                                        <td><img src="https://www.showroomafrica.com/assets/images/popup/{{$popup->image}}" width="200" height="300"></td>
                                                         <td>{{ $popup->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
