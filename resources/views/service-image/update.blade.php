@@ -45,7 +45,7 @@
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="exampleInputFile" name="service_image" value="{{old('service_image')??$images->service_image}}">
-                                                            <label class="custom-file-label" for="exampleInputFile">Choisir l'image</label>
+                                                            <label class="custom-file-label" for="exampleInputFile">{{old('service_image')??$images->service_image}}</label>
                                                         </div>
                                                     </div>
                                                 </div>

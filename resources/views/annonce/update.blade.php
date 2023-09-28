@@ -68,7 +68,7 @@
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="exampleInputFile2" name="image1" value="{{old('image1')??$annonces->image1}}">
-                                                            <label class="custom-file-label" for="exampleInputFile2">Choisir l'image 1</label>
+                                                            <label class="custom-file-label" for="exampleInputFile2">{{old('image1')??$annonces->image1}}</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -79,7 +79,7 @@
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="exampleInputFile3" name="image2" value="{{old('image2')??$annonces->image2}}">
-                                                            <label class="custom-file-label" for="exampleInputFile3">Choisir l'image 2</label>
+                                                            <label class="custom-file-label" for="exampleInputFile3">{{old('image2')??$annonces->image2}}</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -90,7 +90,7 @@
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" id="exampleInputFile3" name="image3" value="{{old('image3')??$annonces->image3}}">
-                                                            <label class="custom-file-label" for="exampleInputFile3">Choisir la vidéo</label>
+                                                            <label class="custom-file-label" for="exampleInputFile3">{{old('image3')??$annonces->image3}}</label>
                                                         </div>
                                                     </div>
                                                 </div>
