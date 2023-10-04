@@ -32,12 +32,11 @@
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Pays</th>
                                                 <th>Sous - Catégorie</th>
                                                 <th>Logo</th>
                                                 <th>Nom</th>
                                                 <th>Adresse</th>
-                                                <th>Adresse</th>
-                                                {{-- <th>Telephone</th> --}}
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -45,6 +44,7 @@
                                                 @foreach ($entreprises as $entreprise)
                                                     <tr>
                                                         <td>{{ $entreprise->identifiant }}</td>
+                                                        <td>{{ $entreprise->pays }}</td>
                                                         <td>{{ $entreprise->subcat }}</td>
                                                         @if ($entreprise->logo)
                                                         <td><img src="https://www.showroomafrica.com/assets/images/companies/logos/{{$entreprise->logo}}" width="60"></td>
@@ -53,7 +53,6 @@
                                                         @endif
                                                         <td>{{ $entreprise->nom }}</td>
                                                         <td>{{ $entreprise->adresse }}</td>
-                                                        <td>{{ $entreprise->nom }}</td>
                                                         <td>
                                                             <div class="btn-group">
                                                                 <a href="{{route('entreprise.edit', $entreprise->identifiant)}}" class="btn btn-default">
@@ -131,12 +130,11 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Pays</th>
                                                 <th>Sous - Catégorie</th>
                                                 <th>Logo</th>
                                                 <th>Nom</th>
                                                 <th>Adresse</th>
-                                                <th>Adresse</th>
-                                                {{-- <th>Telephone</th> --}}
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>

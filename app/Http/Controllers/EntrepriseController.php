@@ -26,7 +26,6 @@ class EntrepriseController extends Controller
             ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
             ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
             ->select('*','pays.libelle as pays', 'entreprises.id as identifiant', 'entreprises.nom as ent', 'sous_categories.libelle as subcat')
-            ->orderBy('entreprises.id', 'desc')
             ->get();
         return view('entreprise.index', compact('entreprises'));
     }

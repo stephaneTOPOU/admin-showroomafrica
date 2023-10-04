@@ -123,7 +123,6 @@ class BannerController extends Controller
     public function update(Request $request, $banner)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024',
             'pays_id'=>'required|integer'
         ]);
 
