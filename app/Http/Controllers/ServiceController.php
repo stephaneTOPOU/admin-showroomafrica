@@ -18,9 +18,12 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = DB::table('entreprises')
+        $services = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
             ->join('services', 'entreprises.id', '=', 'services.entreprise_id')
-            ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant')
+            ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant', 'pays.libelle as pays')
             ->get();
 
         return view('service.index', compact('services'));
@@ -33,7 +36,13 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $entreprises = Entreprise::all();
+        $entreprises = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
+            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
+            ->get();
+
         return view('service.add', compact('entreprises'));
     }
 
@@ -139,7 +148,12 @@ class ServiceController extends Controller
     public function edit($service)
     {
         $services = Service::find($service);
-        $entreprises = Entreprise::all();
+        $entreprises = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
+            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
+            ->get();
         return view('service.update', compact('entreprises', 'services'));
     }
 

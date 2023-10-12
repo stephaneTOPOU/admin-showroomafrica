@@ -21,7 +21,8 @@ class Parametre extends Model
         'lienyoutube',
         'logo_header',
         'logo_footer',
-        'pays_id'
+        'pays_id',
+        'lienlinkedin'
 
     ];
 }

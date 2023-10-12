@@ -33,7 +33,7 @@
                                                     <select class="form-control select2" style="width: 100%;" name="service_id">
                                                         <option selected="selected">Entreprise ici</option>
                                                         @foreach ($services as $service)
-                                                            <option value="{{ $service->identifiant }}">{{ $service->entreprise }}</option>
+                                                            <option value="{{ $service->identifiant }}">{{ $service->entreprise }} - {{ $service->pays }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

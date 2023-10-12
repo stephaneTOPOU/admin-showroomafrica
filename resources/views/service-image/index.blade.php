@@ -32,6 +32,7 @@
                                         <thead>
                                             <tr>
                                             <th>Id</th>
+                                            <th>Pays</th>
                                             <th>Entreprise</th>
                                             <th>Image</th>
                                             <th>Description</th>
@@ -43,6 +44,7 @@
                                                 @foreach ($images as $image)
                                                     <tr>
                                                         <td>{{ $image->identifiant }}</td>
+                                                        <td>{{ $image->pays }}</td>
                                                         <td>{{ $image->entreprise }}</td>
                                                         {{-- @if ($image->galerie_image) --}}
                                                         <td><img src="https://www.showroomafrica.com/assets/images/companies/showroom/products/{{$image->service_image}}" width="60"></td>
@@ -125,6 +127,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Pays</th>
                                                 <th>Entreprise</th>
                                                 <th>Image</th>
                                                 <th>Description</th>

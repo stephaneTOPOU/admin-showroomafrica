@@ -17,9 +17,12 @@ class HoraireController extends Controller
      */
     public function index()
     {
-        $horaires = DB::table('entreprises')
+        $horaires = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
             ->join('horaires', 'entreprises.id', '=', 'horaires.entreprise_id')
-            ->select('*', 'entreprises.nom as entreprise', 'horaires.id as identifiant')
+            ->select('*', 'entreprises.nom as entreprise', 'horaires.id as identifiant', 'pays.libelle as pays')
             ->get();
         return view('horaire.index', compact('horaires'));
     }
@@ -31,7 +34,12 @@ class HoraireController extends Controller
      */
     public function create()
     {
-        $entreprises = Entreprise::all();
+        $entreprises = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
+            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
+            ->get();
 
         return view('horaire.add', compact('entreprises'));
     }
@@ -82,7 +90,12 @@ class HoraireController extends Controller
      */
     public function edit($horaire)
     {
-        $entreprises = Entreprise::all();
+        $entreprises = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
+            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
+            ->get();
 
         $horaires = Horaire::find($horaire);
 

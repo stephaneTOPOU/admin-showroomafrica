@@ -18,10 +18,13 @@ class PartenaireController extends Controller
      */
     public function index()
     {
-        $partenaires = DB::table('entreprises')
-        ->join('partenaires', 'entreprises.id', '=', 'partenaires.entreprise_id')
-        ->select('*', 'entreprises.nom as entreprise', 'partenaires.id as identifiant')
-        ->get();
+        $partenaires = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
+            ->join('partenaires', 'entreprises.id', '=', 'partenaires.entreprise_id')
+            ->select('*', 'entreprises.nom as entreprise', 'partenaires.id as identifiant', 'pays.libelle as pays')
+            ->get();
         return view('partenaire.index', compact('partenaires'));
     }
 
@@ -32,7 +35,12 @@ class PartenaireController extends Controller
      */
     public function create()
     {
-        $entreprises = Entreprise::all();
+        $entreprises = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
+            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
+            ->get();
         return view('partenaire.add', compact('entreprises'));
     }
 
@@ -100,8 +108,15 @@ class PartenaireController extends Controller
      */
     public function edit($partenaire)
     {
-        $entreprises = Entreprise::all();
+        $entreprises = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
+            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
+            ->get();
+
         $partenaires = Partenaire::find($partenaire);
+        
         return view('partenaire.update', compact('entreprises','partenaires'));
     }
 

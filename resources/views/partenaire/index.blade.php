@@ -32,6 +32,7 @@
                                         <thead>
                                             <tr>
                                             <th>Id</th>
+                                            <th>Pays</th>
                                             <th>Entreprise</th>
                                             <th>Image</th>
                                             <th>Date</th>
@@ -42,6 +43,7 @@
                                                 @foreach ($partenaires as $partenaire)
                                                     <tr>
                                                         <td>{{ $partenaire->identifiant }}</td>
+                                                        <td>{{ $partenaire->pays }}</td>
                                                         <td>{{ $partenaire->entreprise }}</td>
                                                         <td><img src="https://www.showroomafrica.com/assets/images/partenaires/{{$partenaire->image}}" width="60"></td>
                                                         <td>{{ $partenaire->created_at }}</td>
@@ -121,6 +123,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Pays</th>
                                                 <th>Entreprise</th>
                                                 <th>Image</th>
                                                 <th>Date</th>

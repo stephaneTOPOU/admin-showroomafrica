@@ -29,6 +29,7 @@
                                         <thead>
                                             <tr>
                                             <th>Id</th>
+                                            <th>Pays</th>
                                             <th>Entreprise</th>
                                             <th>Qui sommes-nous</th>
                                             <th>Notre mission</th>
@@ -43,6 +44,7 @@
                                                 @foreach ($services as $service)
                                                     <tr>
                                                         <td>{{ $service->identifiant }}</td>
+                                                        <td>{{ $service->pays }}</td>
                                                         <td>{{ $service->entreprise }}</td>
                                                         <td>{{ $service->libelle }}</td>
                                                         <td>{{ $service->description }}</td>
@@ -129,6 +131,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Pays</th>
                                                 <th>Entreprise</th>
                                                 <th>Qui sommes-nous</th>
                                                 <th>Notre mission</th>

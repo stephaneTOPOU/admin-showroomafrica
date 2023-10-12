@@ -32,6 +32,7 @@
                                         <thead>
                                             <tr>
                                             <th>Id</th>
+                                            <th>Pays</th>
                                             <th>Entreprise</th>
                                             <th>Image</th>
                                             <th>Date</th>
@@ -42,6 +43,7 @@
                                                 @foreach ($galleries as $gallerie)
                                                     <tr>
                                                         <td>{{ $gallerie->identifiant }}</td>
+                                                        <td>{{ $gallerie->pays }}</td>
                                                         <td>{{ $gallerie->entreprise }}</td>
                                                         <td><img src="https://www.showroomafrica.com/assets/images/companies/showroom/gallery/{{$gallerie->galerie_image}}" width="60"></td>
                                                         <td>{{ $gallerie->created_at }}</td>
@@ -121,6 +123,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Pays</th>
                                                 <th>Entreprise</th>
                                                 <th>Image</th>
                                                 <th>Date</th>

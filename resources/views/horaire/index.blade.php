@@ -32,6 +32,7 @@
                                         <thead>
                                             <tr>
                                             <th>Id</th>
+                                            <th>Pays</th>
                                             <th>Entreprise</th>
                                             <th>Jours</th>
                                             <th>Horaires</th>
@@ -42,6 +43,7 @@
                                                 @foreach ($horaires as $horaire)
                                                     <tr>
                                                         <td>{{ $horaire->identifiant }}</td>
+                                                        <td>{{ $horaire->pays }}</td>
                                                         <td>{{ $horaire->entreprise }}</td>
                                                         <td>{{ $horaire->jour }}</td>
                                                         <td>{{ $horaire->h_ouverture }}</td>
@@ -121,6 +123,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
+                                                <th>Pays</th>
                                                 <th>Entreprise</th>
                                                 <th>Jours</th>
                                                 <th>Horaires</th>

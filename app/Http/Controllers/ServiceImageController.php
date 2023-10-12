@@ -17,10 +17,13 @@ class ServiceImageController extends Controller
      */
     public function index()
     {
-        $images = DB::table('entreprises')
+        $images = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
             ->join('services', 'entreprises.id', '=', 'services.entreprise_id')
             ->join('service_images', 'services.id', '=', 'service_images.service_id')
-            ->select('*', 'entreprises.nom as entreprise', 'service_images.id as identifiant')
+            ->select('*', 'entreprises.nom as entreprise', 'service_images.id as identifiant', 'pays.libelle as pays')
             ->get();
         return view('service-image.index', compact('images'));
     }
@@ -32,9 +35,12 @@ class ServiceImageController extends Controller
      */
     public function create()
     {
-        $services = DB::table('entreprises')
+        $services = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
             ->join('services', 'entreprises.id', '=', 'services.entreprise_id')
-            ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant')
+            ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant', 'pays.libelle as pays')
             ->get();
 
         return view('service-image.add', compact('services'));
@@ -112,9 +118,12 @@ class ServiceImageController extends Controller
     {
         $images = ServiceImage::find($image);
 
-        $services = DB::table('entreprises')
+        $services = DB::table('pays')
+        ->join('categories', 'pays.id', '=', 'categories.pays_id')
+        ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+        ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
         ->join('services', 'entreprises.id', '=', 'services.entreprise_id')
-        ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant')
+        ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant', 'pays.libelle as pays')
         ->get();
 
         return view('service-image.update', compact('services','images'));

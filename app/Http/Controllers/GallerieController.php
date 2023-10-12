@@ -18,9 +18,12 @@ class GallerieController extends Controller
      */
     public function index()
     {
-        $galleries = DB::table('entreprises')
+        $galleries = DB::table('pays')
+        ->join('categories', 'pays.id', '=', 'categories.pays_id')
+        ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+        ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
         ->join('gallerie_images', 'entreprises.id', '=', 'gallerie_images.entreprise_id')
-        ->select('*', 'entreprises.nom as entreprise', 'gallerie_images.id as identifiant')
+        ->select('*', 'entreprises.nom as entreprise', 'gallerie_images.id as identifiant', 'pays.libelle as pays')
         ->get();
         return view('gallerie.index', compact('galleries'));
     }
@@ -32,7 +35,13 @@ class GallerieController extends Controller
      */
     public function create()
     {
-        $entreprises = Entreprise::all();
+        $entreprises = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
+            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
+            ->get();
+
         return view('gallerie.add', compact('entreprises'));
     }
 
@@ -100,8 +109,15 @@ class GallerieController extends Controller
      */
     public function edit($gallerie)
     {
-        $entreprises = Entreprise::all();
+        $entreprises = DB::table('pays')
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
+            ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
+            ->get();
+
         $galleries = Gallerie_image::find($gallerie);
+
         return view('gallerie.update', compact('entreprises','galleries'));
     }
 

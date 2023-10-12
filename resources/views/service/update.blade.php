@@ -34,7 +34,7 @@
                                                     <select class="form-control select2" style="width: 100%;" name="entreprise_id">
                                                         <option selected="selected">Entreprise ici</option>
                                                         @foreach ($entreprises as $entreprise)
-                                                            <option value="{{ $entreprise->id }}" {{ $services->entreprise_id == $entreprise->id ? 'selected' : '' }}>{{ $entreprise->nom }}</option>
+                                                            <option value="{{ $entreprise->id }}" {{ $services->entreprise_id == $entreprise->id ? 'selected' : '' }}>{{ $entreprise->nom }} - {{ $entreprise->pays }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
