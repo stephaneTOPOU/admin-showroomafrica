@@ -35,10 +35,16 @@
                                     @csrf
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Titre</label>
                                                     <input type="text" class="form-control" placeholder="Entrez le titre du blog" name="titre">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label >Description courte</label>
+                                                    <input type="text" class="form-control" placeholder="Entrez la description courte blog" name="descriptionCourte">
                                                 </div>
                                             </div>
                                         </div>

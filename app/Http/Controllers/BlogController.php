@@ -41,12 +41,14 @@ class BlogController extends Controller
     {
         $data = $request->validate([
             'titre' => 'required|string',
+            'descriptionCourte' => 'required|string',
             'description1' => 'required|string'
         ]);
 
         try {
             $data = new Blog();
             $data->titre = $request->titre;
+            $data->descriptionCourte = $request->descriptionCourte;
             $data->description1 = $request->description1;
             $data->description2 = $request->description2;
             
@@ -202,12 +204,14 @@ class BlogController extends Controller
     {
         $data = $request->validate([
             'titre' => 'required|string',
+            'descriptionCourte' => 'required|string',
             'description1' => 'required|string'
         ]);
 
         try {
             $data = Blog::find($blog);
             $data->titre = $request->titre;
+            $data->descriptionCourte = $request->descriptionCourte;
             $data->description1 = $request->description1;
             $data->description2 = $request->description2;
             
