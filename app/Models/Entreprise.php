@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -53,6 +54,18 @@ class Entreprise extends Model
         'partenaire',
         'video'
     ];
+
+    use Sluggable;
+
+    public function Sluggable():array
+    {
+        return[
+            'slug' =>
+            [
+                'source' => 'nom'
+            ]
+        ];
+    }
 
     public function sousCategorie()
     {
