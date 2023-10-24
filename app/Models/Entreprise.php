@@ -11,18 +11,16 @@ class Entreprise extends Model
     use HasFactory;
 
     protected $fillable = [
-        'souscategorie_id',
         'nom',
         'email',
         'adresse',
-        'statu',
+        'statut',
         'telephone1',
         'telephone2',
         'telephone3',
         'telephone4',
         'itineraire',
         'siteweb',
-        'geolocalisation',
         'descriptionCourte',
         'descriptionLongue',
         'logo',
@@ -34,7 +32,6 @@ class Entreprise extends Model
         'pharmacie_de_garde',
         'honneur',
         'est_souscrit',
-        'elus',
         'vue',
         'a_publireportage',
         'publireportage1',
@@ -52,7 +49,8 @@ class Entreprise extends Model
         'premium',
         'basic',
         'partenaire',
-        'video'
+        'video',
+        'slug_entreprise'
     ];
 
     use Sluggable;
@@ -60,7 +58,7 @@ class Entreprise extends Model
     public function Sluggable():array
     {
         return[
-            'slug' =>
+            'slug_entreprise' =>
             [
                 'source' => 'nom'
             ]
@@ -69,26 +67,26 @@ class Entreprise extends Model
 
     public function sousCategorie()
     {
-        return $this->hasMany(SousCategories::class);
+        return $this->belongsTo(SousCategories::class);
     }
 
     public function commentaire()
     {
-        return $this->belongsTo(Commentaire::class);
+        return $this->hasMany(Commentaire::class);
     }
 
     public function galerie()
     {
-        return $this->belongsTo(Gallerie_image::class);
+        return $this->hasMany(Gallerie_image::class);
     }
 
     public function horaire()
     {
-        return $this->belongsTo(Horaire::class);
+        return $this->hasMany(Horaire::class);
     }
 
     public function service()
     {
-        return $this->belongsTo(Service::class);
+        return $this->hasMany(Service::class);
     }
 }

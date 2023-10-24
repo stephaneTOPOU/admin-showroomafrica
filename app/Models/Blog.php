@@ -15,12 +15,12 @@ class Blog extends Model
     public function Sluggable():array
     {
         return[
-            'slug' =>
+            'slug_blog' =>
             [
                 'source' => 'titre'
             ]
         ];
     }
 
-    public $fillable = ['titre', 'description1', 'image1', 'description2', 'image2', 'description3', 'image3', 'description4', 'video1', 'description5', 'video2', 'descriptionCourte'];
+    public $fillable = ['titre', 'description1', 'image1', 'description2', 'image2', 'description3', 'image3', 'description4', 'video1', 'description5', 'video2', 'descriptionCourte', 'slug_blog'];
 }

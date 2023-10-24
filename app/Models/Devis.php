@@ -15,6 +15,6 @@ class Devis extends Model
 
     public function sousCategorie()
     {
-        return $this->hasMany(SousCategories::class);
+        return $this->belongsTo(SousCategories::class);
     }
 }

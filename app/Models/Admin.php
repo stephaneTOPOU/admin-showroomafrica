@@ -22,67 +22,67 @@ class Admin extends Authenticatable
 
     public function minispot()
     {
-        return $this->belongsTo(MiniSpot::class);
+        return $this->hasMany(MiniSpot::class);
     }
 
     public function popup()
     {
-        return $this->belongsTo(PopUp::class);
+        return $this->hasMany(PopUp::class);
     }
 
     public function reportage()
     {
-        return $this->belongsTo(Reportage::class);
+        return $this->hasMany(Reportage::class);
     }
 
     public function slider1()
     {
-        return $this->belongsTo(Slider1::class);
+        return $this->hasMany(Slider1::class);
     }
 
     public function slider2()
     {
-        return $this->belongsTo(Slider2::class);
+        return $this->hasMany(Slider2::class);
     }
 
     public function slider3()
     {
-        return $this->belongsTo(Slider3::class);
+        return $this->hasMany(Slider3::class);
     }
 
     public function sliderlateral()
     {
-        return $this->belongsTo(SliderLateral::class);
+        return $this->hasMany(SliderLateral::class);
     }
 
     public function sliderlateralbas()
     {
-        return $this->belongsTo(SliderLateralBas::class);
+        return $this->hasMany(SliderLateralBas::class);
     }
 
     public function sliderrecherche()
     {
-        return $this->belongsTo(SliderRecherche::class);
+        return $this->hasMany(SliderRecherche::class);
     }
 
     public function sliderrecherchelateral()
     {
-        return $this->belongsTo(SliderRechercheLateral::class);
+        return $this->hasMany(SliderRechercheLateral::class);
     }
 
     public function sliderrecherchelateralbas()
     {
-        return $this->belongsTo(SliderRechercheLateralBas::class);
+        return $this->hasMany(SliderRechercheLateralBas::class);
     }
 
     public function sliderCategorie()
     {
-        return $this->belongsTo(SliderCategorie::class);
+        return $this->hasMany(SliderCategorie::class);
     }
 
     public function sliderEntreprise()
     {
-        return $this->belongsTo(SliderEntreprise::class);
+        return $this->hasMany(SliderEntreprise::class);
     }
 
 }

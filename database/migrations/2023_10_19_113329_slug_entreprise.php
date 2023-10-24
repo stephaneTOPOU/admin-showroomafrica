@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SlugUser extends Migration
+class SlugEntreprise extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class SlugUser extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('slug')->nullable()->unique();
+        Schema::table('entreprises', function (Blueprint $table) {
+            $table->string('slug_entreprise')->nullable()->unique();
         });
     }
 
@@ -25,8 +25,8 @@ class SlugUser extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('slug');
+        Schema::table('entreprises', function (Blueprint $table) {
+            $table->dropColumn('slug_entreprise');
         });
     }
 }

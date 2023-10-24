@@ -31,8 +31,8 @@ class User extends Authenticatable
         'fonction',
         'description',
         'password',
-        'pays_id'
-
+        'pays_id',
+        'slug_user'
     ];
 
     use Sluggable;
@@ -40,7 +40,7 @@ class User extends Authenticatable
     public function Sluggable():array
     {
         return[
-            'slug' =>
+            'slug_user' =>
             [
                 'source' => 'name'
             ]

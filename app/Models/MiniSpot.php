@@ -9,10 +9,8 @@ class MiniSpot extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['admin_id', 'video', 'image', 'pays_id'];
-
     public function admin()
     {
-        return $this->hasMany(Admin::class);
+        return $this->belongsTo(Admin::class);
     }
 }

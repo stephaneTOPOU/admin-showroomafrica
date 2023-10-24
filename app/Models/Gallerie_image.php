@@ -9,10 +9,8 @@ class Gallerie_image extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['entreprise_id','galerie_image'];
-
     public function entreprise()
     {
-        return $this->hasMany(Entreprises::class);
+        return $this->belongsTo(Entreprises::class);
     }
 }

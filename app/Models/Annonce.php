@@ -15,7 +15,7 @@ class Annonce extends Model
     public function Sluggable():array
     {
         return[
-            'slug' =>
+            'slug_annonce' =>
             [
                 'source' => 'titre'
             ]
@@ -23,6 +23,6 @@ class Annonce extends Model
     }
     
     public $fillable = [
-        'titre', 'text1', 'image1', 'text2', 'image2', 'text3', 'image3', 'text4', 'image4', 'text5', 'image5', 'text6', 'image6'
+        'titre', 'text1', 'image1', 'text2', 'image2', 'text3', 'image3', 'text4', 'image4', 'text5', 'image5', 'text6', 'image6','slug_annonce'
     ];
 }

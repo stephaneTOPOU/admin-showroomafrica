@@ -9,10 +9,8 @@ class SliderRechercheLateral extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['admin_id','image', 'pays_id'];
-
     public function admin()
     {
-        return $this->hasMany(Admin::class);
+        return $this->belongsTo(Admin::class);
     }
 }

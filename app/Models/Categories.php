@@ -2,30 +2,32 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Categories extends Model
 {
     use HasFactory;
+
+    public $fillable = [
+        'libelle', 'pays_id', 'slug_categorie'
+    ];
 
     use Sluggable;
 
     public function Sluggable():array
     {
         return[
-            'slug' =>
+            'slug_categorie' =>
             [
                 'source' => 'libelle'
             ]
         ];
     }
 
-    protected $fillable = ['libelle', 'pays_id'];
-
     public function sousCategorie()
     {
-        return $this->belongsTo(SousCategories::class);
+        return $this->hasMany(SousCategories::class);
     }
 }

@@ -14,7 +14,7 @@ class SlugBlog extends Migration
     public function up()
     {
         Schema::table('blogs', function (Blueprint $table) {
-            $table->string('slug')->nullable()->unique();
+            $table->string('slug_blog')->nullable()->unique();
         });
     }
 
@@ -26,7 +26,7 @@ class SlugBlog extends Migration
     public function down()
     {
         Schema::table('blogs', function (Blueprint $table) {
-            $table->dropColumn('slug');
+            $table->dropColumn('slug_blog');
         });
     }
 }

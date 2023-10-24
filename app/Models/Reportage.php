@@ -9,10 +9,8 @@ class Reportage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['admin_id', 'video', 'pays_id'];
-
     public function admin()
     {
-        return $this->hasMany(Admin::class);
+        return $this->belongsTo(Admin::class);
     }
 }
