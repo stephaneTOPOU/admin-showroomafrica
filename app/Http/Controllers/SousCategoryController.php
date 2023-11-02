@@ -54,7 +54,10 @@ class SousCategoryController extends Controller
         ]);
 
         try {
-            SousCategories::create($data);
+            $data = new SousCategories();
+            $data->categorie_id = $request->categorie_id;
+            $data->libelle = $request->libelle;
+            $data->save();
             return redirect()->back()->with('success','Sous - catégorie Ajouté avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
@@ -97,14 +100,17 @@ class SousCategoryController extends Controller
      */
     public function update(Request $request, $souscategorie)
     {
-        $souscategories = SousCategories::find($souscategorie);
+
         $data = $request->validate([
             'libelle'=>'required|string',
             'categorie_id'=>'required|integer',
         ]);
 
         try {
-            $souscategories->update($data);
+            $data = SousCategories::find($souscategorie);
+            $data->categorie_id = $request->categorie_id;
+            $data->libelle = $request->libelle;
+            $data->update();
             return redirect()->back()->with('success','Sous - catégorie mise à jour avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
