@@ -19,7 +19,7 @@ class MiniSpotController extends Controller
      */
     public function index()
     {
-        $minspots = DB::table('Pays')
+        $minspots = DB::table('pays')
             ->join('mini_spots', 'pays.id', '=', 'mini_spots.pays_id')
             ->join('admins', 'admins.id', '=', 'mini_spots.admin_id')
             ->select('*', 'admins.name as admin', 'mini_spots.id as identifiant')
@@ -34,7 +34,8 @@ class MiniSpotController extends Controller
      */
     public function create()
     {
-        //
+        $pays = Pays::all();
+        return view('mini-spot.add', compact('pays'));
     }
 
     /**
@@ -45,7 +46,70 @@ class MiniSpotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'video'=>'required|file',
+            'pays_id'=>'required|integer'
+        ]);
+
+        try {
+            $data = new MiniSpot();
+
+            $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
+            
+            // if ($request->video) {
+            //     $filename = time() . rand(1, 50) . '.' . $request->video->extension();
+            //     $video = $request->file('video')->storeAs('MiniSpot', $filename, 'public');
+            //     $data->video = $video;
+            // }
+
+            if ($request->hasFile('video') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('video')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('video')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp19')->put($filenametostore, fopen($request->file('video'), 'r+'));
+
+                //Upload name to database
+                $data->video = $filenametostore;
+            }
+
+            if ($request->hasFile('image') ) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('image')->getClientOriginalName();
+        
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        
+                //get file extension
+                $extension = $request->file('image')->getClientOriginalExtension();
+        
+                //filename to store
+                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+                //Upload File to external server
+                Storage::disk('ftp20')->put($filenametostore, fopen($request->file('image'), 'r+'));
+
+                //Upload name to database
+                $data->image = $filenametostore;
+            }
+
+            $data->save();
+            return redirect()->back()->with('success', 'minispot ajouté avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 
     /**
@@ -141,7 +205,7 @@ class MiniSpotController extends Controller
             }
 
             $data->update();
-            return redirect()->back()->with('success', 'Vidéo mise à jour avec succès');
+            return redirect()->back()->with('success', 'minispot mis à jour avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

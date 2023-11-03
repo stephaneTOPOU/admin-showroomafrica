@@ -18,9 +18,9 @@
                                             <div class="col-md-10">
                                                 <h3 class="card-title">Les Mini - Spots</h3>
                                             </div>
-                                            {{-- <div class="col-md-2">
-                                                <a href="{{route('minispot.add')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
-                                            </div> --}}
+                                            <div class="col-md-2">
+                                                <a href="{{route('mini-spot.create')}}" class="btn btn-block btn-success pull-right">  Ajouter  </a>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- /.card-header -->
