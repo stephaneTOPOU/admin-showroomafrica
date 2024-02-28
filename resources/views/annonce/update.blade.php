@@ -7,6 +7,11 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
 @include('header.header5')
 <div class="wrapper">
     @include('navBar.navbar')
@@ -40,13 +45,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Premier Text</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="text1">{{old('text1')??$annonces->text1}}</textarea>
+                                                    <textarea id="summernote-1" name="text1">{{old('text1')??$annonces->text1}}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Deuxieme Text</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="text2">{{old('text2')??$annonces->text2}}</textarea>
+                                                    <textarea id="summernote-2" name="text2">{{old('text2')??$annonces->text2}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -55,7 +60,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile1">Troisieme Text</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="text3">{{old('text3')??$annonces->text3}}</textarea>
+                                                    <textarea id="summernote-3" name="text3">{{old('text3')??$annonces->text3}}</textarea>
                                                 </div>
                                             </div>
                                             
@@ -109,6 +114,7 @@
         </div>
         @include('footer.footer')
 </div>
+@include('footer.footer18')
 @include('footer.footer3')
 @include('footer.footer6')
 <script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>

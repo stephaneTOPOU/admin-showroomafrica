@@ -7,6 +7,12 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+
 @include('header.header5')
 <div class="wrapper">
     @include('navBar.navbar')
@@ -45,13 +51,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Qui sommes-nous</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="libelle">{{old('libelle')??$services->libelle}}</textarea>
+                                                    <textarea id="summernote-1" name="libelle">{{old('libelle')??$services->libelle}}</textarea>                                                    
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label >Notre mission</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="description">{{old('description')??$services->description}}</textarea>
+                                                    <textarea id="summernote-2" name="description">{{old('description')??$services->description}}</textarea>                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -60,13 +66,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile1">Notre mission (suite)</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="image1">{{old('image1')??$services->image1}}</textarea>
+                                                    <textarea id="summernote-3" name="image1">{{old('image1')??$services->image1}}</textarea>                                                    
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="exampleInputFile4">Nos objectifs</label>
-                                                    <textarea class="form-control" rows="4" placeholder="Enter ..." name="image5">{{old('image5')??$services->image5}}</textarea>
+                                                    <textarea id="summernote-4" name="image5">{{old('image5')??$services->image5}}</textarea>                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -107,6 +113,7 @@
         </div>
         @include('footer.footer')
 </div>
+@include('footer.footer18')
 @include('footer.footer3')
 @include('footer.footer6')
 <script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
