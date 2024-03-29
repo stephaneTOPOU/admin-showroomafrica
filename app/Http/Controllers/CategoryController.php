@@ -21,7 +21,11 @@ class CategoryController extends Controller
             ->join('categories', 'pays.id', '=', 'categories.pays_id')
             ->select('*', 'pays.libelle as pays', 'categories.libelle as categorie', 'categories.id as identifiant')
             ->get();
-        return view('categorie.index', compact('categories'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+        return view('categorie.index', compact('categories', 'fonctions'));
     }
 
     /**
@@ -32,7 +36,12 @@ class CategoryController extends Controller
     public function create()
     {
         $pays = Pays::all();
-        return view('categorie.add', compact('pays'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('categorie.add', compact('pays', 'fonctions'));
     }
 
     /**
@@ -44,8 +53,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'libelle'=>'required|string',
-            'pays_id'=>'required|integer'
+            'libelle' => 'required|string',
+            'pays_id' => 'required|integer'
         ]);
 
         try {
@@ -53,7 +62,7 @@ class CategoryController extends Controller
             $data->pays_id = $request->pays_id;
             $data->libelle = $request->libelle;
             $data->save();
-            return redirect()->back()->with('success','Catégorie Ajouté avec succès');
+            return redirect()->back()->with('success', 'Catégorie Ajouté avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -79,8 +88,14 @@ class CategoryController extends Controller
     public function edit($categorie)
     {
         $categories = Categories::find($categorie);
+
         $pays = Pays::all();
-        return view('categorie.update', compact('categories', 'pays'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('categorie.update', compact('categories', 'pays', 'fonctions'));
     }
 
     /**
@@ -92,10 +107,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $categorie)
     {
-        
+
         $data = $request->validate([
-            'libelle'=>'required|string',
-            'pays_id'=>'required|integer'
+            'libelle' => 'required|string',
+            'pays_id' => 'required|integer'
         ]);
 
         try {
@@ -103,7 +118,7 @@ class CategoryController extends Controller
             $data->pays_id = $request->pays_id;
             $data->libelle = $request->libelle;
             $data->update();
-            return redirect()->back()->with('success','Catégorie mise à jour avec succès');
+            return redirect()->back()->with('success', 'Catégorie mise à jour avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -120,7 +135,7 @@ class CategoryController extends Controller
         $categories = Categories::find($categorie);
         try {
             $categories->delete();
-            return redirect()->back()->with('success','Catégorie supprimée avec succès');
+            return redirect()->back()->with('success', 'Catégorie supprimée avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

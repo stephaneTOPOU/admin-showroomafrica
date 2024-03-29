@@ -18,15 +18,13 @@
                 <div class="">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Modifier le lien Youtube</h3>
+                            <h3 class="card-title">Ajouter le lien Youtube</h3>
                         </div>
                         @if (Session::has('success'))
                             <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
                         @endif
-                        <form role="form" method="POST" action="{{ route('reportage.update', $reportages->id) }}"
-                            enctype="multipart/form-data">
+                        <form role="form" method="POST" action="{{ route('reportage.store') }}" enctype="multipart/form-data">
                             @csrf
-                            @method('PUT')
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -35,8 +33,7 @@
                                             <select class="form-control select2" style="width: 100%;" name="pays_id">
                                                 <option selected="selected">Pays</option>
                                                 @foreach ($pays as $pay)
-                                                    <option value="{{ $pay->id }}"
-                                                        @if ($pay->id == $reportages->pays_id) selected @endif>
+                                                    <option value="{{ $pay->id }}">
                                                         {{ $pay->libelle }}</option>
                                                 @endforeach
                                             </select>
@@ -46,22 +43,20 @@
                                         <div class="form-group">
                                             <label>Lien Youtube</label>
                                             <input type="text" class="form-control"
-                                                placeholder="Entrez le lien youtube" name="video"
-                                                value="{{ old('video') ?? $reportages->video }}">
+                                                placeholder="Entrez le lien youtube" name="video">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Titre Youtube</label>
                                             <input type="text" class="form-control"
-                                                placeholder="Entrez le titre youtube" name="libelle"
-                                                value="{{ old('libelle') ?? $reportages->libelle }}">
+                                                placeholder="Entrez le titre youtube" name="libelle">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Modifier</button>
+                                    <button type="submit" class="btn btn-primary">Ajouter</button>
                                 </div>
                             </div>
                         </form>

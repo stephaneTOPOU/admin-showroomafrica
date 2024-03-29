@@ -19,11 +19,16 @@ class ReportageController extends Controller
     public function index()
     {
         $reportages = DB::table('pays')
-        ->join('reportages', 'pays.id', '=', 'reportages.pays_id')
-        ->join('admins', 'admins.id', '=', 'reportages.admin_id')
-        ->select('*', 'admins.name as admin', 'reportages.id as identifiant','pays.libelle as pays')
-        ->get();
-        return view('reportage.index', compact('reportages'));
+            ->join('reportages', 'pays.id', '=', 'reportages.pays_id')
+            ->join('admins', 'admins.id', '=', 'reportages.admin_id')
+            ->select('*', 'admins.name as admin', 'reportages.id as identifiant', 'pays.libelle as pays')
+            ->get();
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('reportage.index', compact('reportages', 'fonctions'));
     }
 
     /**
@@ -33,7 +38,13 @@ class ReportageController extends Controller
      */
     public function create()
     {
-        //
+        $pays = Pays::all();
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('reportage.add', compact('pays', 'fonctions'));
     }
 
     /**
@@ -44,7 +55,24 @@ class ReportageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'video' => 'required|string',
+            'pays_id' => 'required|integer'
+        ]);
+
+        try {
+            $data = new Reportage();
+
+            $data->admin_id =  Auth::user()->id;
+            $data->pays_id = $request->pays_id;
+            $data->video = $request->video;
+            $data->libelle = $request->libelle;
+
+            $data->save();
+            return redirect()->back()->with('success', 'Lien YouTube ajouté avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 
     /**
@@ -68,7 +96,12 @@ class ReportageController extends Controller
     {
         $reportages = Reportage::find($reportage);
         $pays = Pays::all();
-        return view('reportage.update',compact('reportages', 'pays'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('reportage.update', compact('reportages', 'pays', 'fonctions'));
     }
 
     /**
@@ -81,8 +114,8 @@ class ReportageController extends Controller
     public function update(Request $request, $reportage)
     {
         $data = $request->validate([
-            'video'=>'required|string',
-            'pays_id'=>'required|integer'
+            'video' => 'required|string',
+            'pays_id' => 'required|integer'
         ]);
 
         try {
@@ -91,9 +124,10 @@ class ReportageController extends Controller
             $data->admin_id =  Auth::user()->id;
             $data->pays_id = $request->pays_id;
             $data->video = $request->video;
+            $data->libelle = $request->libelle;
 
             $data->update();
-            return redirect()->back()->with('success', 'Lien mis à jour avec succès');
+            return redirect()->back()->with('success', 'Lien YouTube mis à jour avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pays;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PaysController extends Controller
+class UserValideController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +17,17 @@ class PaysController extends Controller
      */
     public function index()
     {
-        $pays = Pays::all();
+        $users = DB::table('pays')
+            ->join('users', 'pays.id', '=', 'users.pays_id')
+            ->select('*', 'users.id as identifiant', 'pays.libelle as pays')
+            ->where('users.valide', 1)
+            ->get();
 
         $fonctions = DB::table('admins')
             ->where('fonction', 'admin')
             ->get();
 
-        return view('pays.index', compact('pays', 'fonctions'));
+        return view('users.index', compact('users', 'fonctions'));
     }
 
     /**
@@ -32,7 +37,7 @@ class PaysController extends Controller
      */
     public function create()
     {
-        return view('pays.add');
+        //
     }
 
     /**
@@ -43,31 +48,16 @@ class PaysController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'iso'=>'required|string',
-            'libelle'=>'required|string'
-        ]);
-
-        try {
-            $data = new Pays();
-
-            $data->iso = $request->iso;
-            $data->libelle = $request->libelle;
-            
-            $data->save();
-            return redirect()->back()->with('success', 'Pays ajouté avec succès');
-        } catch (Exception $e) {
-            return redirect()->back()->with('success', $e->getMessage());
-        }
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         //
     }
@@ -75,42 +65,45 @@ class PaysController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($pay)
+    public function edit($user)
     {
-        $pays = Pays::find($pay);
+        $pays = Pays::all();
+
+        $users = User::find($user);
 
         $fonctions = DB::table('admins')
             ->where('fonction', 'admin')
             ->get();
 
-        return view('pays.update', compact('pays', 'fonctions'));
+        return view('users.update', compact('pays', 'users', 'fonctions'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $pay)
+    public function update(Request $request, $user)
     {
         $data = $request->validate([
-            'iso'=>'required|string',
-            'libelle'=>'required|string'
+            'name' => 'required|string',
         ]);
 
         try {
-            $data = Pays::find($pay);
-
-            $data->iso = $request->iso;
-            $data->libelle = $request->libelle;
             
+            $data = User::find($user);
+            if ($request->valide) {
+                $data->valide = $request->valide;
+            } else {
+                $data->valide = 0;
+            }
             $data->update();
-            return redirect()->back()->with('success', 'Pays ajouté avec succès');
+            return redirect()->back()->with('success', 'Utilisateur validé avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -119,17 +112,11 @@ class PaysController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($pay)
+    public function destroy(User $user)
     {
-        $pays = Pays::find($pay);
-        try {
-            $pays->delete();
-            return redirect()->back()->with('success', 'Pays supprimée avec succès');
-        } catch (Exception $e) {
-            return redirect()->back()->with('success', $e->getMessage());
-        }
+        //
     }
 }

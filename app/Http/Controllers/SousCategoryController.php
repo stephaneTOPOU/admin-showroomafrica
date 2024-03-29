@@ -20,10 +20,15 @@ class SousCategoryController extends Controller
         $sousCategories = DB::table('pays')
             ->join('categories', 'pays.id', '=', 'categories.pays_id')
             ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
-            ->select('*','pays.libelle as nom', 'sous_categories.id as identifiant', 'categories.libelle as categorie')
+            ->select('*', 'pays.libelle as nom', 'sous_categories.id as identifiant', 'categories.libelle as categorie')
             ->orderBy('sous_categories.id', 'desc')
             ->get();
-        return view('sub-categorie.index', compact('sousCategories'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('sub-categorie.index', compact('sousCategories', 'fonctions'));
     }
 
     /**
@@ -35,9 +40,14 @@ class SousCategoryController extends Controller
     {
         $categories = DB::table('pays')
             ->join('categories', 'pays.id', '=', 'categories.pays_id')
-            ->select('*','pays.libelle as nom')
+            ->select('*', 'pays.libelle as nom')
             ->get();
-        return view('sub-categorie.add', compact('categories'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('sub-categorie.add', compact('categories', 'fonctions'));
     }
 
     /**
@@ -49,8 +59,8 @@ class SousCategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'libelle'=>'required|string',
-            'categorie_id'=>'required|integer',
+            'libelle' => 'required|string',
+            'categorie_id' => 'required|integer',
         ]);
 
         try {
@@ -58,7 +68,7 @@ class SousCategoryController extends Controller
             $data->categorie_id = $request->categorie_id;
             $data->libelle = $request->libelle;
             $data->save();
-            return redirect()->back()->with('success','Sous - catégorie Ajouté avec succès');
+            return redirect()->back()->with('success', 'Sous - catégorie Ajouté avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -86,9 +96,14 @@ class SousCategoryController extends Controller
         $souscategories = SousCategories::find($souscategorie);
         $categories = DB::table('pays')
             ->join('categories', 'pays.id', '=', 'categories.pays_id')
-            ->select('*','pays.libelle as nom')
+            ->select('*', 'pays.libelle as nom')
             ->get();
-        return view('sub-categorie.update', compact('categories', 'souscategories'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('sub-categorie.update', compact('categories', 'souscategories', 'fonctions'));
     }
 
     /**
@@ -102,8 +117,8 @@ class SousCategoryController extends Controller
     {
 
         $data = $request->validate([
-            'libelle'=>'required|string',
-            'categorie_id'=>'required|integer',
+            'libelle' => 'required|string',
+            'categorie_id' => 'required|integer',
         ]);
 
         try {
@@ -111,7 +126,7 @@ class SousCategoryController extends Controller
             $data->categorie_id = $request->categorie_id;
             $data->libelle = $request->libelle;
             $data->update();
-            return redirect()->back()->with('success','Sous - catégorie mise à jour avec succès');
+            return redirect()->back()->with('success', 'Sous - catégorie mise à jour avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -128,7 +143,7 @@ class SousCategoryController extends Controller
         $souscategories = SousCategories::find($souscategorie);
         try {
             $souscategories->delete();
-            return redirect()->back()->with('success','Sous - catégorie supprimée avec succès');
+            return redirect()->back()->with('success', 'Sous - catégorie supprimée avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

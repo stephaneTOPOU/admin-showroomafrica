@@ -21,7 +21,12 @@ class VilleController extends Controller
             ->join('villes', 'pays.id', '=', 'villes.pays_id')
             ->select('*', 'villes.id as identifiant', 'villes.libelle as ville')
             ->get();
-        return view('ville.index', compact('villes'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('ville.index', compact('villes', 'fonctions'));
     }
 
     /**
@@ -32,7 +37,12 @@ class VilleController extends Controller
     public function create()
     {
         $pays = Pays::all();
-        return view('ville.add', compact('pays'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('ville.add', compact('pays', 'fonctions'));
     }
 
     /**
@@ -84,7 +94,11 @@ class VilleController extends Controller
         $villes = Ville::find($ville);
         $pays = Pays::all();
 
-        return view('ville.update', compact('pays', 'villes'));
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('ville.update', compact('pays', 'villes', 'fonctions'));
     }
 
     /**

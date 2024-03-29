@@ -25,7 +25,12 @@ class PartenaireController extends Controller
             ->join('partenaires', 'entreprises.id', '=', 'partenaires.entreprise_id')
             ->select('*', 'entreprises.nom as entreprise', 'partenaires.id as identifiant', 'pays.libelle as pays')
             ->get();
-        return view('partenaire.index', compact('partenaires'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('partenaire.index', compact('partenaires', 'fonctions'));
     }
 
     /**
@@ -41,7 +46,11 @@ class PartenaireController extends Controller
             ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
             ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
             ->get();
-        return view('partenaire.add', compact('entreprises'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+        return view('partenaire.add', compact('entreprises', 'fonctions'));
     }
 
     /**
@@ -60,20 +69,20 @@ class PartenaireController extends Controller
         try {
             $data = new Partenaire();
             $data->entreprise_id = $request->entreprise_id;
-            
-            if ($request->hasFile('image') ) {
+
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp24')->put($filenametostore, fopen($request->file('image'), 'r+'));
@@ -116,8 +125,12 @@ class PartenaireController extends Controller
             ->get();
 
         $partenaires = Partenaire::find($partenaire);
-        
-        return view('partenaire.update', compact('entreprises','partenaires'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('partenaire.update', compact('entreprises', 'partenaires', 'fonctions'));
     }
 
     /**
@@ -136,20 +149,20 @@ class PartenaireController extends Controller
         try {
             $data = Partenaire::find($partenaire);
             $data->entreprise_id = $request->entreprise_id;
-            
-            if ($request->hasFile('image') ) {
+
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp24')->put($filenametostore, fopen($request->file('image'), 'r+'));

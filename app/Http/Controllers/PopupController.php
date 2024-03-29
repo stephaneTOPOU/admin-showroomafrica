@@ -25,7 +25,11 @@ class PopupController extends Controller
             ->select('*', 'pop_ups.id as identifiant', 'admins.name as admin')
             ->get();
 
-        return view('popup.index', compact('popups'));
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('popup.index', compact('popups', 'fonctions'));
     }
 
     /**
@@ -36,7 +40,12 @@ class PopupController extends Controller
     public function create()
     {
         $pays = Pays::all();
-        return view('popup.add', compact('pays'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('popup.add', compact('pays', 'fonctions'));
     }
 
     /**
@@ -48,8 +57,8 @@ class PopupController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'pays_id'=>'required|integer',
-            'image'=>'required|file'
+            'pays_id' => 'required|integer',
+            'image' => 'required|file'
         ]);
 
         try {
@@ -57,27 +66,27 @@ class PopupController extends Controller
 
             $data->admin_id =  Auth::user()->id;
             $data->pays_id = $request->pays_id;
-            
+
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
             //     $image = $request->file('image')->storeAs('Popup', $filename, 'public');
             //     $data->image = $image;
             // }
 
-            if ($request->hasFile('image') ) {
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
-        
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
                 //Upload File to external server
                 Storage::disk('ftp28')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
@@ -111,10 +120,15 @@ class PopupController extends Controller
      */
     public function edit($popup)
     {
-        
+
         $popups = PopUp::find($popup);
         $pays = Pays::all();
-        return view('popup.update', compact('popups', 'pays'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('popup.update', compact('popups', 'pays', 'fonctions'));
     }
 
     /**
@@ -127,7 +141,7 @@ class PopupController extends Controller
     public function update(Request $request, $popup)
     {
         $data = $request->validate([
-            'pays_id'=>'required|integer',
+            'pays_id' => 'required|integer',
         ]);
 
         try {
@@ -135,27 +149,27 @@ class PopupController extends Controller
 
             $data->admin_id =  Auth::user()->id;
             $data->pays_id = $request->pays_id;
-            
+
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
             //     $image = $request->file('image')->storeAs('Popup', $filename, 'public');
             //     $data->image = $image;
             // }
 
-            if ($request->hasFile('image') ) {
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
-        
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
                 //Upload File to external server
                 Storage::disk('ftp28')->put($filenametostore, fopen($request->file('image'), 'r+'));
 
@@ -180,7 +194,7 @@ class PopupController extends Controller
     {
         try {
             $data = PopUp::find($popup);
-            $data -> delete();
+            $data->delete();
             return redirect()->back()->with('success', 'Popup supprimé avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());

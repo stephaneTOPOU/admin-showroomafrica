@@ -20,7 +20,12 @@ class DevisController extends Controller
             ->join('devis', 'sous_categories.id', '=', 'devis.souscategorie_id')
             ->select('*', 'devis.id as identifiant')
             ->get();
-        return view('devis.index', compact('devis'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('devis.index', compact('devis', 'fonctions'));
     }
 
     /**
@@ -53,7 +58,12 @@ class DevisController extends Controller
     public function show($devis)
     {
         $devis = Devis::find($devis);
-        return view('devis.front', compact('devis'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('devis.front', compact('devis', 'fonctions'));
     }
 
     /**
@@ -90,7 +100,7 @@ class DevisController extends Controller
         $devis = Devis::find($devis);
         try {
             $devis->delete();
-            return redirect()->back()->with('success','Devis supprimé avec succès');
+            return redirect()->back()->with('success', 'Devis supprimé avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }

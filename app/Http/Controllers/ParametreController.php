@@ -19,10 +19,14 @@ class ParametreController extends Controller
     public function index()
     {
         $parametres = DB::table('pays')
-        ->join('parametres', 'pays.id', '=', 'parametres.pays_id')
-        ->select('*', 'parametres.id as identifiant')
-        ->get();
-        return view('parametre.index', compact('parametres'));
+            ->join('parametres', 'pays.id', '=', 'parametres.pays_id')
+            ->select('*', 'parametres.id as identifiant')
+            ->get();
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+        return view('parametre.index', compact('parametres', 'fonctions'));
     }
 
     /**
@@ -34,7 +38,12 @@ class ParametreController extends Controller
     {
         $pays = Pays::all();
         $parametres = Parametre::all();
-        return view('parametre.add', compact('pays', 'parametres'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('parametre.add', compact('pays', 'parametres', 'fonctions'));
     }
 
     /**
@@ -104,7 +113,12 @@ class ParametreController extends Controller
     {
         $parametres = Parametre::find($parametre);
         $pays = Pays::all();
-        return view('parametre.update',compact('parametres', 'pays'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('parametre.update',compact('parametres', 'pays', 'fonctions'));
     }
 
     /**

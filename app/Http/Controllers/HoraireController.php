@@ -24,7 +24,12 @@ class HoraireController extends Controller
             ->join('horaires', 'entreprises.id', '=', 'horaires.entreprise_id')
             ->select('*', 'entreprises.nom as entreprise', 'horaires.id as identifiant', 'pays.libelle as pays')
             ->get();
-        return view('horaire.index', compact('horaires'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('horaire.index', compact('horaires', 'fonctions'));
     }
 
     /**
@@ -41,7 +46,11 @@ class HoraireController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
             ->get();
 
-        return view('horaire.add', compact('entreprises'));
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('horaire.add', compact('entreprises', 'fonctions'));
     }
 
     /**
@@ -63,7 +72,7 @@ class HoraireController extends Controller
             $data->entreprise_id = $request->entreprise_id;
             $data->jour = $request->jour;
             $data->h_ouverture = $request->h_ouverture;
-            
+
             $data->save();
             return redirect()->back()->with('success', 'Horaire Ajoutée avec succès');
         } catch (Exception $e) {
@@ -99,7 +108,11 @@ class HoraireController extends Controller
 
         $horaires = Horaire::find($horaire);
 
-        return view('horaire.update', compact('horaires', 'entreprises'));
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('horaire.update', compact('horaires', 'entreprises', 'fonctions'));
     }
 
     /**
@@ -122,7 +135,7 @@ class HoraireController extends Controller
             $data->entreprise_id = $request->entreprise_id;
             $data->jour = $request->jour;
             $data->h_ouverture = $request->h_ouverture;
-            
+
             $data->update();
             return redirect()->back()->with('success', 'Horaire mis à jour avec succès');
         } catch (Exception $e) {

@@ -20,12 +20,16 @@ class SliderLateralHautController extends Controller
     public function index()
     {
         $sliders = DB::table('pays')
-        ->join('slider_laterals', 'pays.id', '=', 'slider_laterals.pays_id')
-        ->join('admins', 'admins.id', '=', 'slider_laterals.admin_id')
-        ->select('*', 'admins.name as admin', 'slider_laterals.id as identifiant')
-        ->get();
+            ->join('slider_laterals', 'pays.id', '=', 'slider_laterals.pays_id')
+            ->join('admins', 'admins.id', '=', 'slider_laterals.admin_id')
+            ->select('*', 'admins.name as admin', 'slider_laterals.id as identifiant')
+            ->get();
 
-        return view('slider-lateral-haut.index', compact('sliders'));
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('slider-lateral-haut.index', compact('sliders', 'fonctions'));
     }
 
     /**
@@ -36,7 +40,12 @@ class SliderLateralHautController extends Controller
     public function create()
     {
         $pays = Pays::all();
-        return view('slider-lateral-haut.add', compact('pays'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('slider-lateral-haut.add', compact('pays', 'fonctions'));
     }
 
     /**
@@ -48,8 +57,8 @@ class SliderLateralHautController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024',
-            'pays_id'=>'required|integer'
+            'image' => 'required|file|max:1024',
+            'pays_id' => 'required|integer'
         ]);
 
         try {
@@ -57,26 +66,26 @@ class SliderLateralHautController extends Controller
 
             $data->admin_id =  Auth::user()->id;
             $data->pays_id = $request->pays_id;
-            
+
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
             //     $img = $request->file('image')->storeAs('sliders', $filename, 'public');
             //     $data->image = $img;
             // }
 
-            if ($request->hasFile('image') ) {
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp17')->put($filenametostore, fopen($request->file('image'), 'r+'));
@@ -113,7 +122,12 @@ class SliderLateralHautController extends Controller
     {
         $pays = Pays::all();
         $sliders = SliderLateral::find($slider);
-        return view('slider-lateral-haut.update', compact('sliders', 'pays'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('slider-lateral-haut.update', compact('sliders', 'pays', 'fonctions'));
     }
 
     /**
@@ -126,8 +140,8 @@ class SliderLateralHautController extends Controller
     public function update(Request $request, $slider)
     {
         $data = $request->validate([
-            'image'=>'required|file|max:1024',
-            'pays_id'=>'required|integer'
+            'image' => 'required|file|max:1024',
+            'pays_id' => 'required|integer'
         ]);
 
         try {
@@ -135,26 +149,26 @@ class SliderLateralHautController extends Controller
 
             $data->admin_id =  Auth::user()->id;
             $data->pays_id = $request->pays_id;
-            
+
             // if ($request->image) {
             //     $filename = time() . rand(1, 50) . '.' . $request->image->extension();
             //     $img = $request->file('image')->storeAs('sliders', $filename, 'public');
             //     $data->image = $img;
             // }
 
-            if ($request->hasFile('image') ) {
+            if ($request->hasFile('image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp17')->put($filenametostore, fopen($request->file('image'), 'r+'));

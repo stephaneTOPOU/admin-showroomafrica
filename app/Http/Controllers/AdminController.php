@@ -19,10 +19,14 @@ class AdminController extends Controller
     public function index()
     {
         $admins = DB::table('pays')
-        ->join('admins', 'pays.id', '=', 'admins.pays_id')
-        ->select('*', 'admins.id as identifiant')
-        ->get();
-        return view('admin.index', compact('admins'));
+            ->join('admins', 'pays.id', '=', 'admins.pays_id')
+            ->select('*', 'admins.id as identifiant')
+            ->get();
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+        return view('admin.index', compact('admins', 'fonctions'));
     }
 
     /**
@@ -33,7 +37,11 @@ class AdminController extends Controller
     public function create()
     {
         $pays = Pays::all();
-        return view('admin.add', compact('pays'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+        return view('admin.add', compact('pays', 'fonctions'));
     }
 
     /**
@@ -45,11 +53,11 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'=>'required|string',
-            'prenoms'=>'required|string',
-            'email'=>'required|email|string',
-            'password'=>'required|string',
-            'pays_id'=>'required|integer'
+            'name' => 'required|string',
+            'prenoms' => 'required|string',
+            'email' => 'required|email|string',
+            'password' => 'required|string',
+            'pays_id' => 'required|integer'
         ]);
 
         try {
@@ -62,7 +70,7 @@ class AdminController extends Controller
             $data->password = bcrypt($request->password);
             $data->pays_id = $request->pays_id;
             $data->save();
-            return redirect()->back()->with('success','Admin Ajouté avec succès');
+            return redirect()->back()->with('success', 'Admin Ajouté avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -87,9 +95,13 @@ class AdminController extends Controller
      */
     public function edit(Admin $admin)
     {
-        //dd($admin);
         $pays = Pays::all();
-        return view('admin.update', compact('admin', 'pays'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('admin.update', compact('admin', 'pays', 'fonctions'));
     }
 
     /**
@@ -102,28 +114,23 @@ class AdminController extends Controller
     public function update(Request $request, $admin)
     {
         $data = $request->validate([
-            'name'=>'required|string',
-            'prenoms'=>'required|string',
-            'email'=>'required|email|string',
-            'password'=>'required|string',
-            'pays_id'=>'required|integer'
+            'name' => 'required|string',
+            'prenoms' => 'required|string',
+            'email' => 'required|email|string',
+            'password' => 'string',
+            'pays_id' => 'required|integer'
         ]);
 
         try {
+            $d['password'] = bcrypt($data['password']);
             $data = Admin::find($admin);
-            if (Hash::check(request('password'), $data->password)) {
-                //$data['password'] = bcrypt($request->new_password);
-                //$admin->update($data);
-                $data->name = $request->name;
-                $data->prenoms = $request->prenoms;
-                $data->email = $request->email;
-                $data->password = bcrypt($request->password);;
-                $data->pays_id = $request->pays_id;
-                $data->update();
-                return redirect()->back()->with('success','Admin mise à jour avec succès');
-            } else {
-                return redirect()->back()->with('success','Mot de pass ne correspondent pas!!!');
-            }
+            $data->name = $request->name;
+            $data->prenoms = $request->prenoms;
+            $data->email = $request->email;
+            $data->password = $d['password'];
+            $data->pays_id = $request->pays_id;
+            $data->update();
+            return redirect()->back()->with('success', 'Admin mise à jour avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
@@ -139,10 +146,9 @@ class AdminController extends Controller
     {
         try {
             $admin->delete();
-            return redirect()->back()->with('success','Admin supprimé avec succès');
+            return redirect()->back()->with('success', 'Admin supprimé avec succès');
         } catch (Exception $e) {
             return redirect()->back()->with('success', $e->getMessage());
         }
-        
     }
 }

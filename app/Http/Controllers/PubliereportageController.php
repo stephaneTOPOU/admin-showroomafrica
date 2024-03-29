@@ -15,10 +15,14 @@ class PubliereportageController extends Controller
     public function index()
     {
         $entreprises = DB::table('entreprises')
-        ->where('a_publireportage', 1)
-        ->select('*')
-        ->get();
-        return view('entreprise.index', compact('entreprises'));
+            ->where('a_publireportage', 1)
+            ->select('*')
+            ->get();
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+        return view('entreprise.index', compact('entreprises', 'fonctions'));
     }
 
     /**

@@ -25,7 +25,12 @@ class ServiceImageController extends Controller
             ->join('service_images', 'services.id', '=', 'service_images.service_id')
             ->select('*', 'entreprises.nom as entreprise', 'service_images.id as identifiant', 'pays.libelle as pays')
             ->get();
-        return view('service-image.index', compact('images'));
+
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('service-image.index', compact('images', 'fonctions'));
     }
 
     /**
@@ -43,7 +48,11 @@ class ServiceImageController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant', 'pays.libelle as pays')
             ->get();
 
-        return view('service-image.add', compact('services'));
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('service-image.add', compact('services', 'fonctions'));
     }
 
     /**
@@ -69,19 +78,19 @@ class ServiceImageController extends Controller
             //     $data->service_image = $img;
             // }
 
-            if ($request->hasFile('service_image') ) {
+            if ($request->hasFile('service_image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('service_image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('service_image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp15')->put($filenametostore, fopen($request->file('service_image'), 'r+'));
@@ -119,14 +128,18 @@ class ServiceImageController extends Controller
         $images = ServiceImage::find($image);
 
         $services = DB::table('pays')
-        ->join('categories', 'pays.id', '=', 'categories.pays_id')
-        ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
-        ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
-        ->join('services', 'entreprises.id', '=', 'services.entreprise_id')
-        ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant', 'pays.libelle as pays')
-        ->get();
+            ->join('categories', 'pays.id', '=', 'categories.pays_id')
+            ->join('sous_categories', 'sous_categories.categorie_id', '=', 'categories.id')
+            ->join('entreprises', 'entreprises.souscategorie_id', '=', 'sous_categories.id')
+            ->join('services', 'entreprises.id', '=', 'services.entreprise_id')
+            ->select('*', 'entreprises.nom as entreprise', 'services.id as identifiant', 'pays.libelle as pays')
+            ->get();
 
-        return view('service-image.update', compact('services','images'));
+        $fonctions = DB::table('admins')
+            ->where('fonction', 'admin')
+            ->get();
+
+        return view('service-image.update', compact('services', 'images', 'fonctions'));
     }
 
     /**
@@ -147,19 +160,19 @@ class ServiceImageController extends Controller
             $data->service_id = $request->service_id;
             $data->description = $request->description;
 
-            if ($request->hasFile('service_image') ) {
+            if ($request->hasFile('service_image')) {
 
                 //get filename with extension
                 $filenamewithextension = $request->file('service_image')->getClientOriginalName();
-        
+
                 //get filename without extension
                 $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-        
+
                 //get file extension
                 $extension = $request->file('service_image')->getClientOriginalExtension();
-        
+
                 //filename to store
-                $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 //Upload File to external server
                 Storage::disk('ftp15')->put($filenametostore, fopen($request->file('service_image'), 'r+'));

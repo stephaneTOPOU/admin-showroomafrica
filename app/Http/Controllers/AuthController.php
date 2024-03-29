@@ -8,28 +8,30 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function login(){
+    public function login()
+    {
         return view('auth.login');
     }
-    public function authenticate(Request $request,Admin $admin){
-        $credentials = $request->only('email','password'); 
+    public function authenticate(Request $request, Admin $admin)
+    {
+        $credentials = $request->only('email', 'password');
         $login = $request->email;
         $request->validate([
-            'email'=>'required|email',
-            'password'=>'required'
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
-        if(Admin::where('email',$login)->count() > 0 ) {
+        if (Admin::where('email', $login)->count() > 0) {
 
-            if(Auth::attempt($credentials)){
+            if (Auth::attempt($credentials)) {
                 return redirect()->route('home');
             }
-            return redirect()->back()->with('success',"Les identifiants ne correspondent pas!!!");
-        }else{
-            return redirect()->back()->with('success',"Les identifiants ne correspondent pas!!!!!");
+            return redirect()->back()->with('success', "Les identifiants ne correspondent pas!!!");
+        } else {
+            return redirect()->back()->with('success', "Les identifiants ne correspondent pas!!!!!");
         }
-
     }
-    public function logout(){
+    public function logout()
+    {
         auth()->logout();
         return redirect()->route('login');
     }

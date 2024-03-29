@@ -16,12 +16,12 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-10">
-                                        <h3 class="card-title">Tous les Entreprise</h3>
+                                        <h3 class="card-title">Utilisateurs</h3>
                                     </div>
-                                    <div class="col-md-2">
-                                        <a href="{{ route('entreprise-valide.create') }}"
+                                    {{-- <div class="col-md-2">
+                                        <a href="{{ route('user-valide.create') }}"
                                             class="btn btn-block btn-success pull-right"> Ajouter </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -34,48 +34,43 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Pays</th>
-                                            <th>Catégories</th>
-                                            <th>Sous - Catégories</th>
-                                            <th>Logo</th>
                                             <th>Nom</th>
-                                            <th>Adresse</th>
+                                            <th>Prénom</th>
+                                            <th>Email</th>
+                                            <th>Téléphone</th>
+                                            <th>Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($entreprises as $entreprise)
+                                        @foreach ($users as $user)
                                             <tr>
-                                                <td>{{ $entreprise->identifiant }}</td>
-                                                <td>{{ $entreprise->pays }}</td>
-                                                <td>{{ $entreprise->categorie }}</td>
-                                                <td>{{ $entreprise->subcat }}</td>
-                                                @if ($entreprise->logo)
-                                                    <td><img src="https://www.showroomafrica.com/assets/images/companies/logos/{{ $entreprise->logo }}"
-                                                            width="60"></td>
-                                                @else
-                                                    <td><img src="{{ asset('default.png') }} "width="60"></td>
-                                                @endif
-                                                <td>{{ $entreprise->nom }}</td>
-                                                <td>{{ $entreprise->adresse }}</td>
+                                                <td>{{ $user->identifiant }}</td>
+                                                <td>{{ $user->pays }}</td>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->prenoms }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->telephone1 }}</td>
+                                                <td>{{ $user->created_at }}</td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <a href="{{ route('entreprise-valide.edit', $entreprise->identifiant) }}"
+                                                        <a href="{{ route('user-valide.edit', $user->identifiant) }}"
                                                             class="btn btn-default">
                                                             <i class="fas fa-edit"></i> Modifier
                                                         </a>
                                                     </div>
-                                                    {{-- <form method="POST" action="{{ route('entreprise.destroy',$entreprise->identifiant) }}" class="btn-group">
+                                                    {{-- <form method="POST" action="{{ route('admin.destroy',$user->identifiant) }}" class="btn-group">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" href="" class="btn btn-default">
+                                                                <button type="submit" href="" class="btn btn-default" onclick="confirm('Etes-vous sûr de vouloir supprimer ce produit ??? ') || event.stopImmediatePropagation()">
                                                                     <i class="fas fa-trash"></i> Supprimer
                                                                 </button>
                                                             </form> --}}
 
                                                     <button class="btn btn-default"
-                                                        onclick="deleteData({{ $entreprise->identifiant }})"
-                                                        data-id="{{ $entreprise->identifiant }}"
-                                                        data-target="#default{{ $entreprise->identifiant }}">
+                                                        onclick="deleteData({{ $user->identifiant }})"
+                                                        data-id="{{ $user->identifiant }}"
+                                                        data-target="#default{{ $user->identifiant }}">
                                                         <i class="fas fa-trash"></i> Supprimer
                                                     </button>
 
@@ -96,7 +91,7 @@
                                                             }).then((result) => {
                                                                 if (result.isConfirmed) {
 
-                                                                    let url = "{{ url('entreprise-valide') }}/" + identifiant
+                                                                    let url = "{{ url('admin') }}/" + identifiant
                                                                     window.location.reload();
 
                                                                     //console.log(url);
@@ -130,7 +125,6 @@
 
                                                         }
                                                     </script>
-
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -139,11 +133,11 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Pays</th>
-                                            <th>Catégories</th>
-                                            <th>Sous - Catégories</th>
-                                            <th>Logo</th>
                                             <th>Nom</th>
-                                            <th>Adresse</th>
+                                            <th>Prénom</th>
+                                            <th>Email</th>
+                                            <th>Téléphone</th>
+                                            <th>Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EntrepriseController;
+use App\Http\Controllers\EntrepriseNonvalideController;
 use App\Http\Controllers\GallerieController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HoraireController;
@@ -31,6 +32,8 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\DevisController;
+use App\Http\Controllers\UserNonValideController;
+use App\Http\Controllers\UserValideController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,7 +57,8 @@ Route::middleware(['auth'])->group(function () {
 Route::resource('/admin', AdminController::class);
 Route::resource('/category', CategoryController::class);
 Route::resource('/sub-category', SousCategoryController::class);
-Route::resource('/entreprise', EntrepriseController::class);
+Route::resource('/entreprise-valide', EntrepriseController::class);
+Route::resource('/entreprise-non-valide', EntrepriseNonvalideController::class);
 Route::resource('/pharmacie-garde', PharmacieController::class);
 Route::resource('/magazine', MagazineController::class);
 Route::resource('/publiereportage', PubliereportageController::class);
@@ -81,6 +85,8 @@ Route::resource('/banner', BannerController::class);
 Route::resource('/partenaire', PartenaireController::class);
 Route::resource('/devis', DevisController::class);
 Route::resource('/blog', BlogController::class);
+Route::resource('/user-valide', UserValideController::class);
+Route::resource('/user-non-valide', UserNonValideController::class);
 });
 
 Route::get('login',[App\Http\Controllers\AuthController::class,'login'])->name('login');

@@ -18,48 +18,56 @@
                 <div class="">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Modifier le lien Youtube</h3>
+                            <h3 class="card-title">Modifier un admin</h3>
                         </div>
-                        @if (Session::has('success'))
-                            <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
-                        @endif
-                        <form role="form" method="POST" action="{{ route('reportage.update', $reportages->id) }}"
-                            enctype="multipart/form-data">
+
+                        <form role="form" method="POST" action="{{ route('user-valide.update', $users->id) }}">
                             @csrf
                             @method('PUT')
+                            @if (Session::has('success'))
+                                <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
+                            @endif
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Trouver pays</label>
-                                            <select class="form-control select2" style="width: 100%;" name="pays_id">
-                                                <option selected="selected">Pays</option>
-                                                @foreach ($pays as $pay)
-                                                    <option value="{{ $pay->id }}"
-                                                        @if ($pay->id == $reportages->pays_id) selected @endif>
-                                                        {{ $pay->libelle }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Lien Youtube</label>
-                                            <input type="text" class="form-control"
-                                                placeholder="Entrez le lien youtube" name="video"
-                                                value="{{ old('video') ?? $reportages->video }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Titre Youtube</label>
-                                            <input type="text" class="form-control"
-                                                placeholder="Entrez le titre youtube" name="libelle"
-                                                value="{{ old('libelle') ?? $reportages->libelle }}">
+                                    <div class="col-md-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                                name="valide" data-key="{{ $users->id }}" value="1"
+                                                @if ($users->valide == 1) checked @endif
+                                                @if ($users->valide == 0) unchecked @endif>
+                                            <label class="form-check-label" for="exampleCheck1">Valider
+                                                l'utilisateur</label>
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="form-group">
+                                    <label>Trouver pays</label>
+                                    <select class="form-control select2" style="width: 100%;" name="pays_id">
+                                        <option selected="selected">Pays</option>
+                                        @foreach ($pays as $pay)
+                                            <option value="{{ $pay->id }}"
+                                                @if ($pay->id == $users->pays_id) selected @endif>{{ $pay->libelle }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Nom</label>
+                                            <input type="text" class="form-control"
+                                                value="{{ old('name') ?? $users->name }}" required name="name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Prénom</label>
+                                            <input type="text" class="form-control"
+                                                value="{{ old('prenoms') ?? $users->prenoms }}" required
+                                                name="prenoms">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Modifier</button>
                                 </div>
