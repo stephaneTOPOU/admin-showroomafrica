@@ -17,11 +17,7 @@
                                 <div class="row">
                                     <div class="col-md-10">
                                         <h3 class="card-title">Utilisateurs</h3>
-                                    </div>
-                                    {{-- <div class="col-md-2">
-                                        <a href="{{ route('user-valide.create') }}"
-                                            class="btn btn-block btn-success pull-right"> Ajouter </a>
-                                    </div> --}}
+                                    </div>                                    
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -59,14 +55,7 @@
                                                             <i class="fas fa-edit"></i> Modifier
                                                         </a>
                                                     </div>
-                                                    {{-- <form method="POST" action="{{ route('admin.destroy',$user->identifiant) }}" class="btn-group">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" href="" class="btn btn-default" onclick="confirm('Etes-vous sûr de vouloir supprimer ce produit ??? ') || event.stopImmediatePropagation()">
-                                                                    <i class="fas fa-trash"></i> Supprimer
-                                                                </button>
-                                                            </form> --}}
-
+                                                    
                                                     <button class="btn btn-default"
                                                         onclick="deleteData({{ $user->identifiant }})"
                                                         data-id="{{ $user->identifiant }}"
@@ -91,7 +80,7 @@
                                                             }).then((result) => {
                                                                 if (result.isConfirmed) {
 
-                                                                    let url = "{{ url('admin') }}/" + identifiant
+                                                                    let url = "{{ url('user-valide') }}/" + identifiant
                                                                     window.location.reload();
 
                                                                     //console.log(url);

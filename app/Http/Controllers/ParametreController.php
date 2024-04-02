@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Pays;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ParametreController extends Controller
 {
@@ -148,17 +149,47 @@ class ParametreController extends Controller
             $data->lieninsta = $request->lieninsta;
             $data->lienyoutube = $request->lienyoutube;
             $data->pays_id = $request->pays_id;
-            
-            if ($request->logo_header) {
-                $filename = time() . rand(1, 50) . '.' . $request->logo_header->extension();
-                $logo_header = $request->file('logo_header')->storeAs('MiniSpot', $filename, 'public');
-                $data->logo_header = $logo_header;
+
+            if ($request->hasFile('logo_header')) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('logo_header')->getClientOriginalName();
+
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+                //get file extension
+                $extension = $request->file('logo_header')->getClientOriginalExtension();
+
+                //filename to store
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
+                //Upload File to external server
+                Storage::disk('ftp20')->put($filenametostore, fopen($request->file('logo_header'), 'r+'));
+
+                //Upload name to database
+                $data->logo_header = $filenametostore;
             }
 
-            if ($request->logo_footer) {
-                $filename2 = time() . rand(1, 50) . '.' . $request->logo_footer->extension();
-                $logo_footer = $request->file('logo_footer')->storeAs('MiniSpot', $filename2, 'public');
-                $data->logo_footer = $logo_footer;
+            if ($request->hasFile('logo_footer')) {
+
+                //get filename with extension
+                $filenamewithextension = $request->file('logo_footer')->getClientOriginalName();
+
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+                //get file extension
+                $extension = $request->file('logo_footer')->getClientOriginalExtension();
+
+                //filename to store
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
+                //Upload File to external server
+                Storage::disk('ftp20')->put($filenametostore, fopen($request->file('logo_footer'), 'r+'));
+
+                //Upload name to database
+                $data->logo_footer = $filenametostore;
             }
 
             $data->update();

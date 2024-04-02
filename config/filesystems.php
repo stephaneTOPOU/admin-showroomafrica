@@ -304,6 +304,15 @@ return [
             'port'     => env('FTP_PORT'),
             'root' => env('FTP_ROOT28'),
         ],
+
+        'ftp29' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port'     => env('FTP_PORT'),
+            'root' => env('FTP_ROOT29'),
+        ],
     ],
 
     /*

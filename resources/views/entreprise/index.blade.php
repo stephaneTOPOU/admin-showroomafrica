@@ -39,6 +39,7 @@
                                             <th>Logo</th>
                                             <th>Nom</th>
                                             <th>Adresse</th>
+                                            <th>Téléphone</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -57,6 +58,7 @@
                                                 @endif
                                                 <td>{{ $entreprise->nom }}</td>
                                                 <td>{{ $entreprise->adresse }}</td>
+                                                <td>{{ $entreprise->telephone1 }}</td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <a href="{{ route('entreprise-valide.edit', $entreprise->identifiant) }}"
@@ -144,6 +146,7 @@
                                             <th>Logo</th>
                                             <th>Nom</th>
                                             <th>Adresse</th>
+                                            <th>Téléphone</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>

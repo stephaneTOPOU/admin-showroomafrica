@@ -115,8 +115,14 @@ class UserValideController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($user)
     {
-        //
+        $users = User::find($user);
+        try {
+            $users->delete();
+            return redirect()->back()->with('success', 'Utilisateur supprimé avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 }
