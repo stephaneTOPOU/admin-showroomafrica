@@ -10,6 +10,7 @@ use App\Models\Ville;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class EntrepriseController extends Controller
@@ -29,9 +30,7 @@ class EntrepriseController extends Controller
             ->where('entreprises.valide', 1)
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('entreprise.index', compact('entreprises', 'fonctions'));
     }
@@ -53,9 +52,7 @@ class EntrepriseController extends Controller
 
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('entreprise.add', compact('souscategories', 'villes', 'pays', 'fonctions'));
     }
@@ -374,9 +371,7 @@ class EntrepriseController extends Controller
 
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('entreprise.update', compact('souscategories', 'villes', 'pays', 'entreprises', 'fonctions'));
     }

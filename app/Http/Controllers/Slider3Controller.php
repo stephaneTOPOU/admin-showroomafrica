@@ -26,9 +26,7 @@ class Slider3Controller extends Controller
             ->select('*', 'admins.name as admin', 'slider3s.id as identifiant')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('slider3.index', compact('slider3s', 'fonctions'));
     }
@@ -42,9 +40,7 @@ class Slider3Controller extends Controller
     {
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('slider3.add', compact('pays', 'fonctions'));
     }
@@ -124,9 +120,7 @@ class Slider3Controller extends Controller
         $slider3s = Slider3::find($slider3);
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('slider3.update', compact('slider3s', 'pays', 'fonctions'));
     }

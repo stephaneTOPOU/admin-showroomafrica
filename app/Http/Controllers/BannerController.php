@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Pays;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,9 +24,7 @@ class BannerController extends Controller
             ->select('*', 'banners.id as identifiant')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('banner.index', compact('banners', 'fonctions'));
     }
@@ -39,9 +38,7 @@ class BannerController extends Controller
     {
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('banner.add', compact('pays', 'fonctions'));
     }
@@ -121,9 +118,7 @@ class BannerController extends Controller
         $pays = Pays::all();
         $banners = Banner::find($banner);
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('banner.update', compact('pays', 'banners', 'fonctions'));
     }

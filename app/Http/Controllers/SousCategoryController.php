@@ -6,6 +6,7 @@ use App\Models\Categories;
 use App\Models\SousCategories;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SousCategoryController extends Controller
@@ -24,9 +25,7 @@ class SousCategoryController extends Controller
             ->orderBy('sous_categories.id', 'desc')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('sub-categorie.index', compact('sousCategories', 'fonctions'));
     }
@@ -43,9 +42,7 @@ class SousCategoryController extends Controller
             ->select('*', 'pays.libelle as nom')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('sub-categorie.add', compact('categories', 'fonctions'));
     }
@@ -99,9 +96,7 @@ class SousCategoryController extends Controller
             ->select('*', 'pays.libelle as nom')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('sub-categorie.update', compact('categories', 'souscategories', 'fonctions'));
     }

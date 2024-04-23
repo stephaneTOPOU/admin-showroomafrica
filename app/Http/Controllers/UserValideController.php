@@ -6,6 +6,7 @@ use App\Models\Pays;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserValideController extends Controller
@@ -23,9 +24,7 @@ class UserValideController extends Controller
             ->where('users.valide', 1)
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('users.index', compact('users', 'fonctions'));
     }
@@ -74,9 +73,7 @@ class UserValideController extends Controller
 
         $users = User::find($user);
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('users.update', compact('pays', 'users', 'fonctions'));
     }

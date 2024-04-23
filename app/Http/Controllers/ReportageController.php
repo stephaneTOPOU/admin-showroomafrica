@@ -24,9 +24,7 @@ class ReportageController extends Controller
             ->select('*', 'admins.name as admin', 'reportages.id as identifiant', 'pays.libelle as pays')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('reportage.index', compact('reportages', 'fonctions'));
     }
@@ -40,9 +38,7 @@ class ReportageController extends Controller
     {
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('reportage.add', compact('pays', 'fonctions'));
     }
@@ -97,9 +93,7 @@ class ReportageController extends Controller
         $reportages = Reportage::find($reportage);
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('reportage.update', compact('reportages', 'pays', 'fonctions'));
     }

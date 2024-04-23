@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Categories;
 use App\Models\Entreprise;
 use App\Models\SousCategories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -25,9 +27,8 @@ class HomeController extends Controller
         $nbre_sousCat = SousCategories::count();
         $nbre_entreprise = Entreprise::count();
         $nbre_phar = Entreprise::where('est_pharmacie', 1)->count();
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        
+        $fonctions = Auth::user();
 
         return view('home.home', compact('nbre_cat', 'nbre_sousCat', 'nbre_entreprise', 'nbre_phar', 'fonctions'));
     }

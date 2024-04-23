@@ -25,9 +25,7 @@ class RechercheController extends Controller
             ->select('*', 'admins.name as admin', 'slider_recherches.id as identifiant')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('slider-recherche.index', compact('sliders', 'fonctions'));
     }
@@ -41,9 +39,7 @@ class RechercheController extends Controller
     {
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
         return view('slider-recherche.add', compact('pays', 'fonctions'));
     }
 
@@ -122,9 +118,7 @@ class RechercheController extends Controller
         $sliders = SliderRecherche::find($slider);
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('slider-recherche.update', compact('sliders', 'pays', 'fonctions'));
     }

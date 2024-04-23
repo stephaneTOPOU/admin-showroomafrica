@@ -24,9 +24,7 @@ class ParametreController extends Controller
             ->select('*', 'parametres.id as identifiant')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
         return view('parametre.index', compact('parametres', 'fonctions'));
     }
 
@@ -40,9 +38,7 @@ class ParametreController extends Controller
         $pays = Pays::all();
         $parametres = Parametre::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('parametre.add', compact('pays', 'parametres', 'fonctions'));
     }
@@ -115,9 +111,7 @@ class ParametreController extends Controller
         $parametres = Parametre::find($parametre);
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('parametre.update',compact('parametres', 'pays', 'fonctions'));
     }

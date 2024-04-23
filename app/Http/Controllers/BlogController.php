@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,9 +20,7 @@ class BlogController extends Controller
     {
         $blogs = Blog::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('blog.index', compact('blogs', 'fonctions'));
     }
@@ -33,9 +32,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('blog.add', compact('fonctions'));
     }
@@ -199,9 +196,7 @@ class BlogController extends Controller
     {
         $blogs = Blog::find($blog);
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('blog.update', compact('blogs', 'fonctions'));
     }

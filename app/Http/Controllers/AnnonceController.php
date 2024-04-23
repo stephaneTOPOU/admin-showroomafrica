@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Annonce;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,9 +20,7 @@ class AnnonceController extends Controller
     {
         $annonces = Annonce::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('annonce.index', compact('annonces', 'fonctions'));
     }
@@ -33,9 +32,7 @@ class AnnonceController extends Controller
      */
     public function create()
     {
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('annonce.add', compact('fonctions'));
     }
@@ -151,9 +148,7 @@ class AnnonceController extends Controller
     {
         $annonces = Annonce::find($annonce);
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('annonce.update', compact('annonces', 'fonctions'));
     }

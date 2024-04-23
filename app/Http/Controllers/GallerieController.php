@@ -6,6 +6,7 @@ use App\Models\Entreprise;
 use App\Models\Gallerie_image;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,9 +27,7 @@ class GallerieController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'gallerie_images.id as identifiant', 'pays.libelle as pays')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('gallerie.index', compact('galleries', 'fonctions'));
     }
@@ -47,9 +46,7 @@ class GallerieController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('gallerie.add', compact('entreprises', 'fonctions'));
     }
@@ -125,9 +122,7 @@ class GallerieController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         $galleries = Gallerie_image::find($gallerie);
 

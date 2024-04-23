@@ -25,9 +25,7 @@ class SliderLateralHautController extends Controller
             ->select('*', 'admins.name as admin', 'slider_laterals.id as identifiant')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('slider-lateral-haut.index', compact('sliders', 'fonctions'));
     }
@@ -41,9 +39,7 @@ class SliderLateralHautController extends Controller
     {
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('slider-lateral-haut.add', compact('pays', 'fonctions'));
     }
@@ -123,9 +119,7 @@ class SliderLateralHautController extends Controller
         $pays = Pays::all();
         $sliders = SliderLateral::find($slider);
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('slider-lateral-haut.update', compact('sliders', 'pays', 'fonctions'));
     }

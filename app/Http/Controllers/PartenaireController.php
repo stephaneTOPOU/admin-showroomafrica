@@ -6,6 +6,7 @@ use App\Models\Entreprise;
 use App\Models\Partenaire;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,9 +27,7 @@ class PartenaireController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'partenaires.id as identifiant', 'pays.libelle as pays')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('partenaire.index', compact('partenaires', 'fonctions'));
     }
@@ -47,9 +46,7 @@ class PartenaireController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
         return view('partenaire.add', compact('entreprises', 'fonctions'));
     }
 
@@ -126,9 +123,7 @@ class PartenaireController extends Controller
 
         $partenaires = Partenaire::find($partenaire);
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('partenaire.update', compact('entreprises', 'partenaires', 'fonctions'));
     }

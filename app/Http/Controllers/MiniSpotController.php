@@ -25,9 +25,7 @@ class MiniSpotController extends Controller
             ->select('*', 'admins.name as admin', 'mini_spots.id as identifiant')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('mini-spot.index', compact('minspots', 'fonctions'));
     }
@@ -41,9 +39,7 @@ class MiniSpotController extends Controller
     {
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('mini-spot.add', compact('pays', 'fonctions'));
     }
@@ -144,9 +140,7 @@ class MiniSpotController extends Controller
         $minspots = MiniSpot::find($minspot);
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('mini-spot.update', compact('minspots', 'pays', 'fonctions'));
     }

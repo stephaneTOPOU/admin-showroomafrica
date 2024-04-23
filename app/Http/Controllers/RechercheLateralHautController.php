@@ -26,9 +26,7 @@ class RechercheLateralHautController extends Controller
             ->select('*', 'admins.name as admin', 'slider_recherche_laterals.id as identifiant')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('slider-recherche-lateral-haut.index', compact('sliders', 'fonctions'));
     }
@@ -42,9 +40,7 @@ class RechercheLateralHautController extends Controller
     {
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('slider-recherche-lateral-haut.add', compact('pays', 'fonctions'));
     }
@@ -124,9 +120,7 @@ class RechercheLateralHautController extends Controller
         $pays = Pays::all();
         $sliders = SliderRechercheLateral::find($slider);
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('slider-recherche-lateral-haut.update', compact('sliders', 'pays', 'fonctions'));
     }

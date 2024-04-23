@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Pays;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -23,9 +24,7 @@ class AdminController extends Controller
             ->select('*', 'admins.id as identifiant')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
         return view('admin.index', compact('admins', 'fonctions'));
     }
 
@@ -38,9 +37,7 @@ class AdminController extends Controller
     {
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
         return view('admin.add', compact('pays', 'fonctions'));
     }
 
@@ -97,9 +94,7 @@ class AdminController extends Controller
     {
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('admin.update', compact('admin', 'pays', 'fonctions'));
     }

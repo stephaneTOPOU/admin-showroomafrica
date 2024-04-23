@@ -6,6 +6,7 @@ use App\Models\Entreprise;
 use App\Models\Horaire;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HoraireController extends Controller
@@ -25,9 +26,7 @@ class HoraireController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'horaires.id as identifiant', 'pays.libelle as pays')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('horaire.index', compact('horaires', 'fonctions'));
     }
@@ -46,9 +45,7 @@ class HoraireController extends Controller
             ->select('*', 'entreprises.nom as entreprise', 'pays.libelle as pays')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('horaire.add', compact('entreprises', 'fonctions'));
     }
@@ -108,9 +105,7 @@ class HoraireController extends Controller
 
         $horaires = Horaire::find($horaire);
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('horaire.update', compact('horaires', 'entreprises', 'fonctions'));
     }

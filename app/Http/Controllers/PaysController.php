@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pays;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PaysController extends Controller
@@ -18,9 +19,7 @@ class PaysController extends Controller
     {
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('pays.index', compact('pays', 'fonctions'));
     }
@@ -82,9 +81,7 @@ class PaysController extends Controller
     {
         $pays = Pays::find($pay);
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('pays.update', compact('pays', 'fonctions'));
     }

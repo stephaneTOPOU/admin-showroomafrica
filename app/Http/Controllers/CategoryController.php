@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Categories;
 use App\Models\Pays;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
@@ -22,9 +23,7 @@ class CategoryController extends Controller
             ->select('*', 'pays.libelle as pays', 'categories.libelle as categorie', 'categories.id as identifiant')
             ->get();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
         return view('categorie.index', compact('categories', 'fonctions'));
     }
 
@@ -37,9 +36,7 @@ class CategoryController extends Controller
     {
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('categorie.add', compact('pays', 'fonctions'));
     }
@@ -91,9 +88,7 @@ class CategoryController extends Controller
 
         $pays = Pays::all();
 
-        $fonctions = DB::table('admins')
-            ->where('fonction', 'admin')
-            ->get();
+        $fonctions = Auth::user();
 
         return view('categorie.update', compact('categories', 'pays', 'fonctions'));
     }
