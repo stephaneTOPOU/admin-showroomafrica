@@ -43,7 +43,7 @@
                                                 <td>{{ $reportage->identifiant }}</td>
                                                 <td>{{ $reportage->pays }}</td>
                                                 <td>{{ $reportage->admin }}</td>
-                                                <td><iframe width="90%" height="100px" src="{{ $reportage->video }}"
+                                                <td><iframe width="100%" height="100px" src="{{ $reportage->video }}"
                                                         title="YouTube video player" frameborder="0"
                                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                         allowfullscreen></iframe></td>

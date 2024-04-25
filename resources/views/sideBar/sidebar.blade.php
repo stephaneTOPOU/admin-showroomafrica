@@ -220,7 +220,7 @@
                             <a href="{{ route('sliderhaut.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-sliders-h"></i>
                                 <p>
-                                    Slider Latéral Haut
+                                    Slider catégorie Haut
                                 </p>
                             </a>
                         </li>
@@ -228,7 +228,7 @@
                             <a href="{{ route('sliderbas.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-sliders-h"></i>
                                 <p>
-                                    Slider Latéral Bas
+                                    Slider catégorie Bas
                                 </p>
                             </a>
                         </li>
