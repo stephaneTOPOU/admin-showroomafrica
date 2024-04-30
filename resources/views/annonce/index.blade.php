@@ -46,11 +46,11 @@
                                                         <td>{{ $annonce->id }}</td>
                                                         <td>{{ $annonce->titre }}</td>
                                                         <td>{{ $annonce->text1 }}</td>
-                                                        <td><img src="https://www.showroomafrica.com/assets/images/advertorial/{{$annonce->image1}}" width="60"></td>
+                                                        <td><img src="https://www.showroomafrica.com/assets/images/annonce/images/{{$annonce->image1}}" width="60"></td>
                                                         <td>{{ $annonce->text2 }}</td>
-                                                        <td><img src="https://www.showroomafrica.com/assets/images/advertorial/{{$annonce->image2}}" width="60"></td>
+                                                        <td><img src="https://www.showroomafrica.com/assets/images/annonce/images/{{$annonce->image2}}" width="60"></td>
                                                         <td>{{ $annonce->text3 }}</td>
-                                                        <td><video src="https://www.showroomafrica.com/assets/videos/{{$annonce->image3}}" width="200" height="100" autoplay muted type="video/mp4"></video></td>
+                                                        <td><video src="https://www.showroomafrica.com/assets/images/annonce/videos/{{$annonce->image3}}" width="200" height="100" autoplay muted type="video/mp4"></video></td>
                                                         <td>{{ $annonce->created_at }}</td>
                                                         <td>
                                                             <div class="btn-group">
