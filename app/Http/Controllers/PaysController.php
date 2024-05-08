@@ -31,7 +31,9 @@ class PaysController extends Controller
      */
     public function create()
     {
-        return view('pays.add');
+        $fonctions = Auth::user();
+
+        return view('pays.add', compact('fonctions'));
     }
 
     /**
