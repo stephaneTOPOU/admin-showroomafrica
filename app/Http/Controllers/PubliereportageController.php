@@ -21,6 +21,7 @@ class PubliereportageController extends Controller
             ->get();
 
         $fonctions = Auth::user();
+        
         return view('entreprise.index', compact('entreprises', 'fonctions'));
     }
 
