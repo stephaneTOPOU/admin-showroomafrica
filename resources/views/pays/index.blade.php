@@ -59,14 +59,14 @@
                                                                 </button>
                                                             </form> --}}
                                                             
-                                                            <button class="btn btn-default" onclick="deleteData({{ $pay->identifiant }})" data-id="{{ $pay->identifiant }}" data-target="#default{{ $pay->identifiant }}">
+                                                            <button class="btn btn-default" onclick="deleteData({{ $pay->id }})" data-id="{{ $pay->id }}" data-target="#default{{ $pay->id }}">
                                                                 <i class="fas fa-trash"></i> Supprimer
                                                             </button>
 
                                                             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                                                             <script>
 
-                                                            function deleteData(identifiant) {
+                                                            function deleteData(id) {
 
                                                                 let table = $('#example1');
 
@@ -81,7 +81,7 @@
                                                                 }).then((result) => {
                                                                 if (result.isConfirmed) {
 
-                                                                    let url = "{{url('pays')}}/" + identifiant
+                                                                    let url = "{{url('pays')}}/" + id
                                                                     window.location.reload();
 
                                                                     //console.log(url);
@@ -91,7 +91,7 @@
                                                                         data: {
                                                                         _method: 'DELETE',
                                                                         _token: "{{ csrf_token() }}",
-                                                                        service: identifiant                                                                  
+                                                                        service: id                                                                  
                                                                         },
                                                                         
                                                                         success: function () {
