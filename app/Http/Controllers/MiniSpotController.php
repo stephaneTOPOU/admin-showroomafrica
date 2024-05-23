@@ -226,8 +226,14 @@ class MiniSpotController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($minspot)
     {
-        //
+        $minspots = MiniSpot::find($minspot);
+        try {
+            $minspots->delete();
+            return redirect()->back()->with('success', 'Mini - spot supprimé avec succès');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', $e->getMessage());
+        }
     }
 }
